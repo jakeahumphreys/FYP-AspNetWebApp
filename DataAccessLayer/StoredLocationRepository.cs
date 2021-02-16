@@ -21,7 +21,7 @@ namespace FYP_WebApp.DataAccessLayer
             _context = context;
         }
 
-        public IList<StoredLocation> GetAll()
+        public List<StoredLocation> GetAll()
         {
             return _context.StoredLocations.ToList();
         }

@@ -17,6 +17,11 @@ namespace FYP_WebApp.ServiceLayer
             _storedLocationRepository = new StoredLocationRepository(new ApplicationDbContext());
         }
 
+        public List<StoredLocation> Index()
+        {
+            return _storedLocationRepository.GetAll();
+        }
+
         public StoredLocation GetDetails(int id)
         {
             if (id == 0)

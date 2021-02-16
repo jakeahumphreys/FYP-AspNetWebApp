@@ -196,6 +196,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="DataAccessLayer\IStoredLocationRepository.cs" />
     <Compile Include="DataAccessLayer\StoredLocationRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -438,6 +439,11 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\StoredLocation\Create.cshtml" />
+    <Content Include="Views\StoredLocation\Delete.cshtml" />
+    <Content Include="Views\StoredLocation\Details.cshtml" />
+    <Content Include="Views\StoredLocation\Edit.cshtml" />
+    <Content Include="Views\StoredLocation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

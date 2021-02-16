@@ -8,7 +8,7 @@ namespace FYP_WebApp.DataAccessLayer
 {
     public interface IStoredLocationRepository : IDisposable
     {
-        IList<StoredLocation> GetAll();
+        List<StoredLocation> GetAll();
         StoredLocation GetById(int id);
         void Insert(StoredLocation storedLocation);
         void Update(StoredLocation storedLocation);
