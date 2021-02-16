@@ -1,0 +1,21 @@
+﻿@using FYP_WebApp.Common_Logic
+@model FYP_WebApp.Models.ErrorViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+@switch (Model.Error)
+{
+    case Errors.AccountInactive:
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Account not accessible</h4>
+            <p>The account you are trying to access is no longer accessible.</p>
+            <hr>
+            <p class="mb-0">If you believe this is an error please contact your system administrator.</p>
+        </div>
+        break;
+}
+
+
+

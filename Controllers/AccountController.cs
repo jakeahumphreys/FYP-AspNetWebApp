@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Protocols;
+using System.Web.WebSockets;
+using FYP_WebApp.Common_Logic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FYP_WebApp.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
 {
@@ -17,15 +23,19 @@ namespace FYP_WebApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _applicationDbContext;
 
         public AccountController()
         {
+            _applicationDbContext = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _applicationDbContext = new ApplicationDbContext();
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -52,6 +62,96 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        public ActionResult Index()
+        {
+            var userList = _applicationDbContext.Users.ToList();
+
+            return View(userList);
+        }
+
+        public ActionResult Details(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                ApplicationUser applicationUser = _applicationDbContext.Users.Find(id);
+
+                if (applicationUser != null)
+                {
+                    return View(applicationUser);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public ActionResult Edit(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                ApplicationUser applicationUser = _applicationDbContext.Users.Find(id);
+
+                if (applicationUser != null)
+                {
+                    return View(applicationUser);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ApplicationUser user)
+        {
+            var existingUser = _applicationDbContext.Users.Find(user.Id);
+
+            existingUser.FirstName = user.FirstName;
+            existingUser.Surname = user.Surname;
+            existingUser.IsInactive = user.IsInactive;
+            existingUser.Email = user.Email;
+            existingUser.PhoneNumber = user.PhoneNumber;
+
+            if (user.LockoutEndDateUtc != null)
+            {
+                if (user.LockoutEndDateUtc == DateTime.MinValue)
+                {
+                    existingUser.LockoutEndDateUtc = null;
+                }
+                else
+                {
+                    existingUser.LockoutEndDateUtc = user.LockoutEndDateUtc;
+                }
+            }
+
+            if (existingUser.UserName != existingUser.Email)
+            {
+                existingUser.UserName = existingUser.Email;
+            }
+
+            if (ModelState.IsValid)
+            {
+                _applicationDbContext.Entry(existingUser).State = EntityState.Modified;
+                _applicationDbContext.SaveChanges();
+                return RedirectToAction("Details", new {@id = user.Id});
+            }
+            else
+            {
+                return View(user);
+            }
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -68,6 +168,7 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            bool isInactive = false;
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -75,6 +176,14 @@ namespace FYP_WebApp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+
+            var applicationUser = _applicationDbContext.Users.SingleOrDefault(x => x.Email == model.Email);
+
+            if (applicationUser != null && applicationUser.IsInactive == true)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = "" });
+            }
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -139,7 +248,10 @@ namespace FYP_WebApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var rolesSelectList = new SelectList(_applicationDbContext.Roles.ToList(), "Name", "Name");
+            var registerViewModel = new RegisterViewModel { Roles = rolesSelectList};
+
+            return View(registerViewModel);
         }
 
         //
@@ -151,17 +263,18 @@ namespace FYP_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //By default ASP.Net logs in a new user, this comment disables that.
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //return RedirectToAction("Index", "Home");
+
+                    if (!string.IsNullOrEmpty(model.Role))
+                    {
+                        UserManager.AddToRole(user.Id, model.Role);
+                    }
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -208,13 +321,6 @@ namespace FYP_WebApp.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

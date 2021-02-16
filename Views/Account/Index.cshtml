@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using Microsoft.Owin.Security.DataHandler.Encoder
+@model IEnumerable<FYP_WebApp.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>System Users</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsInactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            <p>Flags</p>
+        </th>
+        <th>
+            <p>Actions</p>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsInactive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @if (item.LockoutEndDateUtc != null)
+            {
+                <span class="badge badge-danger">Account Locked</span>
+            }
+            @if (item.IsInactive == true)
+            {
+                <span class="badge badge-dark">Inactive</span>
+            }
+        </td>
+        <td>
+            <button class="btn btn-info" onclick="location.href = '@Url.Action("Details","Account", new { id = item.Id })';return false;">Details</button>
+        </td>
+    </tr>
+}
+
+</table>

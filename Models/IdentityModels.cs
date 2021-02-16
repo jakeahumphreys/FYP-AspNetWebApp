@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,13 +28,29 @@ namespace FYP_WebApp.Models
             return userIdentity;
         }
 
+        //Information Fields
+        [Display(Name = "First Name(s)")]
+        public string FirstName { get; set; }
+        [Display(Name = "Surname(s)")]
+        public string Surname { get; set; }
 
-        //Additional fields
+        //Gps Fields
         [EnumDataType(typeof(Status))]
         public Status Status { get; set; }
-        public int TeamId { get; set; }
+
+        //Admin Fields
+        public int? TeamId { get; set; }
         public Team Team { get; set; }
         public bool IsInactive { get; set; }
+
+        //Identity override fields
+        [Display(Name = "Account Locked Until")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        override public DateTime? LockoutEndDateUtc { get; set; }
+
+        [Display(Name = "Account can be locked")]
+        override public bool LockoutEnabled { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -55,5 +72,6 @@ namespace FYP_WebApp.Models
         public DbSet<Pairing> Pairings { get; set; }
         public DbSet<StoredLocation> StoredLocations { get; set; }
         public DbSet<Team> Teams { get; set; }
+
     }
 }
