@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.SqlServer;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FYP_WebApp.Common_Logic;
@@ -58,6 +60,17 @@ namespace FYP_WebApp.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<StoredLocation>().Property(x => x.Latitude).HasPrecision(18, 9);
+            modelBuilder.Entity<StoredLocation>().Property(x => x.Longitude).HasPrecision(18, 9);
+            modelBuilder.Entity<GpsReport>().Property(x => x.Latitude).HasPrecision(18, 9);
+            modelBuilder.Entity<GpsReport>().Property(x => x.Longitude).HasPrecision(18, 9);
+
+            base.OnModelCreating(modelBuilder);
+
         }
 
         public static ApplicationDbContext Create()

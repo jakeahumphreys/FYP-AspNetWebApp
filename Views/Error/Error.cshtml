@@ -15,6 +15,14 @@
             <p class="mb-0">If you believe this is an error please contact your system administrator.</p>
         </div>
         break;
+    case Errors.SystemError:
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">System Error</h4>
+            <p>A System Error has occurred.</p>
+            <hr>
+            <p class="mb-0">@Model.Message</p>
+        </div>
+        break;
 }
 
 

@@ -168,7 +168,6 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            bool isInactive = false;
             if (!ModelState.IsValid)
             {
                 return View(model);

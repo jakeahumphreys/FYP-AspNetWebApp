@@ -108,6 +108,39 @@ namespace FYP_WebApp.Controllers
             return View(storedLocation);
         }
 
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                return View(_storedLocationService.DeleteView(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+            }
+            catch (StoredLocationNotFoundException ex)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAction(int id)
+        {
+            ServiceResponse response = _storedLocationService.DeleteAction(id);
+
+            if (response.Success == true)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Error", new {@Error = Errors.SystemError, @Message="Deletion unsuccessful"});
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
