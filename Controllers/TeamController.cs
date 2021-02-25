@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
@@ -16,11 +17,13 @@ namespace FYP_WebApp.Controllers
 {
     public class TeamController : Controller
     {
-        private TeamService _teamService;
+        private readonly TeamService _teamService;
+        private readonly AccountService _accountService;
 
         public TeamController()
         {
             _teamService = new TeamService();
+            _accountService = new AccountService();
         }
 
         public ActionResult Index()
@@ -46,15 +49,15 @@ namespace FYP_WebApp.Controllers
 
         public ActionResult Create()
         {
+            var managerList = new SelectList(_accountService.GetAllManagers(), "Id", "DisplayString");
+            ViewBag.managerList = managerList;
             return View();
         }
 
-        // POST: Team/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IsInactive")] Team team)
+        public ActionResult Create([Bind(Include = "Id,Name,ManagerId,IsInactive")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -73,11 +76,12 @@ namespace FYP_WebApp.Controllers
             return View(team);
         }
 
-        // GET: Team/Edit/5
         public ActionResult Edit(int id)
         {
             try
             {
+                var managerList = new SelectList(_accountService.GetAllManagers(), "Id", "DisplayString");
+                ViewBag.managerList = managerList;
                 return View(_teamService.GetDetails(id));
             }
             catch (ArgumentException ex)
@@ -93,7 +97,7 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IsInactive")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Name, ManagerId, IsInactive")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +112,9 @@ namespace FYP_WebApp.Controllers
                     return View(team);
                 }
             }
-            
+
+            var managerList = new SelectList(_accountService.GetAllManagers(), "Id", "DisplayString");
+            ViewBag.managerList = managerList;
             return View(team);
         }
 

@@ -1,0 +1,31 @@
+﻿@model FYP_WebApp.Models.TeamSelectViewModel
+@{
+    ViewBag.Title = "TeamSelect";
+}
+
+<h2>Team Select</h2>
+
+<p>You are the manager of multiple teams, which team would you like to manage?</p>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <p>Team</p>
+        </th>
+        <th>
+            <p>Action</p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.teams)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <button class="btn btn-success" onclick="location.href = '@Url.Action("Manage","TeamDashboard", new { teamId = item.Id })';return false;">Manage</button>
+            </td>
+        </tr>
+    }
+</table>

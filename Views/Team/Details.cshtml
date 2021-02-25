@@ -17,6 +17,14 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        
+        <dt>
+            <p>Manager</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manager.DisplayString)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.IsInactive)

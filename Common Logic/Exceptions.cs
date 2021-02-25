@@ -16,4 +16,10 @@ namespace FYP_WebApp.Common_Logic
         public TeamNotFoundException(string message) : base(message) { }
     }
 
+    public class UserNotFoundException : Exception
+    {
+        public UserNotFoundException(string message) : base(message) { }
+    }
+
+
 }

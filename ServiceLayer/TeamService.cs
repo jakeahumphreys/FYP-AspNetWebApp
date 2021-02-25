@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Management;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.ServiceLayer
 {
@@ -67,7 +69,11 @@ namespace FYP_WebApp.ServiceLayer
             }
             else
             {
-                _teamRepository.Update(team);
+                var existingTeam = _teamRepository.GetById(team.Id);
+                existingTeam.Name = team.Name;
+                existingTeam.ManagerId = team.ManagerId;
+
+                _teamRepository.Update(existingTeam);
                 _teamRepository.Save();
                 return new ServiceResponse { Success = true };
             }
@@ -90,6 +96,47 @@ namespace FYP_WebApp.ServiceLayer
         public void Dispose()
         {
             _teamRepository.Dispose();
+        }
+
+        public List<ApplicationUser> CheckAvailableManagers(List<ApplicationUser> managers, int teamId)
+        {
+            var availableManagers = new List<ApplicationUser>();
+
+            foreach (var manager in managers)
+            {
+                foreach (var team in _teamRepository.GetAll())
+                {
+                    if (team.Id != teamId)
+                    {
+                        if (team.ManagerId == manager.Id)
+                        {
+                            break;
+                        }
+
+                        if (!availableManagers.Contains(manager))
+                        {
+                            availableManagers.Add(manager);
+                        }
+                    }
+                }
+            }
+
+            return availableManagers;
+        }
+
+        public List<Team> GetUserTeams(string id)
+        {
+            var userTeams = new List<Team>();
+
+            foreach (var team in _teamRepository.GetAll())
+            {
+                if (team.ManagerId == id)
+                {
+                    userTeams.Add(team);
+                }
+            }
+
+            return userTeams;
         }
     }
 }

@@ -17,10 +17,10 @@
             @Html.DisplayNameFor(model => model.Surname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsInactive)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            <p>Role</p>
         </th>
         <th>
             <p>Flags</p>
@@ -39,18 +39,30 @@
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsInactive)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @if (item.LockoutEndDateUtc != null)
+                @switch (item.Roles.FirstOrDefault().RoleId)
                 {
+                    case "0":
+                        <span class="badge badge-warning">Admin</span>
+                        break;
+                    case "1":
+                        <span class="badge badge-info">Manager</span>
+                        break;
+                    case "2":
+                        <span class="badge badge-info">Staff</span>
+                        break;
+                    
+                }
+            </td>
+            <td>
+                @if (item.LockoutEndDateUtc != null)
+                    {
                     <span class="badge badge-danger">Account Locked</span>
                 }
-                @if (item.IsInactive == true)
-                {
+                    @if (item.IsInactive == true)
+                    {
                     <span class="badge badge-dark">Inactive</span>
                 }
             </td>

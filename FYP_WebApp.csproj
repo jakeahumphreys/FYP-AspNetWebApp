@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TeamDashboardController.cs" />
     <Compile Include="DataAccessLayer\IStoredLocationRepository.cs" />
     <Compile Include="DataAccessLayer\ITeamRepository.cs" />
     <Compile Include="DataAccessLayer\StoredLocationRepository.cs" />
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\202102161934089_OnModelCreating.Designer.cs">
       <DependentUpon>202102161934089_OnModelCreating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102251947579_AddManagerToTeam.cs" />
+    <Compile Include="Migrations\202102251947579_AddManagerToTeam.Designer.cs">
+      <DependentUpon>202102251947579_AddManagerToTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ConfigurationRecord.cs" />
@@ -244,9 +249,12 @@
     <Compile Include="Models\Pairing.cs" />
     <Compile Include="Models\StoredLocation.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\TeamDashboardViewModel.cs" />
+    <Compile Include="Models\TeamSelectViewModel.cs" />
     <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
     <Compile Include="OAuth\ChallengeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceLayer\AccountService.cs" />
     <Compile Include="ServiceLayer\StoredLocationService.cs" />
     <Compile Include="ServiceLayer\TeamService.cs" />
     <Compile Include="Startup.cs" />
@@ -469,6 +477,9 @@
     <Content Include="Views\Team\Details.cshtml" />
     <Content Include="Views\Team\Edit.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\TeamDashboard\Manage.cshtml" />
+    <Content Include="Views\TeamDashboard\TeamSelect.cshtml" />
+    <Content Include="Views\TeamDashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -499,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102161934089_OnModelCreating.resx">
       <DependentUpon>202102161934089_OnModelCreating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102251947579_AddManagerToTeam.resx">
+      <DependentUpon>202102251947579_AddManagerToTeam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

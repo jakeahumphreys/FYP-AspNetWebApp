@@ -54,6 +54,15 @@ namespace FYP_WebApp.Models
 
         [Display(Name = "Account can be locked")]
         override public bool LockoutEnabled { get; set; }
+
+        public string DisplayString
+        {
+            get
+            {
+                return FirstName + " " + Surname;
+            }
+        }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
