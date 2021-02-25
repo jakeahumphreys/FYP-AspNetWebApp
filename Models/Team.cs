@@ -13,6 +13,7 @@ namespace FYP_WebApp.Models
         [Display(Name = "Team Name")]
         public string Name { get; set; }
         public ICollection<ApplicationUser> Members { get; set; }
+        [Display(Name = "Inactivated?")]
         public bool IsInactive { get; set; }
     }
 }

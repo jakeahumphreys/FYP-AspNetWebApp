@@ -11,6 +11,8 @@ namespace FYP_WebApp.Common_Logic
         AccountLocked = 1,
         AccountUnauthorized = 2,
         SystemError = 3,
-        HttpError = 4
+        HttpError = 4,
+        InvalidParameter = 5,
+        EntityNotFound = 6
     }
 }

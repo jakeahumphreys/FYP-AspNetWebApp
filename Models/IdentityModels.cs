@@ -41,6 +41,7 @@ namespace FYP_WebApp.Models
         public Status Status { get; set; }
 
         //Admin Fields
+        [Display(Name = "Team")]
         public int? TeamId { get; set; }
         public Team Team { get; set; }
         public bool IsInactive { get; set; }

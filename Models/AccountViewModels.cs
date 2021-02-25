@@ -66,6 +66,7 @@ namespace FYP_WebApp.Models
     public class RegisterViewModel
     {
         public SelectList Roles { get; set; }
+        public SelectList Teams { get; set; }
 
         [Required]
         [Display(Name = "First Name(s)")]
@@ -99,6 +100,9 @@ namespace FYP_WebApp.Models
         [Display(Name = "Confirm password")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Team")]
+        public int TeamId { get; set; }
     }
 
     public class ResetPasswordViewModel

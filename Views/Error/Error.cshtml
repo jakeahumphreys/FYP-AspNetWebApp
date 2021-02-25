@@ -23,6 +23,23 @@
             <p class="mb-0">@Model.Message</p>
         </div>
         break;
+    case Errors.InvalidParameter:
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Invalid Parameter</h4>
+            <p>The specified parameter was incorrect.</p>
+            <hr>
+            <p class="mb-0">@Model.Message</p>
+        </div>
+        break;
+    case Errors.EntityNotFound:
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Entity not found</h4>
+            <p>The requested entity was not found.</p>
+            <hr>
+            <p class="mb-0">@Model.Message</p>
+        </div>
+        break;
+
 }
 
 

@@ -12,11 +12,16 @@ namespace FYP_WebApp.ServiceLayer
 {
     public class StoredLocationService
     {
-        private readonly StoredLocationRepository _storedLocationRepository;
+        private readonly IStoredLocationRepository _storedLocationRepository;
 
         public StoredLocationService()
         {
             _storedLocationRepository = new StoredLocationRepository(new ApplicationDbContext());
+        }
+
+        public StoredLocationService(IStoredLocationRepository storedLocationRepository)
+        {
+            _storedLocationRepository = storedLocationRepository;
         }
 
         public List<StoredLocation> Index()

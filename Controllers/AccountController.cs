@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FYP_WebApp.Models;
+using FYP_WebApp.ServiceLayer;
 using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
@@ -24,10 +25,12 @@ namespace FYP_WebApp.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _applicationDbContext;
+        private TeamService _teamService;
 
         public AccountController()
         {
             _applicationDbContext = new ApplicationDbContext();
+            _teamService = new TeamService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -35,6 +38,7 @@ namespace FYP_WebApp.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
             _applicationDbContext = new ApplicationDbContext();
+            _teamService = new TeamService();
 
         }
 
@@ -73,7 +77,7 @@ namespace FYP_WebApp.Controllers
         {
             if (!string.IsNullOrEmpty(id))
             {
-                ApplicationUser applicationUser = _applicationDbContext.Users.Find(id);
+                ApplicationUser applicationUser = _applicationDbContext.Users.Where(x => x.Id == id).Include(y => y.Team).SingleOrDefault();
 
                 if (applicationUser != null)
                 {
@@ -95,9 +99,10 @@ namespace FYP_WebApp.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 ApplicationUser applicationUser = _applicationDbContext.Users.Find(id);
-
+                var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
                 if (applicationUser != null)
                 {
+                    ViewBag.teamSelectList = teamSelectList;
                     return View(applicationUser);
                 }
                 else
@@ -122,6 +127,7 @@ namespace FYP_WebApp.Controllers
             existingUser.IsInactive = user.IsInactive;
             existingUser.Email = user.Email;
             existingUser.PhoneNumber = user.PhoneNumber;
+            existingUser.TeamId = user.TeamId;
 
             if (user.LockoutEndDateUtc != null)
             {
@@ -148,6 +154,8 @@ namespace FYP_WebApp.Controllers
             }
             else
             {
+                var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
+                ViewBag.teamSelectList = teamSelectList;
                 return View(user);
             }
         }
@@ -248,7 +256,8 @@ namespace FYP_WebApp.Controllers
         public ActionResult Register()
         {
             var rolesSelectList = new SelectList(_applicationDbContext.Roles.ToList(), "Name", "Name");
-            var registerViewModel = new RegisterViewModel { Roles = rolesSelectList};
+            var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
+            var registerViewModel = new RegisterViewModel { Roles = rolesSelectList, Teams = teamSelectList};
 
             return View(registerViewModel);
         }
@@ -262,7 +271,7 @@ namespace FYP_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

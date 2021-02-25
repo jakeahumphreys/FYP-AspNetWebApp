@@ -30,34 +30,37 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsInactive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @if (item.LockoutEndDateUtc != null)
-            {
-                <span class="badge badge-danger">Account Locked</span>
-            }
-            @if (item.IsInactive == true)
-            {
-                <span class="badge badge-dark">Inactive</span>
-            }
-        </td>
-        <td>
-            <button class="btn btn-info" onclick="location.href = '@Url.Action("Details","Account", new { id = item.Id })';return false;">Details</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsInactive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @if (item.LockoutEndDateUtc != null)
+                {
+                    <span class="badge badge-danger">Account Locked</span>
+                }
+                @if (item.IsInactive == true)
+                {
+                    <span class="badge badge-dark">Inactive</span>
+                }
+            </td>
+            <td>
+                <button class="btn btn-info" onclick="location.href = '@Url.Action("Details","Account", new { id = item.Id })';return false;">Details</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<button class="btn btn-success" onclick="location.href = '@Url.Action("Register","Account")';return false;">Create</button>
+
