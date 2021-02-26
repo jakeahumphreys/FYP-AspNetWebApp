@@ -21,5 +21,11 @@ namespace FYP_WebApp.Common_Logic
         public UserNotFoundException(string message) : base(message) { }
     }
 
+    public class PairingNotFoundException : Exception
+    {
+        public PairingNotFoundException(string message) : base(message) { }
+    }
+
+
 
 }

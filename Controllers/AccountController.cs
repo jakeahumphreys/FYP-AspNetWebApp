@@ -289,6 +289,9 @@ namespace FYP_WebApp.Controllers
                 AddErrors(result);
             }
 
+            model.Roles = new SelectList(_applicationDbContext.Roles.ToList(), "Name", "Name");
+            model.Teams = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }

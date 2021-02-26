@@ -9,5 +9,6 @@ namespace FYP_WebApp.Common_Logic
     {
         public bool Success { get; set; }
         public object ServiceObject { get; set; }
+        public ResponseErrors ResponseError { get; set; }
     }
 }

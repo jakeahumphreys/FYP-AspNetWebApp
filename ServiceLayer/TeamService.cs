@@ -51,7 +51,7 @@ namespace FYP_WebApp.ServiceLayer
         {
             if (team == null)
             {
-                return new ServiceResponse { Success = false };
+                return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
             }
             else
             {
@@ -65,7 +65,7 @@ namespace FYP_WebApp.ServiceLayer
         {
             if (team == null)
             {
-                return new ServiceResponse { Success = false };
+                return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
             }
             else
             {
@@ -83,7 +83,7 @@ namespace FYP_WebApp.ServiceLayer
         {
             if (team == null)
             {
-                return new ServiceResponse {Success = false};
+                return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
             }
             else
             {
@@ -96,32 +96,6 @@ namespace FYP_WebApp.ServiceLayer
         public void Dispose()
         {
             _teamRepository.Dispose();
-        }
-
-        public List<ApplicationUser> CheckAvailableManagers(List<ApplicationUser> managers, int teamId)
-        {
-            var availableManagers = new List<ApplicationUser>();
-
-            foreach (var manager in managers)
-            {
-                foreach (var team in _teamRepository.GetAll())
-                {
-                    if (team.Id != teamId)
-                    {
-                        if (team.ManagerId == manager.Id)
-                        {
-                            break;
-                        }
-
-                        if (!availableManagers.Contains(manager))
-                        {
-                            availableManagers.Add(manager);
-                        }
-                    }
-                }
-            }
-
-            return availableManagers;
         }
 
         public List<Team> GetUserTeams(string id)
@@ -137,6 +111,25 @@ namespace FYP_WebApp.ServiceLayer
             }
 
             return userTeams;
+        }
+
+        public List<ApplicationUser> GetSubordinates(List<ApplicationUser> allUsers, string managerId)
+        {
+            var subordinates = new List<ApplicationUser>();
+            foreach (var user in allUsers)
+            {
+                if (user.TeamId != null)
+                {
+                    var team = GetDetails((int)user.TeamId);
+
+                    if (team.ManagerId == managerId)
+                    {
+                        subordinates.Add(user);
+                    }
+                }
+            }
+
+            return subordinates;
         }
     }
 }
