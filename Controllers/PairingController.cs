@@ -17,12 +17,14 @@ namespace FYP_WebApp.Controllers
         private readonly PairingService _pairingService;
         private readonly AccountService _accountService;
         private readonly TeamService _teamService;
+        private readonly Library _library;
 
         public PairingController()
         {
             _pairingService = new PairingService();
             _accountService = new AccountService();
             _teamService = new TeamService();
+            _library = new Library();
         }
 
         public ActionResult Index()
@@ -49,17 +51,33 @@ namespace FYP_WebApp.Controllers
         public ActionResult Create()
         {
             var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
-            ViewBag.userList = userList;
-            return View();
+            var pairingViewModel = new PairingViewModel {UserList = userList};
+            return View(pairingViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Start, End, UserId, BuddyUserId")] Pairing pairing)
+        public ActionResult Create([Bind(Include = "StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
         {
+            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
+            pairingViewModel.UserList = userList;
+
             if (ModelState.IsValid)
             {
-                var result = _pairingService.Create(pairing);
+                var conflictingPairings = _pairingService.CheckConflictingPairings(pairingViewModel.Pairing);
+
+                if (conflictingPairings != null && conflictingPairings.Count > 0)
+                {
+                    pairingViewModel.ConflictingPairings = conflictingPairings;
+                    return View(pairingViewModel);
+                }
+
+                pairingViewModel.Pairing.Start =
+                    _library.ConstructDateTime(pairingViewModel.StartDate, pairingViewModel.StartTime);
+                pairingViewModel.Pairing.End =
+                    _library.ConstructDateTime(pairingViewModel.EndDate, pairingViewModel.EndTime);
+
+                var result = _pairingService.Create(pairingViewModel.Pairing);
 
                 if (result.Success)
                 {
@@ -67,22 +85,20 @@ namespace FYP_WebApp.Controllers
                 }
                 else
                 {
-                    return View(pairing);
+                    return View(pairingViewModel);
                 }
             }
 
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
-            ViewBag.userList = userList;
-            return View(pairing);
+            return View(pairingViewModel);
         }
 
         public ActionResult Edit(int id)
         {
+            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
+
             try
             {
-                var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
-                ViewBag.userList = userList;
-                return View(_pairingService.GetDetails(id));
+                return View(_pairingService.ConstructViewModel(_pairingService.GetDetails(id), userList));
             }
             catch (ArgumentException ex)
             {
@@ -96,11 +112,27 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Start, End, UserId, BuddyUserId")] Pairing pairing)
+        public ActionResult Edit([Bind(Include = "Id, UserId, BuddyUserId, StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
         {
+            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
+            pairingViewModel.UserList = userList;
+
             if (ModelState.IsValid)
             {
-                var result = _pairingService.Edit(pairing);
+                pairingViewModel.Pairing.Start =
+                    _library.ConstructDateTime(pairingViewModel.StartDate, pairingViewModel.StartTime);
+                pairingViewModel.Pairing.End =
+                    _library.ConstructDateTime(pairingViewModel.EndDate, pairingViewModel.EndTime);
+
+                var conflictingPairings = _pairingService.CheckConflictingPairings(pairingViewModel.Pairing);
+
+                if (conflictingPairings != null && conflictingPairings.Count > 0)
+                {
+                    pairingViewModel.ConflictingPairings = conflictingPairings;
+                    return View(pairingViewModel);
+                }
+
+                var result = _pairingService.Edit(pairingViewModel.Pairing);
 
                 if (result.Success)
                 {
@@ -108,13 +140,11 @@ namespace FYP_WebApp.Controllers
                 }
                 else
                 {
-                    return View(pairing);
+                    return View(pairingViewModel);
                 }
             }
 
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
-            ViewBag.userList = userList;
-            return View(pairing);
+            return View(pairingViewModel);
         }
 
         public ActionResult Delete(int id)

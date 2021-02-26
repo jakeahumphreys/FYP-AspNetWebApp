@@ -13,6 +13,10 @@ namespace FYP_WebApp.Common_Logic
         public MappingProfile()
         {
             CreateMap<StoredLocation, StoredLocationDto>();
+            CreateMap<Message, MessageDto>();
+
+            //Reverse
+            CreateMap<MessageDto, Message>();
         }
     }
 

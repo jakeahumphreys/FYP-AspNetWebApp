@@ -22,5 +22,9 @@ namespace FYP_WebApp.Models
         [NotEqualTo("UserId", ErrorMessage = "Cannot be the same as User.")]
         public string BuddyUserId { get; set; }
         public ApplicationUser BuddyUser { get; set; }
+
+        public string DisplayString =>
+            "[Pairing " + Id + "]: " + Start.Date + " - " + End.Date + " (" + User.Surname + ", " +
+            BuddyUser.Surname + ")";
     }
 }

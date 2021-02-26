@@ -26,6 +26,10 @@ namespace FYP_WebApp.Common_Logic
         public PairingNotFoundException(string message) : base(message) { }
     }
 
+    public class MessageNotFoundException : Exception
+    {
+        public MessageNotFoundException(string message) : base(message) { }
+    }
 
 
 }

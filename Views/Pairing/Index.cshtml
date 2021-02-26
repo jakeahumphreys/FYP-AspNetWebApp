@@ -45,15 +45,15 @@
             @Html.DisplayFor(modelItem => item.BuddyUser.DisplayString)
         </td>
         <td>
-            @if (item.End < DateTime.Today)
+            @if (item.End < DateTime.Now)
             {
                 <span class="badge badge-danger">Expired</span>
             }
-            @if (item.Start > DateTime.Today)
+            @if (item.Start > DateTime.Now)
             {
                 <span class="badge badge-info">Upcoming</span>
             }
-            @if (item.Start < DateTime.Today && item.End > DateTime.Today)
+            @if (item.Start <= DateTime.Now && item.End >= DateTime.Now)
             {
                 <span class="badge badge-success">Current</span>
             }
