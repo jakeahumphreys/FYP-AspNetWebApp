@@ -1,0 +1,62 @@
+﻿@using FYP_WebApp.Common_Logic
+@model IEnumerable<FYP_WebApp.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageReceived)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Recipient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageReceived)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sender.DisplayString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recipient.DisplayString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRead)
+        </td>
+        <td>
+            @if (item.MessageType == MessageType.Urgent)
+            {
+                <span class="badge badge-danger">URGENT</span>
+            }
+            @if (item.MessageType == MessageType.CheckIn)
+            {
+                <span class="badge badge-success">CheckIn</span>
+            }
+            @if (item.MessageType == MessageType.Routine)
+            {
+                <span class="badge badge-info">Routine</span>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

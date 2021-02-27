@@ -14,6 +14,7 @@ namespace FYP_WebApp
             ConfigureAuth(app);
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
+            app.MapSignalR();
         }
     }
 }

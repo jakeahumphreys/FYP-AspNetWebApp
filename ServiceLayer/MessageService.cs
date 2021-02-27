@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
+using FYP_WebApp.DTO;
+using FYP_WebApp.Hubs;
 using FYP_WebApp.Models;
 using Microsoft.Owin.Security.Facebook;
 
@@ -58,6 +61,34 @@ namespace FYP_WebApp.ServiceLayer
                 _messageRepository.Save();
                 return new ServiceResponse {Success = true};
             }
+        }
+
+        public void MarkMessageAsRead(int id)
+        {
+            if (id != 0)
+            {
+                var message = _messageRepository.GetById(id);
+
+                if (message != null)
+                {
+                    message.IsRead = true;
+
+                    _messageRepository.Update(message);
+                    _messageRepository.Save();
+                }
+            }
+        }
+
+        public ServiceResponse SendMessage(Message message)
+        {
+            var recipients = message.RecipientId;
+            NotificationHub.Notify(message.MessageType,new List<string> { recipients }, message.Content);
+            return new ServiceResponse {Success = true};
+        }
+
+        public int GetUnreadMessages(string userId)
+        {
+            return _messageRepository.GetAll().Count(x => x.RecipientId == userId && x.IsRead == false);
         }
 
         public void Dispose()

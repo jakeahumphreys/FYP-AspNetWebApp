@@ -12,6 +12,7 @@ namespace FYP_WebApp.Models
     public class Message
     {
         public int Id { get; set; }
+        public DateTime MessageReceived { get; set; }
         [EnumDataType(typeof(MessageType))]
         public MessageType MessageType { get; set; }
         public string SenderId { get; set; }

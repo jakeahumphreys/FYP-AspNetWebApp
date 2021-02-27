@@ -56,7 +56,8 @@ namespace FYP_WebApp.Controllers
         public ActionResult Manage(int teamId)
         {
             var team = _teamService.GetDetails(teamId);
-            var members = _accountService.GetAll().Where(x => x.TeamId == teamId).ToList();
+            var userId = User.Identity.GetUserId();
+            var members = _accountService.GetAll().Where(x => x.TeamId == teamId).Where(x=> x.Id != userId).ToList();
             var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members};
 
             return View(teamDashboardVm);

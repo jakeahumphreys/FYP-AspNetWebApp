@@ -4,23 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using AutoMapper;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DTO;
+using FYP_WebApp.Hubs;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
+using Microsoft.AspNet.Identity;
 
 namespace FYP_WebApp.API
 {
     public class MessageController : ApiController
     {
         private readonly MessageService _messageService;
+        private readonly AccountService _accountService;
+        private readonly TeamService _teamService;
         private Mapper _mapper;
 
         public MessageController()
         {
+            _accountService = new AccountService();
             _messageService = new MessageService();
+            _teamService = new TeamService();
             var config = AutomapperConfig.instance().Configure();
             _mapper = new Mapper(config);
         }
@@ -30,6 +35,7 @@ namespace FYP_WebApp.API
         {
             return _mapper.Map<IList<Message>, List<MessageDto>>(_messageService.GetAll());
         }
+
 
         [System.Web.Http.HttpPost]
         public IHttpActionResult Post([FromBody] MessageDto request)
@@ -41,14 +47,17 @@ namespace FYP_WebApp.API
             else
             {
                 var message = _mapper.Map<MessageDto, Message>(request);
+                message.MessageReceived = DateTime.Now;
+                _messageService.Create(message);
+                var result = _messageService.SendMessage(message);
 
-                switch (message.MessageType)
+                if (result.Success)
                 {
-                    case MessageType.Urgent:
-                        //URGENT REQUEST
-                        break;
-                    case MessageType.Routine:
-                        break;
+                    return Content(HttpStatusCode.Accepted, "Message received.");
+                }
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, "Message not received.");
                 }
             }
         }

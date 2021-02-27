@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using FYP_WebApp.Common_Logic;
@@ -19,6 +20,11 @@ namespace FYP_WebApp.ServiceLayer
         public List<ApplicationUser> GetAll()
         {
             return _applicationDbContext.Users.ToList();
+        }
+
+        public ApplicationUser GetById(string id)
+        {
+            return _applicationDbContext.Users.Find(id);
         }
 
         public List<ApplicationUser> GetAllManagers()
@@ -43,6 +49,28 @@ namespace FYP_WebApp.ServiceLayer
             }
 
             return user;
+        }
+
+        public ServiceResponse SetUserStatus(string userId, Status status)
+        {
+            if (userId == null || status == null)
+            {
+                return new ServiceResponse {Success = false, ResponseError = ResponseErrors.NullParameter};
+            }
+
+            var user = _applicationDbContext.Users.Find(userId);
+
+            if (user == null)
+            {
+                return new ServiceResponse {Success = false, ResponseError = ResponseErrors.EntityNotFound};
+            }
+
+            user.Status = status;
+
+            _applicationDbContext.Entry(user).State = EntityState.Modified;
+            _applicationDbContext.SaveChanges();
+
+            return new ServiceResponse {Success = true};
         }
     }
 }

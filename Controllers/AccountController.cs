@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Services.Protocols;
 using System.Web.WebSockets;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.Hubs;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

@@ -18,6 +18,8 @@ namespace FYP_WebApp.DTO
         public MessageType MessageType { get; set; }
         [DataMember(Name = "Message_Sender_ID")]
         public string SenderId { get; set; }
+        [DataMember(Name = "Message_Recipient_ID")]
+        public string RecipientId { get; set; }
         [DataMember(Name = "Message_Content")]
         public string Content { get; set; }
     }
