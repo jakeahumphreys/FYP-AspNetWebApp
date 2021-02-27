@@ -14,9 +14,11 @@ namespace FYP_WebApp.Common_Logic
         {
             CreateMap<StoredLocation, StoredLocationDto>();
             CreateMap<Message, MessageDto>();
+            CreateMap<GpsReport, GpsReportDto>();
 
             //Reverse
             CreateMap<MessageDto, Message>();
+            CreateMap<GpsReportDto, GpsReport>();
         }
     }
 

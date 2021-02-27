@@ -38,5 +38,14 @@ namespace FYP_WebApp.Controllers
                 return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _messageService.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

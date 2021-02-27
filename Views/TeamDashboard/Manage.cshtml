@@ -4,6 +4,67 @@
     ViewBag.Title = "My Team";
 }
 
+@section scripts
+{
+    @if (Model.OnDutyMembers != 0)
+    {
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8"></script>
+
+        <script type="text/javascript">
+            $.ajax({
+                url: '/TeamDashboard/GetGpsLocations',
+                type: 'GET',
+                success: function(data) {
+                    var markers = [];
+
+                    $.each(data,
+                        function(index, item) {
+                            var marker = {}
+                            marker["title"] = item.Name;
+                            marker["lat"] = item.Latitude;
+                            marker["lng"] = item.Longitude;
+                            marker["status"] = item.Status;
+
+                            markers.push(marker);
+                        })
+
+                    initializeMap(markers);
+                }
+            });
+
+            function initializeMap(markers) {
+                var GoogleMapOptions = {
+                    center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                    zoom: 6,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var infoWindow = new google.maps.InfoWindow();
+                var map = new google.maps.Map(document.getElementById("MapDiv"), GoogleMapOptions);
+
+                for (i = 0; i < markers.length; i++) {
+                    var data = markers[i]
+                    var location = new google.maps.LatLng(data.lat, data.lng);
+
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: data.title
+                    });
+
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            infoWindow.setContent(data.title + "(" + data.status + ")");
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);
+                }
+            }
+        </script>
+    }
+   
+}
+
 <h2>My Team</h2>
 
 <div id="accordion">
@@ -18,7 +79,16 @@
         </div>
         <div id="collapseMap" class="collapse show" aria-labelledby="headingMap" data-parent="#accordion">
             <div class="card-body">
-               TEAM_MAP
+                @if (Model.OnDutyMembers == 0)
+                {
+                    <p>None of your team are currently working, when they are, they'll show on a map here.</p>
+                }
+                else
+                {
+                    <div id="MapDiv" style="width: 100%; height: 500px;">
+                    </div>
+                }
+              
             </div>
         </div>
     </div>

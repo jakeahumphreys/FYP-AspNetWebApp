@@ -31,5 +31,11 @@ namespace FYP_WebApp.Common_Logic
         public MessageNotFoundException(string message) : base(message) { }
     }
 
+    public class GpsReportNotFoundException : Exception
+    {
+        public GpsReportNotFoundException(string message) : base(message) { }
+    }
+
+
 
 }

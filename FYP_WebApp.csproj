@@ -199,6 +199,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\GpsReportController.cs" />
     <Compile Include="API\MessageController.cs" />
     <Compile Include="API\StatusController.cs" />
     <Compile Include="API\StoredLocationController.cs" />
@@ -225,6 +226,8 @@
     <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TeamDashboardController.cs" />
+    <Compile Include="DataAccessLayer\GpsReportRepository.cs" />
+    <Compile Include="DataAccessLayer\IGpsReportRepository.cs" />
     <Compile Include="DataAccessLayer\IMessageRepository.cs" />
     <Compile Include="DataAccessLayer\IPairingRepository.cs" />
     <Compile Include="DataAccessLayer\IStoredLocationRepository.cs" />
@@ -233,6 +236,8 @@
     <Compile Include="DataAccessLayer\PairingRepository.cs" />
     <Compile Include="DataAccessLayer\StoredLocationRepository.cs" />
     <Compile Include="DataAccessLayer\TeamRepository.cs" />
+    <Compile Include="DTO\GpsReportDto.cs" />
+    <Compile Include="DTO\MapDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
     <Compile Include="DTO\StatusDto.cs" />
     <Compile Include="DTO\StoredLocationDto.cs" />
@@ -295,6 +300,7 @@
     <Compile Include="OAuth\ChallengeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\AccountService.cs" />
+    <Compile Include="ServiceLayer\GpsReportService.cs" />
     <Compile Include="ServiceLayer\MessageService.cs" />
     <Compile Include="ServiceLayer\PairingService.cs" />
     <Compile Include="ServiceLayer\StoredLocationService.cs" />
