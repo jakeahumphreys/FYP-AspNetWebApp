@@ -10,6 +10,8 @@ namespace FYP_WebApp.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public int StoredLocationId { get; set; }
+        public StoredLocation StoredLocation { get; set; }
         public bool IsInactive { get; set; }
     }
 }
