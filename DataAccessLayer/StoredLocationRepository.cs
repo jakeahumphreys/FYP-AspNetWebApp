@@ -23,12 +23,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<StoredLocation> GetAll()
         {
-            return _context.StoredLocations.ToList();
+            return _context.StoredLocations.Include(x=> x.Notes).ToList();
         }
 
         public StoredLocation GetById(int id)
         {
-            return _context.StoredLocations.SingleOrDefault(x => x.Id == id);
+            return _context.StoredLocations.Where(x => x.Id == id).Include(x => x.Notes).SingleOrDefault();
         }
 
         public void Insert(StoredLocation storedLocation)

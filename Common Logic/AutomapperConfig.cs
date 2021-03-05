@@ -15,10 +15,12 @@ namespace FYP_WebApp.Common_Logic
             CreateMap<StoredLocation, StoredLocationDto>();
             CreateMap<Message, MessageDto>();
             CreateMap<GpsReport, GpsReportDto>();
+            CreateMap<Note, NoteDto>();
 
             //Reverse
             CreateMap<MessageDto, Message>();
             CreateMap<GpsReportDto, GpsReport>();
+            CreateMap<NoteDto, Note>();
         }
     }
 

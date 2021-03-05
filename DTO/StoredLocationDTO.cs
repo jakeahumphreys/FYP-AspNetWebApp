@@ -17,5 +17,7 @@ namespace FYP_WebApp.DTO
         public decimal Latitude { get; set; }
         [DataMember(Name = "Location_Longitude")]
         public decimal Longitude { get; set; }
+        [DataMember(Name = "Location_Notes")]
+        public List<NoteDto> Notes { get; set; }
     }
 }

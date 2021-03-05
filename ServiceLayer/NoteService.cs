@@ -25,7 +25,7 @@ namespace FYP_WebApp.ServiceLayer
             return _noteRepository.GetAll();
         }
 
-        public Note Details(int id)
+        public Note GetDetails(int id)
         {
             if (id == 0)
             {
@@ -65,7 +65,6 @@ namespace FYP_WebApp.ServiceLayer
             else
             {
                 var existingNote = _noteRepository.GetById(note.Id);
-                existingNote.Title = note.Title;
                 existingNote.Content = note.Content;
                 existingNote.IsInactive = note.IsInactive;
                 existingNote.StoredLocationId = note.StoredLocationId;

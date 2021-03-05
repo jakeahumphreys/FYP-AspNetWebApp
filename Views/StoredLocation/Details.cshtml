@@ -1,4 +1,5 @@
-﻿@model FYP_WebApp.Models.StoredLocation
+﻿@using System.Threading
+@model FYP_WebApp.Models.StoredLocation
 
 @{
     ViewBag.Title = "Details";
@@ -9,41 +10,82 @@
 <div>
     <h4>StoredLocation</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Label)
-        </dt>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+            Location Details
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Label)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Label)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Label)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Longitude)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+            </dl>
+            <iframe src="@ViewBag.mapUrl" style="width: 100%; height: 500px">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInactive)
-        </dt>
+            </iframe>
+        </div>
+    </div>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+            Location Notes
+        </div>
+        <div class="card-body">
+            <ol>
+                @foreach (var item in Model.Notes)
+                {
+                    <li>
+                        @Html.DisplayFor(modelItem => item.Content)
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button class="btn btn-danger fa fa-times" data-toggle="tooltip" title="Back" onclick="location.href = '@Url.Action("Delete", "Note", new {@id = item.Id})';return false;"></button>
+                        }
+                    </li>
+                }
+            </ol>
+            <button class="btn btn-primary" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Create","Note", new {@storedLocationId = Model.Id })';return false;">Add Note</button>
+        </div>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header">
+                Admin Details
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsInactive)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsInactive)
-        </dd>
-
-    </dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsInactive)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    }
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

@@ -201,6 +201,7 @@
   <ItemGroup>
     <Compile Include="API\GpsReportController.cs" />
     <Compile Include="API\MessageController.cs" />
+    <Compile Include="API\NoteController.cs" />
     <Compile Include="API\StatusController.cs" />
     <Compile Include="API\StoredLocationController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\PairingController.cs" />
     <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
@@ -241,6 +243,7 @@
     <Compile Include="DTO\GpsReportDto.cs" />
     <Compile Include="DTO\MapDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
+    <Compile Include="DTO\NoteDto.cs" />
     <Compile Include="DTO\StatusDto.cs" />
     <Compile Include="DTO\StoredLocationDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -287,6 +290,14 @@
     <Compile Include="Migrations\202103051604246_AddLocationToNote.Designer.cs">
       <DependentUpon>202103051604246_AddLocationToNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103051721461_ChangeICollectionToListInLocations.cs" />
+    <Compile Include="Migrations\202103051721461_ChangeICollectionToListInLocations.Designer.cs">
+      <DependentUpon>202103051721461_ChangeICollectionToListInLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103051732036_RemoveTitleFromNote.cs" />
+    <Compile Include="Migrations\202103051732036_RemoveTitleFromNote.Designer.cs">
+      <DependentUpon>202103051732036_RemoveTitleFromNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ConfigurationRecord.cs" />
@@ -296,6 +307,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\NoteViewModel.cs" />
     <Compile Include="Models\Pairing.cs" />
     <Compile Include="Models\PairingViewModel.cs" />
     <Compile Include="Models\StoredLocation.cs" />
@@ -550,6 +562,11 @@
     <Content Include="Views\Pairing\Delete.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
+    <Content Include="Views\Note\Create.cshtml" />
+    <Content Include="Views\Note\Delete.cshtml" />
+    <Content Include="Views\Note\Details.cshtml" />
+    <Content Include="Views\Note\Edit.cshtml" />
+    <Content Include="Views\Note\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -595,6 +612,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103051604246_AddLocationToNote.resx">
       <DependentUpon>202103051604246_AddLocationToNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103051721461_ChangeICollectionToListInLocations.resx">
+      <DependentUpon>202103051721461_ChangeICollectionToListInLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103051732036_RemoveTitleFromNote.resx">
+      <DependentUpon>202103051732036_RemoveTitleFromNote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

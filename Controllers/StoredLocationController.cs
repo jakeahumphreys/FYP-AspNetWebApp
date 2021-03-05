@@ -32,7 +32,10 @@ namespace FYP_WebApp.Controllers
         {
             try
             {
-                return View(_storedLocationService.GetDetails(id));
+                var storedLocation = _storedLocationService.GetDetails(id);
+                ViewBag.mapUrl =
+                    $"https://www.google.com/maps/embed/v1/place?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8&q={storedLocation.Latitude},{storedLocation.Longitude}";
+                return View(storedLocation);
             }
             catch (ArgumentException ex)
             {
