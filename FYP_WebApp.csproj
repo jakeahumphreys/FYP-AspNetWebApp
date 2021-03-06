@@ -75,6 +75,9 @@
     <Reference Include="Microsoft.Owin.Cors, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.Cors.4.1.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.1.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -170,9 +173,6 @@
     <Reference Include="Owin">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
@@ -199,6 +199,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AccountController.cs" />
     <Compile Include="API\GpsReportController.cs" />
     <Compile Include="API\MessageController.cs" />
     <Compile Include="API\NoteController.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="DTO\GpsReportDto.cs" />
     <Compile Include="DTO\MapDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
+    <Compile Include="DTO\MobileUserDto.cs" />
     <Compile Include="DTO\NoteDto.cs" />
     <Compile Include="DTO\StatusDto.cs" />
     <Compile Include="DTO\StoredLocationDto.cs" />
@@ -297,6 +299,10 @@
     <Compile Include="Migrations\202103051732036_RemoveTitleFromNote.cs" />
     <Compile Include="Migrations\202103051732036_RemoveTitleFromNote.Designer.cs">
       <DependentUpon>202103051732036_RemoveTitleFromNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103061708503_AddMobileLoginKeuy.cs" />
+    <Compile Include="Migrations\202103061708503_AddMobileLoginKeuy.Designer.cs">
+      <DependentUpon>202103061708503_AddMobileLoginKeuy.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -618,6 +624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103051732036_RemoveTitleFromNote.resx">
       <DependentUpon>202103051732036_RemoveTitleFromNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061708503_AddMobileLoginKeuy.resx">
+      <DependentUpon>202103061708503_AddMobileLoginKeuy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

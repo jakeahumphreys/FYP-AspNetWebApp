@@ -16,6 +16,7 @@ namespace FYP_WebApp.Common_Logic
             CreateMap<Message, MessageDto>();
             CreateMap<GpsReport, GpsReportDto>();
             CreateMap<Note, NoteDto>();
+            CreateMap<ApplicationUser, MobileUserDto>();
 
             //Reverse
             CreateMap<MessageDto, Message>();

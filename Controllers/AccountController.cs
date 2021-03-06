@@ -129,6 +129,7 @@ namespace FYP_WebApp.Controllers
             existingUser.Email = user.Email;
             existingUser.PhoneNumber = user.PhoneNumber;
             existingUser.TeamId = user.TeamId;
+            existingUser.MobileLoginKey = user.MobileLoginKey;
 
             if (user.LockoutEndDateUtc != null)
             {
@@ -272,7 +273,7 @@ namespace FYP_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId};
+                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId, MobileLoginKey = model.MobileLoginKey};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

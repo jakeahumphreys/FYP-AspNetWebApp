@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.SqlServer;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using FYP_WebApp.Common_Logic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -45,6 +46,9 @@ namespace FYP_WebApp.Models
         public int? TeamId { get; set; }
         public Team Team { get; set; }
         public bool IsInactive { get; set; }
+
+        [Display(Name = "Mobile Login Key")]
+        public string MobileLoginKey { get; set; }
 
         //Identity override fields
         [Display(Name = "Account Locked Until")]
