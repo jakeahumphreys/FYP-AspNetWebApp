@@ -30,6 +30,12 @@ namespace FYP_WebApp.API
             _mapper = new Mapper(config);
         }
 
+        [HttpGet]
+        public IEnumerable<MobileUserDto> Get()
+        {
+            return _mapper.Map<IList<ApplicationUser>, List<MobileUserDto>>(_applicationDbContext.Users.ToList());
+        }
+
         [HttpPost]
         [Route("api/Account/Login")]
         public IHttpActionResult Login(string username, string loginKey)
