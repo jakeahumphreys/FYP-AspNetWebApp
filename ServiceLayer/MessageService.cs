@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
+using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
@@ -16,10 +17,16 @@ namespace FYP_WebApp.ServiceLayer
     public class MessageService
     {
         private readonly IMessageRepository _messageRepository;
+        private readonly IPairingRepository _pairingRepository;
+        private readonly ITeamRepository _teamRepository;
+        private readonly ApplicationDbContext _applicationDbContext;
 
         public MessageService()
         {
             _messageRepository = new MessageRepository(new ApplicationDbContext());
+            _pairingRepository = new PairingRepository(new ApplicationDbContext());
+            _teamRepository = new TeamRepository(new ApplicationDbContext());
+            _applicationDbContext = new ApplicationDbContext();
         }
 
         public MessageService(IMessageRepository messageRepository)
@@ -81,8 +88,60 @@ namespace FYP_WebApp.ServiceLayer
 
         public ServiceResponse SendMessage(Message message)
         {
-            var recipients = message.RecipientId;
-            NotificationHub.Notify(message.MessageType,new List<string> { recipients }, message.Content);
+            List<String> recipients = new List<string>();
+
+            if (message.MessageType == MessageType.CheckIn)
+            {
+                //item.Start <= DateTime.Now && item.End >= DateTime.Now
+                var pairing = _pairingRepository
+                    .GetAll()
+                    .FirstOrDefault(x => x.UserId == message.SenderId && x.Start <= DateTime.Now && x.End >= DateTime.Now);
+                if (pairing == null)
+                {
+                    return new ServiceResponse {Success = false, ResponseError = ResponseErrors.NoValidPairing};
+                }
+
+                recipients.Add(pairing.BuddyUserId);
+            }
+
+            if (message.MessageType == MessageType.Urgent)
+            {
+                var user = _applicationDbContext.Users.Find(message.SenderId);
+
+                if (user.TeamId == null)
+                {
+                    recipients = GetAllManagers();
+                    message.Content += " [FAO ALL MANAGERS -- NO TEAM]";
+                }
+                else
+                {
+                    var team = _teamRepository.GetById((int)user.TeamId);
+
+                    if (team.ManagerId == null)
+                    {
+                        recipients = GetAllManagers();
+                        message.Content += " [FAO ALL MANAGERS -- NO TEAM]";
+                    }
+                    else
+                    {
+                        recipients.Add(team.ManagerId);
+                    }
+                }
+            }
+
+            if (message.MessageType == MessageType.Routine)
+            {
+                recipients.Add(message.RecipientId);
+            }
+
+            NotificationHub.Notify(message.MessageType,recipients, message.Content);
+
+            foreach (var recipient in recipients)
+            {
+                message.RecipientId = recipient;
+                Create(message);
+            }
+
             return new ServiceResponse {Success = true};
         }
 
@@ -94,6 +153,21 @@ namespace FYP_WebApp.ServiceLayer
         public void Dispose()
         {
             _messageRepository.Dispose();
+        }
+
+        public List<string> GetAllManagers()
+        {
+            List<string> allManagers = new List<string>();
+
+            foreach (var team in _teamRepository.GetAll())
+            {
+                if (team.ManagerId != null)
+                {
+                    allManagers.Add(team.ManagerId);
+                }
+            }
+
+            return allManagers;
         }
     }
 }

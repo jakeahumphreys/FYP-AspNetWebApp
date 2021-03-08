@@ -48,7 +48,6 @@ namespace FYP_WebApp.API
             {
                 var message = _mapper.Map<MessageDto, Message>(request);
                 message.MessageReceived = DateTime.Now;
-                _messageService.Create(message);
                 var result = _messageService.SendMessage(message);
 
                 if (result.Success)
@@ -57,7 +56,14 @@ namespace FYP_WebApp.API
                 }
                 else
                 {
-                    return Content(HttpStatusCode.BadRequest, "Message not received.");
+                    switch (result.ResponseError )
+                    {
+                        case ResponseErrors.NoValidPairing:
+                            return Content(HttpStatusCode.NotFound, "No pairing found");
+                        default:
+                            return Content(HttpStatusCode.BadRequest, "Message not received.");
+
+                    }
                 }
             }
         }

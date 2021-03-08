@@ -11,6 +11,9 @@ namespace FYP_WebApp.Common_Logic
         NotInserted = 2,
         NotUpdated = 3,
         NotDeleted = 4,
-        EntityNotFound = 5
+        EntityNotFound = 5,
+        NoValidPairing = 6,
+        NoManager = 7,
+        NoTeam = 8
     }
 }
