@@ -53,7 +53,7 @@ namespace FYP_WebApp.ServiceLayer
 
         public ServiceResponse SetUserStatus(string userId, Status status)
         {
-            if (userId == null || status == null)
+            if (userId == null)
             {
                 return new ServiceResponse {Success = false, ResponseError = ResponseErrors.NullParameter};
             }

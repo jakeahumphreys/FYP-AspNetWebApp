@@ -73,13 +73,27 @@ namespace FYP_WebApp.Controllers
             return View(storedLocation);
         }
 
-        public ActionResult Create(string label, decimal latitude, decimal longitude)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateWithContent(string label, string latitude, string longitude)
         {
-            ServiceResponse response = _storedLocationService.CreateAction(new StoredLocation{Label = label, Longitude = longitude, Latitude = latitude});
+            var decimalLatitude = Convert.ToDecimal(latitude);
+            var decimalLongitude = Convert.ToDecimal(longitude);
+
+            ServiceResponse response = _storedLocationService.CreateAction(new StoredLocation { Label = label, Longitude = decimalLongitude, Latitude = decimalLatitude });
 
             if (response.Success == true)
             {
-                return RedirectToAction("Index");
+                var storedLocation = _storedLocationService.Index().FirstOrDefault(x => x.Label == label && x.Latitude == decimalLatitude && x.Longitude == decimalLongitude);
+
+                if (storedLocation != null)
+                {
+                    return RedirectToAction("Details", "StoredLocation", new { @id = storedLocation.Id });
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = "Unable to create location." });
+                }
             }
             else
             {

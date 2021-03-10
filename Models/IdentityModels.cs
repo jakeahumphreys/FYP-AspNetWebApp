@@ -99,6 +99,7 @@ namespace FYP_WebApp.Models
         public DbSet<Pairing> Pairings { get; set; }
         public DbSet<StoredLocation> StoredLocations { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<ApiLog> ApiLogs { get; set; }
 
     }
 }

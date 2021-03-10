@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Parser;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace FYP_WebApp.Controllers
 {
@@ -25,14 +27,31 @@ namespace FYP_WebApp.Controllers
         }
 
         [Authorize(Roles="Admin, Manager")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchStringName, int? page)
         {
+            var reportsVisible = new List<GpsReport>();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.SortByNameParameter = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SortByDateParameter = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchStringName != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchStringName = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchStringName;
+
             if (!User.IsInRole("Admin"))
             {
                 var team = _teamService.GetAll().FirstOrDefault(x => x.ManagerId == User.Identity.GetUserId());
                 if (team != null)
                 {
-                    return View(_gpsReportService.GetAll().Where(x => x.User.TeamId == team.Id));
+                    reportsVisible = _gpsReportService.GetAll().Where(x => x.User.TeamId == team.Id).ToList();
                 }
                 else
                 {
@@ -41,8 +60,35 @@ namespace FYP_WebApp.Controllers
             }
             else
             {
-                return View(_gpsReportService.GetAll());
+                reportsVisible = _gpsReportService.GetAll();
             }
+
+            if (!String.IsNullOrEmpty(searchStringName))
+            {
+                reportsVisible = reportsVisible.Where(s =>
+                        s.User.DisplayString.IndexOf(searchStringName, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    .ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    reportsVisible = reportsVisible.OrderByDescending(s=> s.User.Surname).ToList();
+                    break;
+                case "Date":
+                    reportsVisible = reportsVisible.OrderBy(s => s.Time).ToList();
+                    break;
+                case "date_desc":
+                    reportsVisible = reportsVisible.OrderByDescending(s => s.Time).ToList();
+                    break;
+                default:
+                    reportsVisible = reportsVisible.OrderBy(s => s.Id).ToList();
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(reportsVisible.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: GpsReport/Details/5

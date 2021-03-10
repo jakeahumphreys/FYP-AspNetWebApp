@@ -78,6 +78,12 @@
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.1.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -215,6 +221,7 @@
     <Compile Include="Common Logic\Errors.cs" />
     <Compile Include="Common Logic\Exceptions.cs" />
     <Compile Include="Common Logic\Library.cs" />
+    <Compile Include="Common Logic\LogLevel.cs" />
     <Compile Include="Common Logic\MessageType.cs" />
     <Compile Include="Common Logic\ResponseErrors.cs" />
     <Compile Include="Common Logic\ServiceResponse.cs" />
@@ -317,8 +324,13 @@
     <Compile Include="Migrations\202103091317277_MakePrivateTimeSentPublic.Designer.cs">
       <DependentUpon>202103091317277_MakePrivateTimeSentPublic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103101704142_AddApiLogs.cs" />
+    <Compile Include="Migrations\202103101704142_AddApiLogs.Designer.cs">
+      <DependentUpon>202103101704142_AddApiLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApiLog.cs" />
     <Compile Include="Models\ConfigurationRecord.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\GpsReport.cs" />
@@ -364,6 +376,7 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\solid.css" />
@@ -402,6 +415,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Diagrams\Class Diagram Helper.cd" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -412,7 +426,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Diagrams\Class Diagram Helper.cd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -651,6 +664,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103091317277_MakePrivateTimeSentPublic.resx">
       <DependentUpon>202103091317277_MakePrivateTimeSentPublic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103101704142_AddApiLogs.resx">
+      <DependentUpon>202103101704142_AddApiLogs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
