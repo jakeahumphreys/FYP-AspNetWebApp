@@ -11,6 +11,9 @@ namespace FYP_WebApp.Models
         public string Content { get; set; }
         public int StoredLocationId { get; set; }
         public StoredLocation StoredLocation { get; set; }
+        public string SenderId { get; set; }
+        public ApplicationUser Sender { get; set; }
+        public DateTime TimeCreated { get; set; }
         public bool IsInactive { get; set; }
     }
 }

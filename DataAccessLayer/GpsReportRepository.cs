@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using FYP_WebApp.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace FYP_WebApp.DataAccessLayer
 {
@@ -23,12 +24,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<GpsReport> GetAll()
         {
-            return _context.GpsReports.ToList();
+            return _context.GpsReports.Include(x=> x.User).ToList();
         }
 
         public GpsReport GetById(int id)
         {
-            return _context.GpsReports.SingleOrDefault(x => x.Id == id);
+            return _context.GpsReports.Where(x => x.Id == id).Include(x=>x.User).SingleOrDefault();
         }
 
         public void Insert(GpsReport gpsReport)

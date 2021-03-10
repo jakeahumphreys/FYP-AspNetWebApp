@@ -23,12 +23,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<Note> GetAll()
         {
-            return _context.Notes.ToList();
+            return _context.Notes.Include(x=> x.Sender).ToList();
         }
 
         public Note GetById(int id)
         {
-            return _context.Notes.SingleOrDefault(x => x.Id == id);
+            return _context.Notes.Where((x => x.Id == id)).Include(x => x.Sender).SingleOrDefault();
         }
 
         public void Insert(Note note)

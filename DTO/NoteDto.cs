@@ -12,5 +12,9 @@ namespace FYP_WebApp.DTO
     {
         [DataMember(Name = "Note_Content")]
         public string Content { get; set; }
+        [DataMember(Name = "Note_Sender_ID")]
+        public string SenderId { get; set; }
+        [DataMember(Name = "Note_Time_Created")]
+        public DateTime TimeCreated { get; set; }
     }
 }

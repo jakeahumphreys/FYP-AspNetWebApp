@@ -73,6 +73,20 @@ namespace FYP_WebApp.Controllers
             return View(storedLocation);
         }
 
+        public ActionResult Create(string label, decimal latitude, decimal longitude)
+        {
+            ServiceResponse response = _storedLocationService.CreateAction(new StoredLocation{Label = label, Longitude = longitude, Latitude = latitude});
+
+            if (response.Success == true)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
         public ActionResult Edit(int id)
         {
             try

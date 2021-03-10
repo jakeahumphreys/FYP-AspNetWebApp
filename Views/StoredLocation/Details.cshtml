@@ -55,6 +55,12 @@
                 {
                     <li>
                         @Html.DisplayFor(modelItem => item.Content)
+                        <span class="badge badge-info">
+                            @Html.DisplayFor(modelItem => item.Sender.DisplayString)
+                        </span>
+                        <span class="badge badge-warning">
+                            @Html.DisplayFor(modelItem => item.TimeCreated)
+                        </span>
                         @if (User.IsInRole("Admin"))
                         {
                             <button class="btn btn-danger fa fa-times" data-toggle="tooltip" title="Back" onclick="location.href = '@Url.Action("Delete", "Note", new {@id = item.Id})';return false;"></button>

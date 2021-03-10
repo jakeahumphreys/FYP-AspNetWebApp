@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
+using Microsoft.AspNet.Identity;
 
 namespace FYP_WebApp.Controllers
 {
@@ -59,6 +60,8 @@ namespace FYP_WebApp.Controllers
             if (ModelState.IsValid)
             {
                 noteViewModel.Note.StoredLocationId = noteViewModel.StoredLocationId;
+                noteViewModel.Note.SenderId = User.Identity.GetUserId();
+                noteViewModel.Note.TimeCreated = DateTime.Now;
                 var result = _noteService.Create(noteViewModel.Note);
 
                 if (result.Success)

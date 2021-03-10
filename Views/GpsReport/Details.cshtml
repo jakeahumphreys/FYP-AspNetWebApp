@@ -1,0 +1,109 @@
+﻿@model FYP_WebApp.Models.GpsReport
+
+@{
+    ViewBag.Title = "Details";
+}
+<button class="btn btn-primary mb-3" data-toggle="tooltip" title="Back" onclick="location.href = '@Url.Action("Index", "GpsReport")';return false;">
+    <i class="fa fa-arrow-alt-circle-left"></i>
+    Back
+</button>
+
+<div>
+    <div class="card shadow mb-3 bg-white rounded">
+        <div class="card-header">
+            Map
+        </div>
+        <div class="card-body">
+            <iframe src="@ViewBag.mapUrl" style="width: 100%; height: 500px"></iframe>
+        </div>
+    </div>
+
+    <div class="card shadow mb-3 bg-white rounded">
+        <div class="card-header">
+            Report Details
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    <strong>Reported By</strong>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.DisplayString)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Time)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Time)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    
+    <div class="card shadow mb-3 bg-white rounded">
+        <div class="card-header">
+            Actions
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#locationModal">
+                <i class="fa fa-location-arrow"></i>
+                Create Location
+            </button>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "StoredLocation", FormMethod.Post))
+{
+    <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="locationModalLabel">Send Test Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="textlabel" class="control-label">Label:</label>
+                            <input type="text" id="textlabel" name="label"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="textlat" class="control-label">Latitude:</label>
+                            <input type="text" id="textlat" name="lat" readonly="readonly" value="@Model.Latitude" disabled="disabled"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="textlong" class="control-label">Longitude:</label>
+                            <input type="text" id="textlong" name="long" readonly="readonly" value="@Model.Longitude" disabled="disabled"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

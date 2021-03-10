@@ -221,6 +221,7 @@
     <Compile Include="Common Logic\Status.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GpsReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -303,6 +304,18 @@
     <Compile Include="Migrations\202103061708503_AddMobileLoginKeuy.cs" />
     <Compile Include="Migrations\202103061708503_AddMobileLoginKeuy.Designer.cs">
       <DependentUpon>202103061708503_AddMobileLoginKeuy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103091304186_AddAdditionalFieldsToNote.cs" />
+    <Compile Include="Migrations\202103091304186_AddAdditionalFieldsToNote.Designer.cs">
+      <DependentUpon>202103091304186_AddAdditionalFieldsToNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103091313213_ChangeSenderIdInNoteToString.cs" />
+    <Compile Include="Migrations\202103091313213_ChangeSenderIdInNoteToString.Designer.cs">
+      <DependentUpon>202103091313213_ChangeSenderIdInNoteToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103091317277_MakePrivateTimeSentPublic.cs" />
+    <Compile Include="Migrations\202103091317277_MakePrivateTimeSentPublic.Designer.cs">
+      <DependentUpon>202103091317277_MakePrivateTimeSentPublic.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -573,6 +586,8 @@
     <Content Include="Views\Note\Details.cshtml" />
     <Content Include="Views\Note\Edit.cshtml" />
     <Content Include="Views\Note\Index.cshtml" />
+    <Content Include="Views\GpsReport\Details.cshtml" />
+    <Content Include="Views\GpsReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -627,6 +642,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103061708503_AddMobileLoginKeuy.resx">
       <DependentUpon>202103061708503_AddMobileLoginKeuy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103091304186_AddAdditionalFieldsToNote.resx">
+      <DependentUpon>202103091304186_AddAdditionalFieldsToNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103091313213_ChangeSenderIdInNoteToString.resx">
+      <DependentUpon>202103091313213_ChangeSenderIdInNoteToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103091317277_MakePrivateTimeSentPublic.resx">
+      <DependentUpon>202103091317277_MakePrivateTimeSentPublic.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
