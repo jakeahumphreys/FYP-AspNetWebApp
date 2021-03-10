@@ -50,6 +50,16 @@ namespace FYP_WebApp.ServiceLayer
             }
             else
             {
+                if (note.Sender == null)
+                {
+                    return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
+                }
+
+                if (note.TimeCreated == DateTime.MinValue)
+                {
+                    return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter};
+
+                }
                 _noteRepository.Insert(note);
                 _noteRepository.Save();
                 return new ServiceResponse {Success = true};

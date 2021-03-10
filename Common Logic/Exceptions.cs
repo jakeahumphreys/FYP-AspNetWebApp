@@ -41,6 +41,12 @@ namespace FYP_WebApp.Common_Logic
         public NoteNotFoundException(string message) : base(message) { }
     }
 
+    public class ApiLogNotFoundException : Exception
+    {
+        public ApiLogNotFoundException(string message) : base(message) { }
+    }
+
+
 
 
 

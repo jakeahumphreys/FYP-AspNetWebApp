@@ -227,6 +227,7 @@
     <Compile Include="Common Logic\ServiceResponse.cs" />
     <Compile Include="Common Logic\Status.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiLogController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GpsReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -237,7 +238,9 @@
     <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TeamDashboardController.cs" />
+    <Compile Include="DataAccessLayer\ApiLogRepository.cs" />
     <Compile Include="DataAccessLayer\GpsReportRepository.cs" />
+    <Compile Include="DataAccessLayer\IApiLogRepository.cs" />
     <Compile Include="DataAccessLayer\IGpsReportRepository.cs" />
     <Compile Include="DataAccessLayer\IMessageRepository.cs" />
     <Compile Include="DataAccessLayer\INoteRepository.cs" />
@@ -328,6 +331,10 @@
     <Compile Include="Migrations\202103101704142_AddApiLogs.Designer.cs">
       <DependentUpon>202103101704142_AddApiLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103101812275_AddRouteFieldsToApiLog.cs" />
+    <Compile Include="Migrations\202103101812275_AddRouteFieldsToApiLog.Designer.cs">
+      <DependentUpon>202103101812275_AddRouteFieldsToApiLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiLog.cs" />
@@ -350,6 +357,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\AccountService.cs" />
     <Compile Include="ServiceLayer\GpsReportService.cs" />
+    <Compile Include="ServiceLayer\LogService.cs" />
     <Compile Include="ServiceLayer\MessageService.cs" />
     <Compile Include="ServiceLayer\NoteService.cs" />
     <Compile Include="ServiceLayer\PairingService.cs" />
@@ -376,6 +384,8 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\Highlight\atom-one-dark-reasonable.css" />
+    <Content Include="Content\Highlight\atom-one-light.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -410,6 +420,8 @@
     <Content Include="Scripts\fontawesome\solid.min.js" />
     <Content Include="Scripts\fontawesome\v4-shims.js" />
     <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="Scripts\highlight.pack.js" />
+    <Content Include="Scripts\highlightInit.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -601,6 +613,8 @@
     <Content Include="Views\Note\Index.cshtml" />
     <Content Include="Views\GpsReport\Details.cshtml" />
     <Content Include="Views\GpsReport\Index.cshtml" />
+    <Content Include="Views\ApiLog\Details.cshtml" />
+    <Content Include="Views\ApiLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -667,6 +681,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103101704142_AddApiLogs.resx">
       <DependentUpon>202103101704142_AddApiLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103101812275_AddRouteFieldsToApiLog.resx">
+      <DependentUpon>202103101812275_AddRouteFieldsToApiLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

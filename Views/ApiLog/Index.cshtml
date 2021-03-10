@@ -1,0 +1,68 @@
+﻿@using FYP_WebApp.Common_Logic
+@model IEnumerable<FYP_WebApp.Models.ApiLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LogLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Controller)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.LogLevel == LogLevel.Warn)
+            {
+                <span class="badge badge-warning">WARN</span>
+            }
+            @if (item.LogLevel == LogLevel.Info)
+            {
+                <span class="badge badge-info">INFO</span>
+            }
+            @if (item.LogLevel == LogLevel.Debug)
+            {
+                <span class="badge badge-dark">DEBUG</span>
+            }
+            @if (item.LogLevel == LogLevel.Error)
+            {
+                <span class="badge badge-danger">ERROR</span>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Controller)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Action)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeStamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusCode)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

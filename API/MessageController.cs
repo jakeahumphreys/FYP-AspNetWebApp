@@ -11,6 +11,8 @@ using FYP_WebApp.Hubs;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Facebook;
+using Newtonsoft.Json;
 
 namespace FYP_WebApp.API
 {
@@ -18,6 +20,7 @@ namespace FYP_WebApp.API
     {
         private readonly MessageService _messageService;
         private readonly AccountService _accountService;
+        private readonly LogService _logService;
         private readonly TeamService _teamService;
         private Mapper _mapper;
 
@@ -25,6 +28,7 @@ namespace FYP_WebApp.API
         {
             _accountService = new AccountService();
             _messageService = new MessageService();
+            _logService = new LogService();
             _teamService = new TeamService();
             var config = AutomapperConfig.instance().Configure();
             _mapper = new Mapper(config);
@@ -42,7 +46,20 @@ namespace FYP_WebApp.API
         {
             if (request == null)
             {
-                return Content(HttpStatusCode.BadRequest, "Invalid data submitted.");
+                var response = Content(HttpStatusCode.BadRequest, "Invalid data submitted.");
+
+                _logService.CreateApiLog(new ApiLog
+                {
+                    LogLevel = LogLevel.Error,
+                    Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                    Action = this.ActionContext.ActionDescriptor.ActionName,
+                    TimeStamp = DateTime.Now,
+                    RequestString = "NULL",
+                    ResponseString = JsonConvert.SerializeObject(response.Content, Formatting.Indented),
+                    StatusCode = HttpStatusCode.BadRequest.ToString()
+                });
+
+                return response;
             }
             else
             {
@@ -52,17 +69,42 @@ namespace FYP_WebApp.API
 
                 if (result.Success)
                 {
-                    return Content(HttpStatusCode.Accepted, "Message received.");
+                    var response = Content(HttpStatusCode.Accepted, "Message received.");
+
+                    _logService.CreateApiLog(new ApiLog
+                    {
+                        LogLevel = LogLevel.Info,
+                        Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                        Action = this.ActionContext.ActionDescriptor.ActionName,
+                        TimeStamp = DateTime.Now,
+                        RequestString = JsonConvert.SerializeObject(request, Formatting.Indented),
+                        ResponseString = JsonConvert.SerializeObject(response.Content, Formatting.Indented),
+                        StatusCode = HttpStatusCode.Accepted.ToString()
+                    });
+
+                    return response;
                 }
                 else
                 {
                     switch (result.ResponseError )
                     {
                         case ResponseErrors.NoValidPairing:
-                            return Content(HttpStatusCode.NotFound, "No pairing found");
+                            var response = Content(HttpStatusCode.NotFound, "No pairing found");
+
+                            _logService.CreateApiLog(new ApiLog
+                            {
+                                LogLevel = LogLevel.Error,
+                                Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                                Action = this.ActionContext.ActionDescriptor.ActionName,
+                                TimeStamp = DateTime.Now,
+                                RequestString = JsonConvert.SerializeObject(request, Formatting.Indented),
+                                ResponseString = JsonConvert.SerializeObject(response.Content, Formatting.Indented),
+                                StatusCode = HttpStatusCode.NotFound.ToString()
+                            });
+
+                            return response;
                         default:
                             return Content(HttpStatusCode.BadRequest, "Message not received.");
-
                     }
                 }
             }
