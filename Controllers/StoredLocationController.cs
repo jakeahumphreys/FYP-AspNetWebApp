@@ -39,11 +39,11 @@ namespace FYP_WebApp.Controllers
             }
             catch (ArgumentException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
             }
             catch (StoredLocationNotFoundException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
             }
         }
 
@@ -109,11 +109,11 @@ namespace FYP_WebApp.Controllers
             }
             catch (ArgumentException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
             }
             catch (StoredLocationNotFoundException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
             }
         }
 
@@ -147,11 +147,11 @@ namespace FYP_WebApp.Controllers
             }
             catch (ArgumentException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
             }
             catch (StoredLocationNotFoundException ex)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.AccountInactive, @Message = ex.Message });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
             }
         }
 
