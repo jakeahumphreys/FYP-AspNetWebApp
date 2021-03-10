@@ -384,8 +384,7 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
-    <Content Include="Content\Highlight\atom-one-dark-reasonable.css" />
-    <Content Include="Content\Highlight\atom-one-light.css" />
+    <Content Include="Content\Highlight\github.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
