@@ -3,12 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
 @if (Request.IsAuthenticated)
 {
     <div class="card">
@@ -30,6 +24,15 @@
             }
            
         </div>
+    </div>
+}
+else
+{
+    <div class="jumbotron shadow-lg p-3" style="background-image: url(../../Content/Images/map_3d.png)">
+        <h1 style="color: snow">BuddyUp Work Tracking System</h1><span class="badge badge-info">Proof Of Concept</span>
+        <p class="lead" style="color: snow">Remote Tracking Solution</p>
+        <hr style="border-color: snow"/>
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Login","Account", new { id = "loginLink" })';return false;">Login</button>
     </div>
 }
 

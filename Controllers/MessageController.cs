@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace FYP_WebApp.Controllers
 {
+    [CustomAuth(Roles = "Admin, Manager, Member")]
     public class MessageController : Controller
     {
         private readonly MessageService _messageService;

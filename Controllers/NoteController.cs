@@ -22,12 +22,13 @@ namespace FYP_WebApp.Controllers
             _noteService = new NoteService();
         }
 
-        // GET: Note
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(_noteService.GetAll());
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             try
@@ -45,7 +46,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
-        // GET: Note/Create
+        [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Create(int storedLocationId)
         {
             //ViewBag.StoredLocationId = new SelectList(db.StoredLocations, "Id", "Label");
@@ -53,6 +54,7 @@ namespace FYP_WebApp.Controllers
             return View(noteViewModel);
         }
 
+        [CustomAuth(Roles = "Admin, Manager, Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Note, StoredLocationId")] NoteViewModel noteViewModel)
@@ -73,7 +75,7 @@ namespace FYP_WebApp.Controllers
             return View(noteViewModel);
         }
 
-        // GET: Note/Edit/5
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             try
@@ -94,6 +96,7 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Title,Content,StoredLocationId,IsInactive")] Note note)
         {
             if (ModelState.IsValid)
@@ -113,7 +116,7 @@ namespace FYP_WebApp.Controllers
             return View(note);
         }
 
-        // GET: Note/Delete/5
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             try
@@ -131,7 +134,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
-        // POST: Note/Delete/5
+        [CustomAuth(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

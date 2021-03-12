@@ -13,6 +13,7 @@ namespace FYP_WebApp.Common_Logic
         SystemError = 3,
         HttpError = 4,
         InvalidParameter = 5,
-        EntityNotFound = 6
+        EntityNotFound = 6,
+        Unauthorized = 7
     }
 }

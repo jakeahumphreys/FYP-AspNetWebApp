@@ -15,6 +15,7 @@ using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
 {
+    [CustomAuth(Roles = "Manager")]
     public class TeamDashboardController : Controller
     {
 

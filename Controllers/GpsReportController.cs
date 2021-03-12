@@ -26,7 +26,7 @@ namespace FYP_WebApp.Controllers
             _teamService = new TeamService();
         }
 
-        [Authorize(Roles="Admin, Manager")]
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchStringName, int? page)
         {
             var reportsVisible = new List<GpsReport>();
@@ -91,7 +91,7 @@ namespace FYP_WebApp.Controllers
             return View(reportsVisible.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: GpsReport/Details/5
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Details(int id)
         {
             try

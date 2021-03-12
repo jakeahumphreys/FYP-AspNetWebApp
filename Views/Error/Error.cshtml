@@ -15,6 +15,22 @@
             <p class="mb-0">If you believe this is an error please contact your system administrator.</p>
         </div>
         break;
+    case Errors.AccountUnauthorized:
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Unauthorized</h4>
+            <p>Your account is not authorized to access that resource.</p>
+            <hr>
+            <p class="mb-0">If you believe this is an error please contact your system administrator.</p>
+        </div>
+        break;
+    case Errors.Unauthorized:
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Unauthorized</h4>
+            <p>You are not authorized to access that resource.</p>
+            <hr>
+            <p class="mb-0">Logging in may resolve this issue.</p>
+        </div>
+        break;
     case Errors.SystemError:
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">System Error</h4>
@@ -39,8 +55,11 @@
             <p class="mb-0">@Model.Message</p>
         </div>
         break;
-
 }
+
+<button class="btn btn-primary" onclick="location.href='@Url.Action("Login","Account", new { id = "loginLink" })';return false;">Login</button>
+<button class="btn btn-primary" onclick="location.href='@Url.Action("Index","Home")';return false;">Home</button>
+
 
 
 

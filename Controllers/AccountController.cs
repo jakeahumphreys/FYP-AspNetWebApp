@@ -27,11 +27,13 @@ namespace FYP_WebApp.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _applicationDbContext;
         private TeamService _teamService;
+        private LogService _logService;
 
         public AccountController()
         {
             _applicationDbContext = new ApplicationDbContext();
             _teamService = new TeamService();
+            _logService = new LogService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -40,7 +42,7 @@ namespace FYP_WebApp.Controllers
             SignInManager = signInManager;
             _applicationDbContext = new ApplicationDbContext();
             _teamService = new TeamService();
-
+            _logService = new LogService();
         }
 
         public ApplicationSignInManager SignInManager
@@ -164,7 +166,7 @@ namespace FYP_WebApp.Controllers
             {
                 var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
                 ViewBag.teamSelectList = teamSelectList;
-                return View(editViewModel.User);
+                return View(editViewModel);
             }
         }
 
@@ -189,6 +191,12 @@ namespace FYP_WebApp.Controllers
                 return View(model);
             }
 
+            var accessLog = new AccessLog
+            {
+                TimeStamp = DateTime.Now,
+                AttemptedUser = model.Email,
+            };
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
 
@@ -203,14 +211,23 @@ namespace FYP_WebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    accessLog.Success = true;
+                    accessLog.Message = "Login Successful.";
+                    _logService.CreateAccessLog(accessLog);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    accessLog.Success = false;
+                    accessLog.Message = "Login failed because the user's account is locked.";
+                    _logService.CreateAccessLog(accessLog);
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
+                    accessLog.Success = false;
+                    accessLog.Message = "Invalid login credentials.";
+                    _logService.CreateAccessLog(accessLog);
                     return View(model);
             }
         }
@@ -245,6 +262,7 @@ namespace FYP_WebApp.Controllers
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -552,6 +570,18 @@ namespace FYP_WebApp.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        public string GetIpAddress()
+        {
+            var ipAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            return ipAddress;
         }
 
         #region Helpers

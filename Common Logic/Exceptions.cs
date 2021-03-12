@@ -46,7 +46,10 @@ namespace FYP_WebApp.Common_Logic
         public ApiLogNotFoundException(string message) : base(message) { }
     }
 
-
+    public class AccessLogNotFoundException : Exception
+    {
+        public AccessLogNotFoundException(string message) : base(message) { }
+    }
 
 
 

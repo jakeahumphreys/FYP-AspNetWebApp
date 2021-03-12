@@ -14,54 +14,51 @@ using PagedList;
 namespace FYP_WebApp.Controllers
 {
     [CustomAuth(Roles = "Admin")]
-    public class ApiLogController : Controller
+    public class AccessLogController : Controller
     {
-
         private readonly LogService _logService;
 
-        public ApiLogController()
+        public AccessLogController()
         {
             _logService = new LogService();
         }
-        // GET: ApiLog
         public ActionResult Index(string sortOrder, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParameter = sortOrder == "Date" ? "date_desc" : "Date";
 
-            var apiLogs = _logService.GetAllApiLogs();
+            var accessLogs = _logService.GetAllAccessLogs();
 
 
             switch (sortOrder)
             {
                 case "Date":
-                    apiLogs = apiLogs.OrderBy(s => s.TimeStamp).ToList();
+                    accessLogs = accessLogs.OrderBy(s => s.TimeStamp).ToList();
                     break;
                 case "date_desc":
-                    apiLogs = apiLogs.OrderByDescending(s => s.TimeStamp).ToList();
+                    accessLogs = accessLogs.OrderByDescending(s => s.TimeStamp).ToList();
                     break;
                 default:
-                    apiLogs = apiLogs.OrderBy(s => s.Id).ToList();
+                    accessLogs = accessLogs.OrderBy(s => s.Id).ToList();
                     break;
             }
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(apiLogs.ToPagedList(pageNumber, pageSize));
+            return View(accessLogs.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: ApiLog/Details/5
         public ActionResult Details(int id)
         {
             try
             {
-                return View(_logService.GetApiLogDetails(id));
+                return View(_logService.GetAccessLogDetails(id));
             }
             catch (ArgumentException ex)
             {
-                return RedirectToAction("Error", "Error", new {@Error = Errors.InvalidParameter, @Message = ex.Message});
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
             }
-            catch (ApiLogNotFoundException ex)
+            catch (AccessLogNotFoundException ex)
             {
                 return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
 

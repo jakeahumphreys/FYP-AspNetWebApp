@@ -218,6 +218,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common Logic\AutomapperConfig.cs" />
+    <Compile Include="Common Logic\CustomAuth.cs" />
+    <Compile Include="Common Logic\CustomHandleErrorAttribute.cs" />
     <Compile Include="Common Logic\Errors.cs" />
     <Compile Include="Common Logic\Exceptions.cs" />
     <Compile Include="Common Logic\Library.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="Common Logic\ResponseErrors.cs" />
     <Compile Include="Common Logic\ServiceResponse.cs" />
     <Compile Include="Common Logic\Status.cs" />
+    <Compile Include="Controllers\AccessLogController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiLogController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -238,8 +241,10 @@
     <Compile Include="Controllers\StoredLocationController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TeamDashboardController.cs" />
+    <Compile Include="DataAccessLayer\AccessLogRepository.cs" />
     <Compile Include="DataAccessLayer\ApiLogRepository.cs" />
     <Compile Include="DataAccessLayer\GpsReportRepository.cs" />
+    <Compile Include="DataAccessLayer\IAccessLogRepository.cs" />
     <Compile Include="DataAccessLayer\IApiLogRepository.cs" />
     <Compile Include="DataAccessLayer\IGpsReportRepository.cs" />
     <Compile Include="DataAccessLayer\IMessageRepository.cs" />
@@ -339,7 +344,20 @@
     <Compile Include="Migrations\202103121442125_AddImageToUser.Designer.cs">
       <DependentUpon>202103121442125_AddImageToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103121637305_AddAccessLogs.cs" />
+    <Compile Include="Migrations\202103121637305_AddAccessLogs.Designer.cs">
+      <DependentUpon>202103121637305_AddAccessLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103121659175_AddMessageToAccessLogs.cs" />
+    <Compile Include="Migrations\202103121659175_AddMessageToAccessLogs.Designer.cs">
+      <DependentUpon>202103121659175_AddMessageToAccessLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103121726382_RemoveIpFromAccessLog.cs" />
+    <Compile Include="Migrations\202103121726382_RemoveIpFromAccessLog.Designer.cs">
+      <DependentUpon>202103121726382_RemoveIpFromAccessLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiLog.cs" />
     <Compile Include="Models\ConfigurationRecord.cs" />
@@ -389,6 +407,7 @@
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\Highlight\github.css" />
+    <Content Include="Content\Images\map_3d.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -619,6 +638,8 @@
     <Content Include="Views\ApiLog\Details.cshtml" />
     <Content Include="Views\ApiLog\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
+    <Content Include="Views\AccessLog\Details.cshtml" />
+    <Content Include="Views\AccessLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -691,6 +712,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103121442125_AddImageToUser.resx">
       <DependentUpon>202103121442125_AddImageToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103121637305_AddAccessLogs.resx">
+      <DependentUpon>202103121637305_AddAccessLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103121659175_AddMessageToAccessLogs.resx">
+      <DependentUpon>202103121659175_AddMessageToAccessLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103121726382_RemoveIpFromAccessLog.resx">
+      <DependentUpon>202103121726382_RemoveIpFromAccessLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

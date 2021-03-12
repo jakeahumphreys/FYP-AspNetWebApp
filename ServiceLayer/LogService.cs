@@ -12,15 +12,22 @@ namespace FYP_WebApp.ServiceLayer
     public class LogService
     {
         private readonly ApiLogRepository _apiLogRepository;
+        private readonly AccessLogRepository _accessLogRepository;
 
         public LogService()
         {
             _apiLogRepository = new ApiLogRepository();
+            _accessLogRepository = new AccessLogRepository();
         }
 
         public List<ApiLog> GetAllApiLogs()
         {
             return _apiLogRepository.GetAll();
+        }
+
+        public List<AccessLog> GetAllAccessLogs()
+        {
+            return _accessLogRepository.GetAll();
         }
 
         public ApiLog GetApiLogDetails(int id)
@@ -40,6 +47,24 @@ namespace FYP_WebApp.ServiceLayer
             return apiLog;
         }
 
+        public AccessLog GetAccessLogDetails(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentException("No ID specified.");
+            }
+
+            var accessLog = _accessLogRepository.GetById(id);
+
+            if (accessLog == null)
+            {
+                throw new AccessLogNotFoundException($"Access Log with ID {id} was not found.");
+            }
+
+            return accessLog;
+        }
+
+
         public ServiceResponse CreateApiLog(ApiLog apiLog)
         {
             if (apiLog != null)
@@ -51,6 +76,20 @@ namespace FYP_WebApp.ServiceLayer
             else
             {
                 return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter};
+            }
+        }
+
+        public ServiceResponse CreateAccessLog(AccessLog accessLog)
+        {
+            if (accessLog != null)
+            {
+                _accessLogRepository.Insert(accessLog);
+                _accessLogRepository.Save();
+                return new ServiceResponse { Success = true };
+            }
+            else
+            {
+                return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
             }
         }
 

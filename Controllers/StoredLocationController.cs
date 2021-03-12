@@ -22,12 +22,13 @@ namespace FYP_WebApp.Controllers
         {
             _storedLocationService = new StoredLocationService();
         }
-
+        [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Index()
         {
             return View(_storedLocationService.Index());
         }
 
+        [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Details(int id)
         {
             try
@@ -47,11 +48,13 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Label,Latitude,Longitude")] StoredLocation storedLocation)
@@ -75,6 +78,7 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult CreateWithContent(string label, string latitude, string longitude)
         {
             var decimalLatitude = Convert.ToDecimal(latitude);
@@ -101,6 +105,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             try
@@ -119,6 +124,7 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Label,Latitude,Longitude,IsInactive")] StoredLocation storedLocation)
         {
 
@@ -139,6 +145,7 @@ namespace FYP_WebApp.Controllers
             return View(storedLocation);
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             try
@@ -157,6 +164,7 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuth(Roles = "Admin")]
         public ActionResult DeleteAction(int id)
         {
             ServiceResponse response = _storedLocationService.DeleteAction(id);

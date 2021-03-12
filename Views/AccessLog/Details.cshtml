@@ -1,0 +1,47 @@
+﻿@model FYP_WebApp.Models.AccessLog
+
+@{
+    ViewBag.Title = "Access Log Details";
+}
+
+<div>
+    <h4>AccessLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => model.TimeStamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttemptedUser)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => model.AttemptedUser)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+    
+        <dt>
+            @Html.DisplayNameFor(model => model.Success)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => model.Success)
+        </dd>
+    
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

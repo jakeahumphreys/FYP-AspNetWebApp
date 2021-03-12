@@ -27,11 +27,13 @@ namespace FYP_WebApp.Controllers
             _library = new Library();
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(_pairingService.GetAll());
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Details(int id)
         {
             try
@@ -48,7 +50,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
-
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Create()
         {
             var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
@@ -56,6 +58,7 @@ namespace FYP_WebApp.Controllers
             return View(pairingViewModel);
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
@@ -93,6 +96,7 @@ namespace FYP_WebApp.Controllers
             return View(pairingViewModel);
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Edit(int id)
         {
             var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
@@ -111,6 +115,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id, UserId, BuddyUserId, StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
@@ -148,6 +153,7 @@ namespace FYP_WebApp.Controllers
             return View(pairingViewModel);
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Delete(int id)
         {
             try
@@ -164,6 +170,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin, Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
