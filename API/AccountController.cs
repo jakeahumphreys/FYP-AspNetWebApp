@@ -79,12 +79,48 @@ namespace FYP_WebApp.API
             }
             else
             {
+                if (user.IsInactive)
+                {
+                    var inactiveResponse = Content(HttpStatusCode.Unauthorized, "User is no longer active on this system.");
+
+                    _logService.CreateApiLog(new ApiLog
+                    {
+                        LogLevel = LogLevel.Warn,
+                        Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                        Action = this.ActionContext.ActionDescriptor.ActionName,
+                        TimeStamp = DateTime.Now,
+                        RequestString = JsonConvert.SerializeObject(new { username = username, loginKey = loginKey }),
+                        ResponseString = JsonConvert.SerializeObject(inactiveResponse.Content, Formatting.Indented),
+                        StatusCode = HttpStatusCode.Unauthorized.ToString()
+                    });
+
+                    return inactiveResponse;
+                }
+
+                if (user.LockoutEndDateUtc != null)
+                {
+                    var lockedOutResponse = Content(HttpStatusCode.Forbidden, "This account is currently locked.");
+
+                    _logService.CreateApiLog(new ApiLog
+                    {
+                        LogLevel = LogLevel.Warn,
+                        Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                        Action = this.ActionContext.ActionDescriptor.ActionName,
+                        TimeStamp = DateTime.Now,
+                        RequestString = JsonConvert.SerializeObject(new { username = username, loginKey = loginKey }),
+                        ResponseString = JsonConvert.SerializeObject(lockedOutResponse.Content, Formatting.Indented),
+                        StatusCode = HttpStatusCode.Forbidden.ToString()
+                    });
+
+                    return lockedOutResponse;
+                }
+
                 var response = Json(_mapper.Map<ApplicationUser, MobileUserDto>(user));
 
 
                 _logService.CreateApiLog(new ApiLog
                 {
-                    LogLevel = LogLevel.Error,
+                    LogLevel = LogLevel.Info,
                     Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
                     Action = this.ActionContext.ActionDescriptor.ActionName,
                     TimeStamp = DateTime.Now,
