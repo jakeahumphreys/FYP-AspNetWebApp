@@ -1,5 +1,8 @@
-﻿@using FYP_WebApp.Common_Logic
-@model IEnumerable<FYP_WebApp.Models.ApiLog>
+﻿@using System.Data.SqlClient
+@using System.Web.UI.WebControls
+@using FYP_WebApp.Common_Logic
+@model PagedList.IPagedList<FYP_WebApp.Models.ApiLog>
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -10,59 +13,79 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LogLevel)
+            Log Level
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Controller)
+            Controller
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Action)
+            Action
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TimeStamp)
+            @Html.ActionLink("Timestamp", "Index", new {SortOrder = ViewBag.DateSortParameter})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StatusCode)
+            Status Code
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @if (item.LogLevel == LogLevel.Warn)
-            {
-                <span class="badge badge-warning">WARN</span>
-            }
-            @if (item.LogLevel == LogLevel.Info)
-            {
-                <span class="badge badge-info">INFO</span>
-            }
-            @if (item.LogLevel == LogLevel.Debug)
-            {
-                <span class="badge badge-dark">DEBUG</span>
-            }
-            @if (item.LogLevel == LogLevel.Error)
-            {
-                <span class="badge badge-danger">ERROR</span>
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Controller)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Action)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeStamp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusCode)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.LogLevel == LogLevel.Warn)
+                {
+                    <span class="badge badge-warning">WARN</span>
+                }
+                @if (item.LogLevel == LogLevel.Info)
+                {
+                    <span class="badge badge-info">INFO</span>
+                }
+                @if (item.LogLevel == LogLevel.Debug)
+                {
+                    <span class="badge badge-dark">DEBUG</span>
+                }
+                @if (item.LogLevel == LogLevel.Error)
+                {
+                    <span class="badge badge-danger">ERROR</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Controller)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                @switch (item.StatusCode)
+                {
+                    case "OK":
+                        <span class="badge badge-success">OK</span>
+                        break;
+                    case "Accepted":
+                        <span class="badge badge-success">Accepted</span>
+                        break;
+                    case "NotFound":
+                        <span class="badge badge-dark">Not Found</span>
+                        break;
+                    case "BadRequest": 
+                        <span class="badge badge-danger">Bad Request</span>
+                        break;
+                    case "Default":
+                        <span class="badge badge-warning">@item.StatusCode</span>
+                        break;
+                }
 
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.Id })
+            </td>
+        </tr>
+    }
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new{page, sortOrder = ViewBag.CurrentSort}))
