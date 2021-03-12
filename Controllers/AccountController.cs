@@ -104,7 +104,8 @@ namespace FYP_WebApp.Controllers
                 if (applicationUser != null)
                 {
                     ViewBag.teamSelectList = teamSelectList;
-                    return View(applicationUser);
+                    var editViewModel = new EditAccountViewModel {User = applicationUser};
+                    return View(editViewModel);
                 }
                 else
                 {
@@ -119,27 +120,32 @@ namespace FYP_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ApplicationUser user)
+        public ActionResult Edit(EditAccountViewModel editViewModel)
         {
-            var existingUser = _applicationDbContext.Users.Find(user.Id);
+            var existingUser = _applicationDbContext.Users.Find(editViewModel.User.Id);
 
-            existingUser.FirstName = user.FirstName;
-            existingUser.Surname = user.Surname;
-            existingUser.IsInactive = user.IsInactive;
-            existingUser.Email = user.Email;
-            existingUser.PhoneNumber = user.PhoneNumber;
-            existingUser.TeamId = user.TeamId;
-            existingUser.MobileLoginKey = user.MobileLoginKey;
-
-            if (user.LockoutEndDateUtc != null)
+            if (editViewModel.Image != null)
             {
-                if (user.LockoutEndDateUtc == DateTime.MinValue)
+                existingUser.Image = Library.convertImageToByteArray(editViewModel.Image);
+            }
+
+            existingUser.FirstName = editViewModel.User.FirstName;
+            existingUser.Surname = editViewModel.User.Surname;
+            existingUser.IsInactive = editViewModel.User.IsInactive;
+            existingUser.Email = editViewModel.User.Email;
+            existingUser.PhoneNumber = editViewModel.User.PhoneNumber;
+            existingUser.TeamId = editViewModel.User.TeamId;
+            existingUser.MobileLoginKey = editViewModel.User.MobileLoginKey;
+
+            if (editViewModel.User.LockoutEndDateUtc != null)
+            {
+                if (editViewModel.User.LockoutEndDateUtc == DateTime.MinValue)
                 {
                     existingUser.LockoutEndDateUtc = null;
                 }
                 else
                 {
-                    existingUser.LockoutEndDateUtc = user.LockoutEndDateUtc;
+                    existingUser.LockoutEndDateUtc = editViewModel.User.LockoutEndDateUtc;
                 }
             }
 
@@ -152,13 +158,13 @@ namespace FYP_WebApp.Controllers
             {
                 _applicationDbContext.Entry(existingUser).State = EntityState.Modified;
                 _applicationDbContext.SaveChanges();
-                return RedirectToAction("Details", new {@id = user.Id});
+                return RedirectToAction("Details", new {@id = editViewModel.User.Id});
             }
             else
             {
                 var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
                 ViewBag.teamSelectList = teamSelectList;
-                return View(user);
+                return View(editViewModel.User);
             }
         }
 
@@ -274,6 +280,12 @@ namespace FYP_WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId, MobileLoginKey = model.MobileLoginKey};
+
+                if (model.Image != null)
+                {
+                    user.Image = Library.convertImageToByteArray(model.Image);
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

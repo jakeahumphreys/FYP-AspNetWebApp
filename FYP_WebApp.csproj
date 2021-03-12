@@ -335,6 +335,10 @@
     <Compile Include="Migrations\202103101812275_AddRouteFieldsToApiLog.Designer.cs">
       <DependentUpon>202103101812275_AddRouteFieldsToApiLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103121442125_AddImageToUser.cs" />
+    <Compile Include="Migrations\202103121442125_AddImageToUser.Designer.cs">
+      <DependentUpon>202103121442125_AddImageToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiLog.cs" />
@@ -614,6 +618,7 @@
     <Content Include="Views\GpsReport\Index.cshtml" />
     <Content Include="Views\ApiLog\Details.cshtml" />
     <Content Include="Views\ApiLog\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -683,6 +688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103101812275_AddRouteFieldsToApiLog.resx">
       <DependentUpon>202103101812275_AddRouteFieldsToApiLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103121442125_AddImageToUser.resx">
+      <DependentUpon>202103121442125_AddImageToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

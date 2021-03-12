@@ -37,6 +37,9 @@ namespace FYP_WebApp.Models
         [Display(Name = "Surname(s)")]
         public string Surname { get; set; }
 
+        //Personalization fields
+        public byte[] Image { get; set; }
+
         //Gps Fields
         [EnumDataType(typeof(Status))]
         public Status Status { get; set; }

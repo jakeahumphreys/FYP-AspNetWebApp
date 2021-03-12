@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc;
 
 namespace FYP_WebApp.Models
@@ -68,6 +69,9 @@ namespace FYP_WebApp.Models
         public SelectList Roles { get; set; }
         public SelectList Teams { get; set; }
 
+        [Display(Name = "Profile Image")]
+        public HttpPostedFileBase Image { get; set; }
+
         [Required]
         [Display(Name = "First Name(s)")]
         public string FirstName { get; set; }
@@ -107,6 +111,13 @@ namespace FYP_WebApp.Models
         [Display(Name = "Team")]
         public int TeamId { get; set; }
     }
+
+    public class EditAccountViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public HttpPostedFileBase Image { get; set; }
+    }
+
 
     public class ResetPasswordViewModel
     {
