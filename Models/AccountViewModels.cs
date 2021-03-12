@@ -115,7 +115,10 @@ namespace FYP_WebApp.Models
     public class EditAccountViewModel
     {
         public ApplicationUser User { get; set; }
+        [Display(Name = "Change Profile Image")]
         public HttpPostedFileBase Image { get; set; }
+        [Display(Name = "Change Role")]
+        public string RoleId { get; set; }
     }
 
 

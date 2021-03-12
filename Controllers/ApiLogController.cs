@@ -47,6 +47,11 @@ namespace FYP_WebApp.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
+            ViewBag.TotalApiCalls = apiLogs.Count;
+            ViewBag.TotalApiErrors = apiLogs.Count(x => x.LogLevel == LogLevel.Error);
+            ViewBag.TotalApiInfos = apiLogs.Count(x => x.LogLevel == LogLevel.Info);
+
             return View(apiLogs.ToPagedList(pageNumber, pageSize));
         }
 

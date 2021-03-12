@@ -99,25 +99,31 @@ namespace FYP_WebApp.Controllers
 
         public ActionResult Edit(string id)
         {
-            if (!string.IsNullOrEmpty(id))
+            
+            if (id == null)
             {
-                ApplicationUser applicationUser = _applicationDbContext.Users.Find(id);
-                var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
-                if (applicationUser != null)
-                {
-                    ViewBag.teamSelectList = teamSelectList;
-                    var editViewModel = new EditAccountViewModel {User = applicationUser};
-                    return View(editViewModel);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = $"User ID was null." });
+
             }
-            else
+
+            ApplicationUser user = _applicationDbContext.Users.Find(id);
+
+            if (user == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = $"A User with ID {id} was not found." });
             }
+
+            var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
+            var rolesSelectList = new SelectList(_applicationDbContext.Roles.ToList(), "Id", "Name");
+            ViewBag.teamSelectList = teamSelectList;
+            ViewBag.roleSelectList = rolesSelectList;
+            var editViewModel = new EditAccountViewModel
+            {
+                User = user,
+                RoleId = user.Roles.FirstOrDefault().RoleId
+            };
+
+            return View(editViewModel);
         }
 
         [HttpPost]
@@ -130,6 +136,23 @@ namespace FYP_WebApp.Controllers
             {
                 existingUser.Image = Library.convertImageToByteArray(editViewModel.Image);
             }
+
+            if (editViewModel.RoleId != null)
+            {
+                var existingUserRoleId = existingUser.Roles.FirstOrDefault().RoleId;
+
+                if (editViewModel.RoleId != existingUserRoleId)
+                {
+                    var roleName = _applicationDbContext.Roles.FirstOrDefault(x => x.Id == editViewModel.RoleId).Name;
+
+                    if (roleName != null)
+                    {
+                        UserManager.RemoveFromRole(existingUser.Id, existingUserRoleId);
+                        UserManager.AddToRole(existingUser.Id, roleName);
+                    }
+                }
+            }
+         
 
             existingUser.FirstName = editViewModel.User.FirstName;
             existingUser.Surname = editViewModel.User.Surname;
@@ -164,7 +187,9 @@ namespace FYP_WebApp.Controllers
             }
             else
             {
+                var rolesSelectList = new SelectList(_applicationDbContext.Roles.ToList(), "Name", "Name");
                 var teamSelectList = new SelectList(_teamService.GetAll().Where(x => x.IsInactive != true), "Id", "Name");
+                ViewBag.roleSelectList = rolesSelectList;
                 ViewBag.teamSelectList = teamSelectList;
                 return View(editViewModel);
             }

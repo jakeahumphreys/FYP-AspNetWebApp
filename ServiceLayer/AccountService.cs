@@ -19,12 +19,12 @@ namespace FYP_WebApp.ServiceLayer
 
         public List<ApplicationUser> GetAll()
         {
-            return _applicationDbContext.Users.ToList();
+            return _applicationDbContext.Users.Include(x => x.Team).ToList();
         }
 
         public ApplicationUser GetById(string id)
         {
-            return _applicationDbContext.Users.Find(id);
+            return _applicationDbContext.Users.Where(x => x.Id == id).Include(x => x.Team).SingleOrDefault();
         }
 
         public List<ApplicationUser> GetAllManagers()

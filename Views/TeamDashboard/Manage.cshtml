@@ -65,97 +65,96 @@
    
 }
 
-<h2>My Team</h2>
+<h2>@Model.Team.Name</h2>
+<hr/>
 
-<div id="accordion">
-    <div class="card">
-        <div class="card-header" id="headingMap">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMap" aria-expanded="true" aria-controls="collapseMap">
-                    <i class="fa fa-map"></i>
-                    <strong>Team Map</strong>
-                </button>
-            </h5>
-        </div>
-        <div id="collapseMap" class="collapse show" aria-labelledby="headingMap" data-parent="#accordion">
-            <div class="card-body">
-                @if (Model.OnDutyMembers == 0)
-                {
-                    <p>None of your team are currently working, when they are, they'll show on a map here.</p>
-                }
-                else
-                {
-                    <div id="MapDiv" style="width: 100%; height: 500px;">
-                    </div>
-                }
-              
-            </div>
-        </div>
+<div class="card shadow-lg rounded mb-3">
+    <div class="card-header">
+        Team Map
     </div>
-    <div class="card">
-        <div class="card-header" id="headingMembers">
-            <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseMembers" aria-expanded="false" aria-controls="collapseMembers">
-                    <i class="fa fa-users"></i>
-                    <strong>Team Members</strong>
-                </button>
-            </h5>
-        </div>
-        <div id="collapseMembers" class="collapse" aria-labelledby="headingMembers" data-parent="#accordion">
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Members[0].FirstName);
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Members[0].Surname)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Members[0].IsInactive)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Members[0].Email)
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                        <th>
-                            <p>Flags</p>
-                        </th>
-                    </tr>
-
-                    @foreach (var item in Model.Members) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Surname)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsInactive)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @if (item.LockoutEndDateUtc != null)
-                                {
-                                    <span class="badge badge-danger">Account Locked</span>
-                                }
-                                @if (item.IsInactive == true)
-                                {
-                                    <span class="badge badge-dark">Inactive</span>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </table>
+    <div class="card-body">
+        @if (Model.OnDutyMembers == 0)
+        {
+            <p>None of your team are currently working, when they are, they'll show on a map here.</p>
+        }
+        else
+        {
+            <div id="MapDiv" style="width: 100%; height: 500px;">
             </div>
-        </div>
+        }
+    </div>
+</div>
+
+<div class="card shadow-lg rounded mb-3">
+    <div class="card-header">
+        Team Roster
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].FirstName);
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].IsInactive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].Email)
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    <p>Flags</p>
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Members)
+            {
+                <tr>
+                    <td>
+                        @if (item.Image != null)
+                        {
+                            <img class="rounded-circle shadow" src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="50" height="50" />
+                        }
+                        else
+                        {
+                            <img class="rounded-circle shadow" src="../../Content/Images/no-image.png" width="50" height="50" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsInactive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (item.LockoutEndDateUtc != null)
+                        {
+                            <span class="badge badge-danger">Account Locked</span>
+                        }
+                        @if (item.IsInactive == true)
+                        {
+                            <span class="badge badge-dark">Inactive</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 </div>
