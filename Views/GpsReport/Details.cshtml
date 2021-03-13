@@ -55,21 +55,36 @@
                 <dd>
                     @Html.DisplayFor(model => model.Longitude)
                 </dd>
+                
+                <dt>
+                    Saved Location
+                </dt>
+                
+                <dd>
+                    @if (Model.LocationId != null)
+                    {
+                        @Html.ActionLink(Model.Location.Label, "Details", "StoredLocation", new {id = Model.LocationId}, null)
+                    }
+                </dd>
             </dl>
         </div>
     </div>
     
-    <div class="card shadow mb-3 bg-white rounded">
-        <div class="card-header">
-            Actions
+    @if (Model.LocationId == null)
+    {
+        <div class="card shadow mb-3 bg-white rounded">
+            <div class="card-header">
+                Actions
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#locationModal">
+                    <i class="fa fa-location-arrow"></i>
+                    Create Location
+                </button>
+            </div>
         </div>
-        <div class="card-body">
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#locationModal">
-                <i class="fa fa-location-arrow"></i>
-                Create Location
-            </button>
-        </div>
-    </div>
+    }
+
 </div>
 
 @using (Html.BeginForm("CreateWithContent", "StoredLocation", FormMethod.Post))

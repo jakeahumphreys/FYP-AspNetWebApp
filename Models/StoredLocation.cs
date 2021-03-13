@@ -16,6 +16,7 @@ namespace FYP_WebApp.Models
         [DisplayFormat(DataFormatString = "{0:0.000000}", ApplyFormatInEditMode = true)]
         public decimal Longitude { get; set; }
         public List<Note> Notes { get; set; }
+        public List<GpsReport> CheckIns { get; set; }
         public bool IsInactive { get; set; }
     }
 }

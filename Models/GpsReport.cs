@@ -13,5 +13,7 @@ namespace FYP_WebApp.Models
         public decimal Longitude { get; set; }
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+        public int? LocationId { get; set; }
+        public StoredLocation Location { get; set; }
     }
 }
