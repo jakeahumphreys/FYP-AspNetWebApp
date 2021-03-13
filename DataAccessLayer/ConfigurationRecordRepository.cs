@@ -7,43 +7,43 @@ using FYP_WebApp.Models;
 
 namespace FYP_WebApp.DataAccessLayer
 {
-    public class AccessLogRepository : IAccessLogRepository
+    public class ConfigurationRecordRepository : IConfigurationRecordRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public AccessLogRepository()
+        public ConfigurationRecordRepository()
         {
             _context = new ApplicationDbContext();
         }
 
-        public AccessLogRepository(ApplicationDbContext context)
+        public ConfigurationRecordRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<AccessLog> GetAll()
+        public List<ConfigurationRecord> GetAll()
         {
-            return _context.AccessLogs.ToList();
+            return _context.ConfigurationRecords.ToList();
         }
 
-        public AccessLog GetById(int id)
+        public ConfigurationRecord GetById(int id)
         {
-            return _context.AccessLogs.SingleOrDefault(x => x.Id == id);
+            return _context.ConfigurationRecords.SingleOrDefault(x => x.Id == id);
         }
 
-        public void Insert(AccessLog accessLog)
+        public void Insert(ConfigurationRecord configurationRecord)
         {
-            _context.AccessLogs.Add(accessLog);
+            _context.ConfigurationRecords.Add(configurationRecord);
         }
 
-        public void Update(AccessLog accessLog)
+        public void Update(ConfigurationRecord configurationRecord)
         {
-            _context.Entry(accessLog).State = EntityState.Modified;
+            _context.Entry(configurationRecord).State = EntityState.Modified;
         }
 
-        public void Delete(AccessLog accessLog)
+        public void Delete(ConfigurationRecord configurationRecord)
         {
-            _context.AccessLogs.Remove(accessLog);
+            _context.ConfigurationRecords.Remove(configurationRecord);
         }
 
         public void Save()

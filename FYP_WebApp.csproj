@@ -232,6 +232,7 @@
     <Compile Include="Controllers\AccessLogController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiLogController.cs" />
+    <Compile Include="Controllers\ConfigurationRecordController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GpsReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -244,9 +245,11 @@
     <Compile Include="Controllers\TeamDashboardController.cs" />
     <Compile Include="DataAccessLayer\AccessLogRepository.cs" />
     <Compile Include="DataAccessLayer\ApiLogRepository.cs" />
+    <Compile Include="DataAccessLayer\ConfigurationRecordRepository.cs" />
     <Compile Include="DataAccessLayer\GpsReportRepository.cs" />
     <Compile Include="DataAccessLayer\IAccessLogRepository.cs" />
     <Compile Include="DataAccessLayer\IApiLogRepository.cs" />
+    <Compile Include="DataAccessLayer\IConfigurationRecordRepository.cs" />
     <Compile Include="DataAccessLayer\IGpsReportRepository.cs" />
     <Compile Include="DataAccessLayer\IMessageRepository.cs" />
     <Compile Include="DataAccessLayer\INoteRepository.cs" />
@@ -357,6 +360,14 @@
     <Compile Include="Migrations\202103121726382_RemoveIpFromAccessLog.Designer.cs">
       <DependentUpon>202103121726382_RemoveIpFromAccessLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103122306471_ConnectGpsAndLocation.cs" />
+    <Compile Include="Migrations\202103122306471_ConnectGpsAndLocation.Designer.cs">
+      <DependentUpon>202103122306471_ConnectGpsAndLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103130008313_UpdateConfigRecord.cs" />
+    <Compile Include="Migrations\202103130008313_UpdateConfigRecord.Designer.cs">
+      <DependentUpon>202103130008313_UpdateConfigRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -379,6 +390,7 @@
     <Compile Include="OAuth\ChallengeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\AccountService.cs" />
+    <Compile Include="ServiceLayer\ConfigurationRecordService.cs" />
     <Compile Include="ServiceLayer\GpsReportService.cs" />
     <Compile Include="ServiceLayer\LogService.cs" />
     <Compile Include="ServiceLayer\MessageService.cs" />
@@ -642,6 +654,11 @@
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Views\AccessLog\Details.cshtml" />
     <Content Include="Views\AccessLog\Index.cshtml" />
+    <Content Include="Views\ConfigurationRecord\Index.cshtml" />
+    <Content Include="Views\ConfigurationRecord\Details.cshtml" />
+    <Content Include="Views\ConfigurationRecord\Create.cshtml" />
+    <Content Include="Views\ConfigurationRecord\Edit.cshtml" />
+    <Content Include="Views\ConfigurationRecord\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -723,6 +740,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103121726382_RemoveIpFromAccessLog.resx">
       <DependentUpon>202103121726382_RemoveIpFromAccessLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103122306471_ConnectGpsAndLocation.resx">
+      <DependentUpon>202103122306471_ConnectGpsAndLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103130008313_UpdateConfigRecord.resx">
+      <DependentUpon>202103130008313_UpdateConfigRecord.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

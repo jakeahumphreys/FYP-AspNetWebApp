@@ -1,0 +1,42 @@
+﻿@model FYP_WebApp.Models.ConfigurationRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ConfigurationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreLocationAccuracy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreLocationAccuracy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageOfTheDayText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageOfTheDayText)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -51,6 +51,11 @@ namespace FYP_WebApp.Common_Logic
         public AccessLogNotFoundException(string message) : base(message) { }
     }
 
+    public class ConfigurationRecordNotFoundException : Exception
+    {
+        public ConfigurationRecordNotFoundException(string message) : base(message) { }
+    }
+
 
 
 }
