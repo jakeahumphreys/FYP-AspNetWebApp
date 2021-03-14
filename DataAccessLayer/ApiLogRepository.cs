@@ -7,7 +7,7 @@ using FYP_WebApp.Models;
 
 namespace FYP_WebApp.DataAccessLayer
 {
-    public class ApiLogRepository
+    public class ApiLogRepository : IApiLogRepository
     {
         private readonly ApplicationDbContext _context;
 

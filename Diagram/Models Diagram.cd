@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="FYP_WebApp.Models.AccessLog">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAAAAgAAAAAAAAAAMAAAAAA=</HashCode>
+      <FileName>Models\AccessLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ExternalLoginConfirmationViewModel">
+    <Position X="27.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ExternalLoginListViewModel">
+    <Position X="23.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.SendCodeViewModel">
+    <Position X="29" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.VerifyCodeViewModel">
+    <Position X="27.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAEAAAAAAAgAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ForgotViewModel">
+    <Position X="27.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.LoginViewModel">
+    <Position X="23.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.RegisterViewModel">
+    <Position X="21.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACEAAACAAAIAAEAAAQAACBgAAABACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.EditAccountViewModel">
+    <Position X="14.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ResetPasswordViewModel">
+    <Position X="32.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAgAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ForgotPasswordViewModel">
+    <Position X="30.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ApiLog">
+    <Position X="9.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQACAAQAAAAAAAAAAAAAAAAAAAIIAIAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ApiLog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LogLevel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ConfigurationRecord">
+    <Position X="7.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAQAAAAABAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ConfigurationRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ErrorViewModel">
+    <Position X="29" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.GpsReport">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAALAAAAAEAAAAAAAAIIAAgAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\GpsReport.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Location" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ApplicationUser">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgEAECAAAAIAAAAAAAAACBAAAABAAEAAAABAAAQA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ApplicationDbContext">
+    <Position X="25.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAEAQAAABCAACAQAAAAAEAAAAEAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.IndexViewModel">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAQAAAEAEA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ManageLoginsViewModel">
+    <Position X="32.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.FactorViewModel">
+    <Position X="30.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.SetPasswordViewModel">
+    <Position X="27.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ChangePasswordViewModel">
+    <Position X="29" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.AddPhoneNumberViewModel">
+    <Position X="30.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.VerifyPhoneNumberViewModel">
+    <Position X="25.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.ConfigureTwoFactorViewModel">
+    <Position X="30.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.Message">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQQgAEgAAAAAAAEAAAAAABAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Message.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sender" />
+      <Property Name="Recipient" />
+      <Property Name="MessageType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.Note">
+    <Position X="19.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAACAAQAAAAgACAAABAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Note.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="StoredLocation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.NoteViewModel">
+    <Position X="19.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\NoteViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Note" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.Pairing">
+    <Position X="12.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIDgAAAACAAEACAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Pairing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.PairingViewModel">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAgIYAgAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\PairingViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Pairing" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.StoredLocation">
+    <Position X="17.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAAAEEAAAAAAAAAYAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StoredLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Models.Team">
+    <Position X="14.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAIAAQCAAAABAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Team.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Manager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.TeamDashboardViewModel">
+    <Position X="17" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAEAAAAAAA=</HashCode>
+      <FileName>Models\TeamDashboardViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Team" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Models.TeamSelectViewModel">
+    <Position X="21.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TeamSelectViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.AccessLogController">
+    <Position X="6.75" Y="13.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAAAAAAAAIAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\AccessLogController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.LogService">
+    <Position X="10.5" Y="13.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAADACACAgBAAAAACAAAAAAAAAAAABAAAAAAAAgAA=</HashCode>
+      <FileName>ServiceLayer\LogService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accessLogRepository" />
+      <Field Name="_apiLogRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.ApiLogRepository">
+    <Position X="16.25" Y="12.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\ApiLogRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.AccessLogRepository">
+    <Position X="16.25" Y="16.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\AccessLogRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IAccessLogRepository">
+    <Position X="21.75" Y="15.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IAccessLogRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IApiLogRepository">
+    <Position X="21.75" Y="12.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IApiLogRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FYP_WebApp.Common_Logic.LogLevel">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAAAAAAAAAAAEAAAAAAEAAAAA=</HashCode>
+      <FileName>Common Logic\LogLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FYP_WebApp.Common_Logic.MessageType">
+    <Position X="11.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAIAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common Logic\MessageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
