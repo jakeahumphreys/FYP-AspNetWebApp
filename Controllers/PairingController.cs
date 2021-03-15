@@ -27,7 +27,7 @@ namespace FYP_WebApp.Controllers
             _library = new Library();
         }
 
-        [CustomAuth(Roles = "Admin")]
+        [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Index()
         {
             return View(_pairingService.GetAll());

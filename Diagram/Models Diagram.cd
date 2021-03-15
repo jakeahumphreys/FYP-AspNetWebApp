@@ -121,6 +121,9 @@
       <HashCode>AAAAgEAECAAAAIAAAAAAAAACBAAAABAAEAAAABAAAQA=</HashCode>
       <FileName>Models\IdentityModels.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="FYP_WebApp.Models.ApplicationDbContext">
     <Position X="25.25" Y="1.25" Width="1.5" />
@@ -186,15 +189,15 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FYP_WebApp.Models.Message">
-    <Position X="11.75" Y="7.75" Width="1.5" />
+    <Position X="11.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAQQgAEgAAAAAAAEAAAAAABAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Models\Message.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Property Name="MessageType" />
       <Property Name="Sender" />
       <Property Name="Recipient" />
-      <Property Name="MessageType" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FYP_WebApp.Models.Note">
@@ -285,12 +288,12 @@
       <FileName>ServiceLayer\LogService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="_accessLogRepository" />
       <Field Name="_apiLogRepository" />
+      <Field Name="_accessLogRepository" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FYP_WebApp.DataAccessLayer.ApiLogRepository">
-    <Position X="16.25" Y="12.25" Width="3.5" />
+    <Position X="16.25" Y="14" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>DataAccessLayer\ApiLogRepository.cs</FileName>
@@ -298,25 +301,454 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FYP_WebApp.DataAccessLayer.AccessLogRepository">
-    <Position X="16.25" Y="16.25" Width="3.5" />
+    <Position X="20.75" Y="14.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>DataAccessLayer\AccessLogRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="FYP_WebApp.Controllers.ApiLogController">
+    <Position X="6.25" Y="16" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAAAAAAAAIAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ApiLogController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.ConfigurationRecordController">
+    <Position X="2.25" Y="21.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAACAAAAAAAAAAAEAAEAiAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ConfigurationRecordController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_configurationRecordService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.ConfigurationRecordService">
+    <Position X="9.75" Y="21.5" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAAAAAAAAAAAAAAAEAAEECAwAAAAAAAAA=</HashCode>
+      <FileName>ServiceLayer\ConfigurationRecordService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_configurationRecordRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.ConfigurationRecordRepository">
+    <Position X="16" Y="17.75" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\ConfigurationRecordRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.ErrorController">
+    <Position X="2.25" Y="25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ErrorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.GpsReportController">
+    <Position X="2.25" Y="27" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAABAAAAAAAAAAAAAAAAAAGAAAAAAAA=</HashCode>
+      <FileName>Controllers\GpsReportController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_gpsReportService" />
+      <Field Name="_teamService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.GpsReportService">
+    <Position X="10" Y="27" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAAAAIAAAAAAAAAAAEAAAgAAAABAAAA=</HashCode>
+      <FileName>ServiceLayer\GpsReportService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_gpsReportRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.TeamController">
+    <Position X="5.75" Y="30.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACABAACBAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\TeamController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.AccountService">
+    <Position X="0.5" Y="30.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAMAAAAAAAAABAAAAAAAAAEAAgAAAAAAAIA=</HashCode>
+      <FileName>ServiceLayer\AccountService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.TeamService">
+    <Position X="10" Y="30.75" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACAAAAAAAAAAAAAAAAEAAEECAghAAAAAAAA=</HashCode>
+      <FileName>ServiceLayer\TeamService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.GpsReportRepository">
+    <Position X="20.5" Y="26.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\GpsReportRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.TeamRepository">
+    <Position X="20.5" Y="31" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\TeamRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.MessageController">
+    <Position X="5.75" Y="34.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAAAACAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\MessageController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_messageService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.MessageService">
+    <Position X="10" Y="34.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAAACEgAAAAACAABAAAAAAAAEEAAggAAABAAAA=</HashCode>
+      <FileName>ServiceLayer\MessageService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_messageRepository" />
+      <Field Name="_teamRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.MessageRepository">
+    <Position X="18.75" Y="35.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\MessageRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.PairingController">
+    <Position X="4.75" Y="39.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACABAACBQAAAAAAQAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\PairingController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_pairingService" />
+      <Field Name="_accountService" />
+      <Field Name="_teamService" />
+      <Field Name="_library" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.PairingService">
+    <Position X="10.25" Y="39.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACAgAAAAAAAAAAAwAAEAAEECAgAAAAAAAAA=</HashCode>
+      <FileName>ServiceLayer\PairingService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_pairingRepository" />
+      <Field Name="_library" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.PairingRepository">
+    <Position X="18.75" Y="39.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\PairingRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.Common_Logic.Library">
+    <Position X="0.5" Y="37.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>CEAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common Logic\Library.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.NoteController">
+    <Position X="4.75" Y="44.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAACgAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\NoteController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_noteService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.NoteService">
+    <Position X="10.5" Y="44.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAEAAEECAgAAAAAAAQA=</HashCode>
+      <FileName>ServiceLayer\NoteService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_noteRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.NoteRepository">
+    <Position X="18.25" Y="44.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\NoteRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.StoredLocationController">
+    <Position X="4.5" Y="49" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAgAAAAAAAAAAAEgAEACAAEAABAAAAA=</HashCode>
+      <FileName>Controllers\StoredLocationController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_storedLocationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DataAccessLayer.StoredLocationRepository">
+    <Position X="20.5" Y="49" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAYAAMAAACAABAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\StoredLocationRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FYP_WebApp.ServiceLayer.StoredLocationService">
+    <Position X="10.5" Y="49.25" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAMAAAABAAAAAAAAAEAAAUCABAAAAA=</HashCode>
+      <FileName>ServiceLayer\StoredLocationService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_storedLocationRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.Controllers.TeamDashboardController">
+    <Position X="4.75" Y="52.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACAAAAABAAAAAAAAAAABAAAAAAGAAABAAAA=</HashCode>
+      <FileName>Controllers\TeamDashboardController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_teamService" />
+      <Field Name="_gpsReportService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.AccountController">
+    <Position X="6.25" Y="58.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAABAAAABAIAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>API\AccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_applicationDbContext" />
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.GpsReportController">
+    <Position X="13" Y="57.75" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAgAAAABAIAACAAAAAAgAACAAAAAAAA=</HashCode>
+      <FileName>API\GpsReportController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_gpsReportService" />
+      <Field Name="_storedLocationService" />
+      <Field Name="_configurationRecordService" />
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.MessageController">
+    <Position X="6.25" Y="61.5" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAABBACABAIAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\MessageController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_messageService" />
+      <Field Name="_accountService" />
+      <Field Name="_logService" />
+      <Field Name="_teamService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.NoteController">
+    <Position X="13.5" Y="61.75" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAhgAAABAIAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\NoteController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_noteService" />
+      <Field Name="_logService" />
+      <Field Name="_storedLocationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.StatusController">
+    <Position X="9.5" Y="66" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\StatusController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.API.StoredLocationController">
+    <Position X="14.75" Y="65.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAhAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\StoredLocationController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_storedLocationService" />
+      <Field Name="_logService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.GpsReportDto">
+    <Position X="0.75" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>DTO\GpsReportDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.MapDto">
+    <Position X="3.75" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAEAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\MapDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.MessageDto">
+    <Position X="0.75" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAgAEAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\MessageDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.MobileUserDto">
+    <Position X="4" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\MobileUserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.NoteDto">
+    <Position X="0.75" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAQAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\NoteDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.StatusDto">
+    <Position X="4" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\StatusDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.DTO.StoredLocationDto">
+    <Position X="0.75" Y="7.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAAAEEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\StoredLocationDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Common_Logic.MappingProfile">
+    <Position X="4" Y="10" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common Logic\AutomapperConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Common_Logic.AutomapperConfig">
+    <Position X="1" Y="10" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common Logic\AutomapperConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_WebApp.Hubs.NotificationHub">
+    <Position X="0.5" Y="15.75" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAJAAAAAAAAAAAA=</HashCode>
+      <FileName>Hubs\NotificationHub.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="FYP_WebApp.DataAccessLayer.IAccessLogRepository">
-    <Position X="21.75" Y="15.75" Width="2.5" />
+    <Position X="21" Y="11.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>DataAccessLayer\IAccessLogRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FYP_WebApp.DataAccessLayer.IApiLogRepository">
-    <Position X="21.75" Y="12.5" Width="2" />
+    <Position X="17" Y="11.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>DataAccessLayer\IApiLogRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IConfigurationRecordRepository">
+    <Position X="18.5" Y="21.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IConfigurationRecordRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IGpsReportRepository">
+    <Position X="16.75" Y="27.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IGpsReportRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.ITeamRepository">
+    <Position X="17" Y="31.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\ITeamRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IMessageRepository">
+    <Position X="15.25" Y="35.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IMessageRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IPairingRepository">
+    <Position X="16" Y="40" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IPairingRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.INoteRepository">
+    <Position X="15" Y="45" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\INoteRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FYP_WebApp.DataAccessLayer.IStoredLocationRepository">
+    <Position X="16.25" Y="49.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAMAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>DataAccessLayer\IStoredLocationRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="FYP_WebApp.Common_Logic.LogLevel">
@@ -327,10 +759,24 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="FYP_WebApp.Common_Logic.MessageType">
-    <Position X="11.75" Y="10.5" Width="1.5" />
+    <Position X="9.5" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAIAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common Logic\MessageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FYP_WebApp.Common_Logic.Status">
+    <Position X="9" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAABACAEAAAAAAAAAABCAAAAAAAAABA=</HashCode>
+      <FileName>Common Logic\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FYP_WebApp.Common_Logic.ResponseErrors">
+    <Position X="1" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAEAAEAAAAAAAAAAAAgAAACAAAAAABAAJAA=</HashCode>
+      <FileName>Common Logic\ResponseErrors.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

@@ -13,7 +13,7 @@ namespace FYP_WebApp.ServiceLayer
 {
     public class NoteService
     {
-        private readonly NoteRepository _noteRepository;
+        private readonly INoteRepository _noteRepository;
 
         public NoteService()
         {

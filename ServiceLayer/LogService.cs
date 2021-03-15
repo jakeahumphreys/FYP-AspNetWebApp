@@ -11,8 +11,8 @@ namespace FYP_WebApp.ServiceLayer
 {
     public class LogService
     {
-        private readonly ApiLogRepository _apiLogRepository;
-        private readonly AccessLogRepository _accessLogRepository;
+        private readonly IApiLogRepository _apiLogRepository;
+        private readonly IAccessLogRepository _accessLogRepository;
 
         public LogService()
         {

@@ -11,7 +11,7 @@ namespace FYP_WebApp.ServiceLayer
 {
     public class GpsReportService
     {
-        private readonly GpsReportRepository _gpsReportRepository;
+        private readonly IGpsReportRepository _gpsReportRepository;
 
         public GpsReportService()
         {
