@@ -8,7 +8,7 @@
 {
     @if (Model.OnDutyMembers != 0)
     {
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@Model.MapsApiKey"></script>
 
         <script type="text/javascript">
             $.ajax({

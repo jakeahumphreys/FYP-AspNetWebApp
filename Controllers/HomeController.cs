@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FYP_WebApp.Common_Logic;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
 
@@ -22,6 +23,13 @@ namespace FYP_WebApp.Controllers
         {
             if (Request.IsAuthenticated)
             {
+                var motdText = ConfigHelper.GetLatestConfigRecord().MessageOfTheDayText;
+
+                if (!string.IsNullOrEmpty(motdText))
+                {
+                    ViewBag.Motd = motdText;
+                }
+
                 var user = _accountService.GetById(User.Identity.GetUserId());
                
                 if (user != null)

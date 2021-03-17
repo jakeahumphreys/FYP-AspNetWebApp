@@ -86,6 +86,14 @@
                 @Html.ValidationMessageFor(model => model.SmtpShouldUseSsl, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.MapsApiKey, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MapsApiKey, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MapsApiKey, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
 
     <div class="form-group">

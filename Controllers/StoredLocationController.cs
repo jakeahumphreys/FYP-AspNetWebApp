@@ -39,8 +39,9 @@ namespace FYP_WebApp.Controllers
             try
             {
                 var storedLocation = _storedLocationService.GetDetails(id);
+                var mapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey;
                 ViewBag.mapUrl =
-                    $"https://www.google.com/maps/embed/v1/place?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8&q={storedLocation.Latitude},{storedLocation.Longitude}";
+                    $"https://www.google.com/maps/embed/v1/place?key={mapsApiKey}&q={storedLocation.Latitude},{storedLocation.Longitude}";
 
                 if (!User.IsInRole("Admin"))
                 {

@@ -44,5 +44,9 @@ namespace FYP_WebApp.Models
         [Display(Name = "Use SSL")]
         public bool SmtpShouldUseSsl { get; set; }
 
+        //Google Maps
+        [Display(Name = "Google Maps API Key")]
+        public string MapsApiKey { get; set; }
+
     }
 }

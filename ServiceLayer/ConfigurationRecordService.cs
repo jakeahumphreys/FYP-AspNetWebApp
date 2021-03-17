@@ -78,6 +78,7 @@ namespace FYP_WebApp.ServiceLayer
                 existingConfigurationRecord.SmtpSenderPassword = configurationRecord.SmtpSenderPassword;
                 existingConfigurationRecord.SmtpShouldUseSsl = configurationRecord.SmtpShouldUseSsl;
                 existingConfigurationRecord.SmtpEmailFrom = configurationRecord.SmtpEmailFrom;
+                existingConfigurationRecord.MapsApiKey = configurationRecord.MapsApiKey;
 
                 _configurationRecordRepository.Update(existingConfigurationRecord);
                 _configurationRecordRepository.Save();

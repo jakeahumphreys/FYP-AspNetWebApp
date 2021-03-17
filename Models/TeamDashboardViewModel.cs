@@ -13,5 +13,6 @@ namespace FYP_WebApp.Models
         public int OnDutyMembers { get; set; }
         public List<GpsReport> UnlinkedReports { get; set; }
         public List<ApplicationUser> UnpairedTeamMembers { get; set; }
+        public string MapsApiKey { get; set; }
     }
 }

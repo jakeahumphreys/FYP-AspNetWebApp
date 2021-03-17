@@ -387,6 +387,10 @@
     <Compile Include="Migrations\202103172232219_removeMasterRecipientEmail.Designer.cs">
       <DependentUpon>202103172232219_removeMasterRecipientEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103172300267_addApiKeyToConfig.cs" />
+    <Compile Include="Migrations\202103172300267_addApiKeyToConfig.Designer.cs">
+      <DependentUpon>202103172300267_addApiKeyToConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -780,6 +784,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103172232219_removeMasterRecipientEmail.resx">
       <DependentUpon>202103172232219_removeMasterRecipientEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103172300267_addApiKeyToConfig.resx">
+      <DependentUpon>202103172300267_addApiKeyToConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

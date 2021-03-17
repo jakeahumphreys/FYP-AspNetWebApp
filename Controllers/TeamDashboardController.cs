@@ -90,7 +90,7 @@ namespace FYP_WebApp.Controllers
             var unlinkedReports = _gpsReportService.GetAll().Where(x => x.User.TeamId == teamId && x.LocationId == null).ToList();
             var unpairedMembers = _pairingService.GetDailyUnpairedUsers(members);
 
-            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports, UnpairedTeamMembers = unpairedMembers};
+            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports, UnpairedTeamMembers = unpairedMembers, MapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey};
 
 
             return View(teamDashboardVm);

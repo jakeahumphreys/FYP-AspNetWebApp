@@ -117,7 +117,8 @@ namespace FYP_WebApp.Controllers
             try
             {
                 var gpsReport = _gpsReportService.Details(id);
-                ViewBag.mapUrl = $"https://www.google.com/maps/embed/v1/place?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8&q={gpsReport.Latitude},{gpsReport.Longitude}";
+                var mapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey;
+                ViewBag.mapUrl = $"https://www.google.com/maps/embed/v1/place?key={mapsApiKey}&q={gpsReport.Latitude},{gpsReport.Longitude}";
                 return View(gpsReport);
             }
             catch (ArgumentException ex)
