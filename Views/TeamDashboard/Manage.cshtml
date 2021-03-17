@@ -75,7 +75,9 @@
     <div class="card-body">
         @if (Model.OnDutyMembers == 0)
         {
-            <p>None of your team are currently working, when they are, they'll show on a map here.</p>
+            <div class="alert alert-info" role="alert">
+                None of your team are currently working, when they are, the team map will display.
+            </div>
         }
         else
         {
@@ -164,46 +166,95 @@
         Unlinked Reports
     </div>
     <div class="card-body">
-        <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
-        <p>Unlinked reports are GPS Reports with no automatic link created. Review the following reports (if any) and provide a location.</p>
+        <p>
+            <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+            Reports not automatically linked require manual linking.
+        </p>
         @if (Model.UnlinkedReports != null && Model.UnlinkedReports.Count > 0)
         {
             <div class="scroller">
-                  <table class="table table-striped">
-                <tr>
-                    <th>
-                        Report Id
-                    </th>
-                    <th>
-                        Reported
-                    </th>
-                    <th>
-                        Team Member
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-                @foreach (var item in Model.UnlinkedReports)
-                {
+                <table class="table table-striped">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Time)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.FirstName)
-                        </td>
-                        <td>
-                            @*<button class="btn btn-primary" formtarget="_blank" onclick="location.href = '@Url.Action("Details","GpsReport", new { id = item.Id})';return false;">Details</button>*@
-                            <button class="btn btn-primary" formtarget="_blank" onclick="window.open('@Url.Action("Details", "GpsReport", new{id = item.Id})')">Details</button>
-                        </td>
+                        <th>
+                            Report Id
+                        </th>
+                        <th>
+                            Reported
+                        </th>
+                        <th>
+                            Team Member
+                        </th>
+                        <th>
+                            Actions
+                        </th>
                     </tr>
-                }
-            </table>
+                    @foreach (var item in Model.UnlinkedReports)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FirstName)
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" formtarget="_blank" onclick="window.open('@Url.Action("Details", "GpsReport", new{id = item.Id})')">Details</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">
+                All records up-to-date.
             </div>
         }
     </div>
 </div>
+
+<div class="card shadow-lg rounded mb-3">
+    <div class="card-header">
+        Unpaired Members (@DateTime.Today.ToShortDateString())
+    </div>
+    <div class="card-body">
+        <p> <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>Team pairings for today's date.</p>
+        
+        <div class="scroller">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Team Member
+                    </th>
+                    <th>
+                        Paired?
+                    </th>
+                </tr>
+                    
+                @foreach (var item in Model.Members)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @if (!Model.UnpairedTeamMembers.Contains(item))
+                            {
+                                <i class="fa fa-check" style="color: green"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times" style="color: red"></i>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -140,5 +140,28 @@ namespace FYP_WebApp.ServiceLayer
                 UserList = userList
             };
         }
+
+        public List<ApplicationUser> GetDailyUnpairedUsers(List<ApplicationUser> teamStaff)
+        {
+            if (teamStaff == null)
+            {
+                return null;
+            }
+
+            var unpairedUsers = new List<ApplicationUser>();
+
+            foreach (var user in teamStaff)
+            {
+                List<Pairing> pairings = _pairingRepository.GetAll().Where(x =>
+                    x.UserId == user.Id && x.Start >= DateTime.Today && x.End <= DateTime.Today).ToList();
+
+                if (pairings.Count == 0)
+                {
+                    unpairedUsers.Add(user);
+                }
+            }
+
+            return unpairedUsers;
+        }
     }
 }

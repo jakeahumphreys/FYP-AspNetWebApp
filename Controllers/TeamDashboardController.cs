@@ -22,6 +22,7 @@ namespace FYP_WebApp.Controllers
         private AccountService _accountService;
         private TeamService _teamService;
         private GpsReportService _gpsReportService;
+        private PairingService _pairingService;
 
         private int CurrentTeamId { get; set; }
 
@@ -30,6 +31,7 @@ namespace FYP_WebApp.Controllers
             _accountService = new AccountService();
             _teamService = new TeamService();
             _gpsReportService = new GpsReportService();
+            _pairingService = new PairingService();
         }
 
         public ActionResult Index()
@@ -86,7 +88,9 @@ namespace FYP_WebApp.Controllers
             var members = _accountService.GetAll().Where(x => x.TeamId == teamId).Where(x=> x.Id != userId).ToList();
             var onDutyMembers = members.Count(x=> x.Status != Status.NotOnShift);
             var unlinkedReports = _gpsReportService.GetAll().Where(x => x.User.TeamId == teamId && x.LocationId == null).ToList();
-            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports};
+            var unpairedMembers = _pairingService.GetDailyUnpairedUsers(members);
+
+            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports, UnpairedTeamMembers = unpairedMembers};
 
 
             return View(teamDashboardVm);
