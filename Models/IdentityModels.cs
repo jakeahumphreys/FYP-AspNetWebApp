@@ -44,6 +44,9 @@ namespace FYP_WebApp.Models
         [EnumDataType(typeof(Status))]
         public Status Status { get; set; }
 
+        [Display(Name = "Notification Email")]
+        public string NotifyEmail { get; set; }
+
         //Admin Fields
         [Display(Name = "Team")]
         public int? TeamId { get; set; }

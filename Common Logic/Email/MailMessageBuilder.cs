@@ -36,7 +36,7 @@ namespace FYP_WebApp.Common_Logic.Email
 
         public MailMessageBuilder From(MailAddress address)
         {
-            _mailMessage.Sender = address;
+            _mailMessage.From = address;
             return this;
         }
 

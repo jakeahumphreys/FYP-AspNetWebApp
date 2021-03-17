@@ -79,6 +79,15 @@
                         @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.NotifyEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <p>If you wish to receive emails at your personal address:</p>
+                        @Html.EditorFor(model => model.User.NotifyEmail, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.User.NotifyEmail, "", new {@class = "text-danger"})
+                    </div>
+                </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.User.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })

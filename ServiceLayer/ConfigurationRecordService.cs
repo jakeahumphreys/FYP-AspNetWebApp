@@ -71,6 +71,13 @@ namespace FYP_WebApp.ServiceLayer
                 existingConfigurationRecord.Created = DateTime.Now;
                 existingConfigurationRecord.StoreLocationAccuracy = configurationRecord.StoreLocationAccuracy;
                 existingConfigurationRecord.MessageOfTheDayText = configurationRecord.MessageOfTheDayText;
+                existingConfigurationRecord.SmtpSendUrgentEmails = configurationRecord.SmtpSendUrgentEmails;
+                existingConfigurationRecord.SmtpUrl = configurationRecord.SmtpUrl;
+                existingConfigurationRecord.SmtpPort = configurationRecord.SmtpPort;
+                existingConfigurationRecord.SmtpSenderUsername = configurationRecord.SmtpSenderUsername;
+                existingConfigurationRecord.SmtpSenderPassword = configurationRecord.SmtpSenderPassword;
+                existingConfigurationRecord.SmtpShouldUseSsl = configurationRecord.SmtpShouldUseSsl;
+                existingConfigurationRecord.SmtpEmailFrom = configurationRecord.SmtpEmailFrom;
 
                 _configurationRecordRepository.Update(existingConfigurationRecord);
                 _configurationRecordRepository.Save();

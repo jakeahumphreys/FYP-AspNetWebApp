@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.Common_Logic.Email;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Hubs;
@@ -140,6 +144,21 @@ namespace FYP_WebApp.ServiceLayer
             {
                 message.RecipientId = recipient;
                 Create(message);
+
+                if (message.MessageType == MessageType.Urgent)
+                {
+                    var user = _applicationDbContext.Users.Find(recipient);
+                    var sender = _applicationDbContext.Users.Find(message.SenderId);
+                    if (user.NotifyEmail != null)
+                    {
+                        SendUrgentEmail(ConfigHelper.GetLatestConfigRecord(), 
+                            user.NotifyEmail,
+                            "Urgent Assistance Request",
+                            $"{sender.DisplayString} has requested urgent assistance at {DateTime.Now}.",
+                            false
+                        );
+                    }
+                }
             }
 
             return new ServiceResponse {Success = true};
@@ -168,6 +187,32 @@ namespace FYP_WebApp.ServiceLayer
             }
 
             return allManagers;
+        }
+
+        public void SendUrgentEmail(ConfigurationRecord latestConfig, string toAddress, string subject, string body, bool isHtml)
+        {
+            if (latestConfig.SmtpSendUrgentEmails)
+            {
+                var smtpClientBuilder = new SmtpClientBuilder();
+                var smtpClient = smtpClientBuilder
+                    .Host(latestConfig.SmtpUrl)
+                    .Port(latestConfig.SmtpPort)
+                    .Credentials(new NetworkCredential(latestConfig.SmtpSenderUsername, latestConfig.SmtpSenderPassword))
+                    .EnableSsl(latestConfig.SmtpShouldUseSsl)
+                    .Build();
+
+                var mailMessageBuilder = new MailMessageBuilder();
+                var mailMessage = mailMessageBuilder
+                    .To(new MailAddress(toAddress))
+                    .From(new MailAddress(latestConfig.SmtpEmailFrom))
+                    .Subject(subject)
+                    .Body(body)
+                    .IsBodyHtml(isHtml)
+                    .Build();
+
+                smtpClient.Send(mailMessage);
+            }
+         
         }
     }
 }

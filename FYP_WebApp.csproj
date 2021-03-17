@@ -219,6 +219,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common Logic\AutomapperConfig.cs" />
+    <Compile Include="Common Logic\ConfigHelper.cs" />
     <Compile Include="Common Logic\CustomAuth.cs" />
     <Compile Include="Common Logic\CustomHandleErrorAttribute.cs" />
     <Compile Include="Common Logic\Email\MailMessageBuilder.cs" />
@@ -373,6 +374,18 @@
     <Compile Include="Migrations\202103171615531_AddFieldsToApiLog.cs" />
     <Compile Include="Migrations\202103171615531_AddFieldsToApiLog.Designer.cs">
       <DependentUpon>202103171615531_AddFieldsToApiLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103172132520_AddSmtpToConfig.cs" />
+    <Compile Include="Migrations\202103172132520_AddSmtpToConfig.Designer.cs">
+      <DependentUpon>202103172132520_AddSmtpToConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103172217343_AddNotifyEmailToUser.cs" />
+    <Compile Include="Migrations\202103172217343_AddNotifyEmailToUser.Designer.cs">
+      <DependentUpon>202103172217343_AddNotifyEmailToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103172232219_removeMasterRecipientEmail.cs" />
+    <Compile Include="Migrations\202103172232219_removeMasterRecipientEmail.Designer.cs">
+      <DependentUpon>202103172232219_removeMasterRecipientEmail.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
@@ -758,6 +771,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103171615531_AddFieldsToApiLog.resx">
       <DependentUpon>202103171615531_AddFieldsToApiLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103172132520_AddSmtpToConfig.resx">
+      <DependentUpon>202103172132520_AddSmtpToConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103172217343_AddNotifyEmailToUser.resx">
+      <DependentUpon>202103172217343_AddNotifyEmailToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103172232219_removeMasterRecipientEmail.resx">
+      <DependentUpon>202103172232219_removeMasterRecipientEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -162,6 +162,14 @@ namespace FYP_WebApp.Controllers
             existingUser.TeamId = editViewModel.User.TeamId;
             existingUser.MobileLoginKey = editViewModel.User.MobileLoginKey;
 
+            if (string.IsNullOrEmpty(editViewModel.User.NotifyEmail))
+            {
+                editViewModel.User.NotifyEmail = editViewModel.User.Email;
+            }
+
+            existingUser.NotifyEmail = editViewModel.User.NotifyEmail;
+
+
             if (editViewModel.User.LockoutEndDateUtc != null)
             {
                 if (editViewModel.User.LockoutEndDateUtc == DateTime.MinValue)
@@ -183,7 +191,15 @@ namespace FYP_WebApp.Controllers
             {
                 _applicationDbContext.Entry(existingUser).State = EntityState.Modified;
                 _applicationDbContext.SaveChanges();
-                return RedirectToAction("Details", new {@id = editViewModel.User.Id});
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Details", new { @id = editViewModel.User.Id });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -322,7 +338,7 @@ namespace FYP_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId, MobileLoginKey = model.MobileLoginKey};
+                var user = new ApplicationUser {FirstName = model.FirstName, Surname = model.Surname, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, TeamId = model.TeamId, MobileLoginKey = model.MobileLoginKey, NotifyEmail = model.Email};
 
                 if (model.Image != null)
                 {
