@@ -96,6 +96,9 @@ namespace FYP_WebApp.API
 
                     var response = Content(HttpStatusCode.OK, "GPS Reported Successfully");
 
+                    var additionalFields = new List<ApiLogAdditionalField>();
+                    additionalFields.Add(new ApiLogAdditionalField{Key = "Distance", Value = distance.ToString()});
+
                     _logService.CreateApiLog(new ApiLog
                     {
                         LogLevel = LogLevel.Info,
@@ -104,7 +107,8 @@ namespace FYP_WebApp.API
                         TimeStamp = DateTime.Now,
                         RequestString = JsonConvert.SerializeObject(request,Formatting.Indented),
                         ResponseString = JsonConvert.SerializeObject(response.Content, Formatting.Indented),
-                        StatusCode = HttpStatusCode.OK.ToString()
+                        StatusCode = HttpStatusCode.OK.ToString(),
+                        AdditionalFields = JsonConvert.SerializeObject(additionalFields)
                     });
 
                     return response;

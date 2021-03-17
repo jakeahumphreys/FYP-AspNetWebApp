@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
+using Microsoft.Owin.Security.Facebook;
+using Newtonsoft.Json;
 using PagedList;
 
 namespace FYP_WebApp.Controllers
@@ -60,7 +62,12 @@ namespace FYP_WebApp.Controllers
         {
             try
             {
-                return View(_logService.GetApiLogDetails(id));
+                var apiLog = _logService.GetApiLogDetails(id);
+                var additionalFields = _logService.ConvertFieldStringToList(apiLog.AdditionalFields);
+
+                var apiLogViewModel = new ApiLogViewModel {ApiLog = apiLog, AdditionalFields = additionalFields};
+
+                return View(apiLogViewModel);
             }
             catch (ArgumentException ex)
             {

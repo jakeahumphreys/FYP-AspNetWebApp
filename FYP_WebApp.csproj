@@ -368,10 +368,16 @@
     <Compile Include="Migrations\202103130008313_UpdateConfigRecord.Designer.cs">
       <DependentUpon>202103130008313_UpdateConfigRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103171615531_AddFieldsToApiLog.cs" />
+    <Compile Include="Migrations\202103171615531_AddFieldsToApiLog.Designer.cs">
+      <DependentUpon>202103171615531_AddFieldsToApiLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiLog.cs" />
+    <Compile Include="Models\ApiLogAdditionalField.cs" />
+    <Compile Include="Models\ApiLogViewModel.cs" />
     <Compile Include="Models\ConfigurationRecord.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\GpsReport.cs" />
@@ -747,6 +753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103130008313_UpdateConfigRecord.resx">
       <DependentUpon>202103130008313_UpdateConfigRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103171615531_AddFieldsToApiLog.resx">
+      <DependentUpon>202103171615531_AddFieldsToApiLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

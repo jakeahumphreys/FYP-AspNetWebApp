@@ -6,6 +6,7 @@ using System.Web.Hosting;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
+using Newtonsoft.Json;
 
 namespace FYP_WebApp.ServiceLayer
 {
@@ -91,6 +92,17 @@ namespace FYP_WebApp.ServiceLayer
             {
                 return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
             }
+        }
+
+        public List<ApiLogAdditionalField> ConvertFieldStringToList(string additionalFields)
+        {
+
+            if (string.IsNullOrEmpty(additionalFields))
+            {
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject<List<ApiLogAdditionalField>>(additionalFields);
         }
 
         public void Dispose()

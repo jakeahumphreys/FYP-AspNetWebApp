@@ -21,5 +21,7 @@ namespace FYP_WebApp.Models
         public string ResponseString { get; set; }
         [Display(Name = "Status Code")]
         public string StatusCode { get; set; }
+        [Display(Name = "Additional Data Fields")]
+        public string AdditionalFields { get; set; }
     }
 }

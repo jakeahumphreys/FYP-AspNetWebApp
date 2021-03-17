@@ -1,4 +1,4 @@
-﻿@model FYP_WebApp.Models.ApiLog
+﻿@model FYP_WebApp.Models.ApiLogViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -19,27 +19,27 @@
         <div>
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.LogLevel)
+                    @Html.DisplayNameFor(model => model.ApiLog.LogLevel)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.LogLevel)
+                    @Html.DisplayFor(model => model.ApiLog.LogLevel)
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.TimeStamp)
+                    @Html.DisplayNameFor(model => model.ApiLog.TimeStamp)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.TimeStamp)
+                    @Html.DisplayFor(model => model.ApiLog.TimeStamp)
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.StatusCode)
+                    @Html.DisplayNameFor(model => model.ApiLog.StatusCode)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.StatusCode)
+                    @Html.DisplayFor(model => model.ApiLog.StatusCode)
                 </dd>
 
             </dl>
@@ -62,7 +62,7 @@
             <div class="card-body">
                 <pre>
                    <code>
-                        @Html.Raw(Model.RequestString)
+                        @Html.Raw(Model.ApiLog.RequestString)
                     </code>
                 </pre>
             </div>
@@ -80,14 +80,53 @@
             <div class="card-body p-0">
                 <pre>
                     <code>
-                        @Html.Raw(Model.ResponseString)
+                        @Html.Raw(Model.ApiLog.ResponseString)
                     </code>
                 </pre>
             </div>
         </div>
     </div>
 </div>
-<!--Free to use script by ctwheels (stackoverflow)-->
+
+@if (Model.AdditionalFields != null)
+{
+    <div class="card bg-light rounded">
+        <div class="card-header bg-white" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Additional Fields
+                </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body p-0">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            Data Key
+                        </th>
+                        <th>
+                            Data Value
+                        </th>
+                    </tr>
+                    
+                    @foreach (var item in Model.AdditionalFields)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Key)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
 <script>
     $("pre code").each(function () {
         var html = $(this).html();
