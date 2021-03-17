@@ -31,7 +31,7 @@ namespace FYP_WebApp.ServiceLayer
         {
             var managerRole = _applicationDbContext.Roles.SingleOrDefault(r => r.Name == "Manager");
             return _applicationDbContext.Users
-                .Where(user => user.Roles.Any(r => r.RoleId == managerRole.Id)).ToList();
+                .Where(user => user.Roles.Any(r => r.RoleId == managerRole.Id) && user.IsInactive == false).ToList();
         }
 
         public ApplicationUser GetDetails(string id)

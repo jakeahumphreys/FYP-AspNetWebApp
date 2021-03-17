@@ -85,7 +85,7 @@ namespace FYP_WebApp.Controllers
         {
             var team = _teamService.GetDetails(teamId);
             var userId = User.Identity.GetUserId();
-            var members = _accountService.GetAll().Where(x => x.TeamId == teamId).Where(x=> x.Id != userId).ToList();
+            var members = _accountService.GetAll().Where(x => x.TeamId == teamId && x.IsInactive == false).Where(x=> x.Id != userId).ToList();
             var onDutyMembers = members.Count(x=> x.Status != Status.NotOnShift);
             var unlinkedReports = _gpsReportService.GetAll().Where(x => x.User.TeamId == teamId && x.LocationId == null).ToList();
             var unpairedMembers = _pairingService.GetDailyUnpairedUsers(members);
