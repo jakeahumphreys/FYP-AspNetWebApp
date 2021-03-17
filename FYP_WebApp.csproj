@@ -221,6 +221,8 @@
     <Compile Include="Common Logic\AutomapperConfig.cs" />
     <Compile Include="Common Logic\CustomAuth.cs" />
     <Compile Include="Common Logic\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Common Logic\Email\MailMessageBuilder.cs" />
+    <Compile Include="Common Logic\Email\SmtpClientBuilder.cs" />
     <Compile Include="Common Logic\Errors.cs" />
     <Compile Include="Common Logic\Exceptions.cs" />
     <Compile Include="Common Logic\Library.cs" />
