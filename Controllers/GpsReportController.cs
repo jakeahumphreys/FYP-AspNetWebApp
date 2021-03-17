@@ -50,10 +50,28 @@ namespace FYP_WebApp.Controllers
 
             if (!User.IsInRole("Admin"))
             {
-                var team = _teamService.GetAll().FirstOrDefault(x => x.ManagerId == User.Identity.GetUserId());
-                if (team != null)
+                var teamIds = new List<int>();
+
+                foreach (var team in _teamService.GetAll())
                 {
-                    reportsVisible = _gpsReportService.GetAll().Where(x => x.User.TeamId == team.Id).ToList();
+                    if (team.ManagerId == User.Identity.GetUserId())
+                    {
+                        teamIds.Add(team.Id);
+                    }
+                }
+
+                if (teamIds.Count > 0)
+                {
+                    var visibleReports = new List<GpsReport>();
+                    foreach (var report in _gpsReportService.GetAll())
+                    {
+                        if (report.User.TeamId != null && teamIds.Contains((int) report.User.TeamId))
+                        {
+                            visibleReports.Add(report);
+                        }
+                    }
+
+                    reportsVisible = visibleReports;
                 }
                 else
                 {

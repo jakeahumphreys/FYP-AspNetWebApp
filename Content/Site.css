@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.scroller {
+    height: 150px;
+    overflow-y: scroll;
+}

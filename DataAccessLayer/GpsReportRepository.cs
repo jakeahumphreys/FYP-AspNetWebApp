@@ -24,12 +24,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<GpsReport> GetAll()
         {
-            return _context.GpsReports.Include(x=> x.User).Include(x=> x.Location).ToList();
+            return _context.GpsReports.Include(x=> x.User).Include(x=> x.Location).Include(x => x.User.Team).ToList();
         }
 
         public GpsReport GetById(int id)
         {
-            return _context.GpsReports.Where(x => x.Id == id).Include(x=>x.User).Include(x => x.Location).SingleOrDefault();
+            return _context.GpsReports.Where(x => x.Id == id).Include(x=>x.User).Include(x => x.Location).Include(x => x.User.Team).SingleOrDefault();
         }
 
         public void Insert(GpsReport gpsReport)

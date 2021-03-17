@@ -10,7 +10,7 @@
 <div>
     <h4>StoredLocation</h4>
     <hr />
-    <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card shadow mb-5 bg-white rounded">
         <div class="card-header">
             Location Details
         </div>
@@ -45,7 +45,7 @@
             </iframe>
         </div>
     </div>
-    <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card shadow mb-5 bg-white rounded">
         <div class="card-header">
             Location Notes
         </div>
@@ -71,9 +71,53 @@
             <button class="btn btn-primary" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Create","Note", new {@storedLocationId = Model.Id })';return false;">Add Note</button>
         </div>
     </div>
+
+    @if (Model.CheckIns != null)
+    {
+        <div class="card shadow mb-5 bg-white rounded">
+            <div class="card-header">
+                Location Check-Ins
+            </div>
+            <div class="card-body">
+                <div class="scroller">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                User
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.CheckIns)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.DisplayString)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Time)
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="location.href = '@Url.Action("Details", "GpsReport", new {id = item.Id})';return false;">
+                                        <i class="fa fa-search"></i>
+                                        View
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+   
     @if (User.IsInRole("Admin"))
     {
-        <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card shadow mb-5 bg-white rounded">
             <div class="card-header">
                 Admin Details
             </div>

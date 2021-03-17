@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
@@ -17,10 +18,12 @@ namespace FYP_WebApp.Controllers
     public class StoredLocationController : Controller
     {
         private readonly StoredLocationService _storedLocationService;
+        private readonly TeamService _teamService;
 
         public StoredLocationController()
         {
             _storedLocationService = new StoredLocationService();
+            _teamService = new TeamService();
         }
         [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Index()
@@ -36,6 +39,36 @@ namespace FYP_WebApp.Controllers
                 var storedLocation = _storedLocationService.GetDetails(id);
                 ViewBag.mapUrl =
                     $"https://www.google.com/maps/embed/v1/place?key=AIzaSyCHpCaID-NBJ4ww4_PZewLLttqi2iKAIQ8&q={storedLocation.Latitude},{storedLocation.Longitude}";
+
+                if (!User.IsInRole("Admin"))
+                {
+                    var teamIds = new List<int>();
+
+                    foreach (var team in _teamService.GetAll())
+                    {
+                        if (team.ManagerId == User.Identity.GetUserId())
+                        {
+                            teamIds.Add(team.Id);
+                        }
+                    }
+
+                    if (teamIds.Count > 0)
+                    {
+                        var visibleCheckins = new List<GpsReport>();
+                        foreach (var checkin in storedLocation.CheckIns)
+                        {
+                            if (checkin.User.TeamId != null && teamIds.Contains((int)checkin.User.TeamId))
+                            {
+                                visibleCheckins.Add(checkin);
+                            }
+                        }
+
+                        storedLocation.CheckIns = visibleCheckins;
+                    }
+                }
+
+                storedLocation.CheckIns = storedLocation.CheckIns.OrderByDescending(x => x.Time).ToList();
+
                 return View(storedLocation);
             }
             catch (ArgumentException ex)

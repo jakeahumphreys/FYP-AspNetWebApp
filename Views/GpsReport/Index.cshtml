@@ -31,6 +31,9 @@
             @Html.ActionLink("Name", "Index", new{sortOrder = ViewBag.SortByNameParameter, currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
+            Team
+        </th>
+        <th>
             @Html.ActionLink("Time", "Index", new {sortOrder = ViewBag.SortByDateParameter, currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
@@ -48,6 +51,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.User.DisplayString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Team.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
