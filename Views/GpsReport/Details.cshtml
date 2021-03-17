@@ -81,11 +81,15 @@
                     <i class="fa fa-location-arrow"></i>
                     Create Location
                 </button>
+                <button class="btn btn-primary mb-3" onclick="location.href = '@Url.Action("Edit", "GpsReport", new {id = Model.Id})';return false;">
+                    <i class="fa fa-link"></i>
+                    Link an Existing Location
+                </button>
             }
             else
             {
                 <button class="btn btn-primary" onclick="location.href = '@Url.Action("Edit", "GpsReport", new {id = Model.Id})';return false;">
-                    <i class="fa fa-location-arrow"></i>
+                    <i class="fa fa-edit"></i>
                     Correct Location
                 </button>
             }

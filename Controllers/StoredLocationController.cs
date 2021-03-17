@@ -19,11 +19,13 @@ namespace FYP_WebApp.Controllers
     {
         private readonly StoredLocationService _storedLocationService;
         private readonly TeamService _teamService;
+        private readonly GpsReportService _gpsReportService;
 
         public StoredLocationController()
         {
             _storedLocationService = new StoredLocationService();
             _teamService = new TeamService();
+            _gpsReportService = new GpsReportService();
         }
         [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Index()
@@ -122,6 +124,8 @@ namespace FYP_WebApp.Controllers
             if (response.Success == true)
             {
                 var storedLocation = _storedLocationService.Index().FirstOrDefault(x => x.Label == label && x.Latitude == decimalLatitude && x.Longitude == decimalLongitude);
+
+                _gpsReportService.LinkExistingLocations(storedLocation);
 
                 if (storedLocation != null)
                 {

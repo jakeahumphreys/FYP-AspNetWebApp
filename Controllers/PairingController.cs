@@ -53,7 +53,7 @@ namespace FYP_WebApp.Controllers
         [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Create()
         {
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
+            var userList = new SelectList(_teamService.GetAllSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
             var pairingViewModel = new PairingViewModel {UserList = userList};
             return View(pairingViewModel);
         }
@@ -63,7 +63,7 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
         {
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
+            var userList = new SelectList(_teamService.GetAllSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
             pairingViewModel.UserList = userList;
 
             if (ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace FYP_WebApp.Controllers
         [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Edit(int id)
         {
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
+            var userList = new SelectList(_teamService.GetAllSubordinates(_accountService.GetAll(), User.Identity.GetUserId()), "Id", "DisplayString");
 
             try
             {
@@ -120,7 +120,7 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id, UserId, BuddyUserId, StartDate, StartTime, EndDate, EndTime, Pairing, UserList, ConflictingPairings")] PairingViewModel pairingViewModel)
         {
-            var userList = new SelectList(_teamService.GetSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
+            var userList = new SelectList(_teamService.GetAllSubordinates(_accountService.GetAll(), User.Identity.GetUserId()).ToList(), "Id", "DisplayString");
             pairingViewModel.UserList = userList;
 
             if (ModelState.IsValid)

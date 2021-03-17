@@ -88,6 +88,24 @@ namespace FYP_WebApp.ServiceLayer
             return gpsReports;
         }
 
+        public void LinkExistingLocations(StoredLocation storedLocation)
+        {
+            if (storedLocation != null)
+            {
+                foreach (var report in _gpsReportRepository.GetAll())
+                {
+                    if (report.Latitude == storedLocation.Latitude && report.Longitude == storedLocation.Longitude &&
+                        report.LocationId == null)
+                    {
+                        var existingReport = _gpsReportRepository.GetById(report.Id);
+                        existingReport.LocationId = storedLocation.Id;
+                        _gpsReportRepository.Update(existingReport);
+                        _gpsReportRepository.Save();
+                    }
+                }
+            }
+        }
+
         public void Dispose()
         {
             _gpsReportRepository.Dispose();

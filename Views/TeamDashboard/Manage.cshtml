@@ -12,7 +12,7 @@
 
         <script type="text/javascript">
             $.ajax({
-                url: '/TeamDashboard/GetGpsLocations',
+                url: '/TeamDashboard/GetGpsLocations?teamId=@Model.Team.Id',
                 type: 'GET',
                 success: function(data) {
                     var markers = [];
@@ -156,5 +156,54 @@
                 </tr>
             }
         </table>
+    </div>
+</div>
+
+<div class="card shadow-lg rounded mb-3">
+    <div class="card-header">
+        Unlinked Reports
+    </div>
+    <div class="card-body">
+        <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+        <p>Unlinked reports are GPS Reports with no automatic link created. Review the following reports (if any) and provide a location.</p>
+        @if (Model.UnlinkedReports != null && Model.UnlinkedReports.Count > 0)
+        {
+            <div class="scroller">
+                  <table class="table table-striped">
+                <tr>
+                    <th>
+                        Report Id
+                    </th>
+                    <th>
+                        Reported
+                    </th>
+                    <th>
+                        Team Member
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                @foreach (var item in Model.UnlinkedReports)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                        </td>
+                        <td>
+                            @*<button class="btn btn-primary" formtarget="_blank" onclick="location.href = '@Url.Action("Details","GpsReport", new { id = item.Id})';return false;">Details</button>*@
+                            <button class="btn btn-primary" formtarget="_blank" onclick="window.open('@Url.Action("Details", "GpsReport", new{id = item.Id})')">Details</button>
+                        </td>
+                    </tr>
+                }
+            </table>
+            </div>
+        }
     </div>
 </div>

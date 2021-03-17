@@ -23,6 +23,8 @@ namespace FYP_WebApp.Controllers
         private TeamService _teamService;
         private GpsReportService _gpsReportService;
 
+        private int CurrentTeamId { get; set; }
+
         public TeamDashboardController()
         {
             _accountService = new AccountService();
@@ -51,11 +53,11 @@ namespace FYP_WebApp.Controllers
             }
         }
 
-        public JsonResult GetGpsLocations()
+        public JsonResult GetGpsLocations(int teamId)
         {
             var mapObjects = new List<MapDto>();
             var userId = User.Identity.GetUserId();
-            var gpsReports = _gpsReportService.GetGpsReports(_teamService.GetSubordinates(_accountService.GetAll().Where(x=> x.Id != userId && x.Status != Status.NotOnShift).ToList(), userId ));
+            var gpsReports = _gpsReportService.GetGpsReports(_teamService.GetTeamSubordinates(_accountService.GetAll().Where(x=> x.Id != userId && x.Status != Status.NotOnShift).ToList(), userId, teamId));
 
             foreach (var report in gpsReports)
             {
@@ -83,7 +85,9 @@ namespace FYP_WebApp.Controllers
             var userId = User.Identity.GetUserId();
             var members = _accountService.GetAll().Where(x => x.TeamId == teamId).Where(x=> x.Id != userId).ToList();
             var onDutyMembers = members.Count(x=> x.Status != Status.NotOnShift);
-            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers};
+            var unlinkedReports = _gpsReportService.GetAll().Where(x => x.User.TeamId == teamId && x.LocationId == null).ToList();
+            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports};
+
 
             return View(teamDashboardVm);
         }

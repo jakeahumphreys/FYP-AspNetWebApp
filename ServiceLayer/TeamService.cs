@@ -113,7 +113,7 @@ namespace FYP_WebApp.ServiceLayer
             return userTeams;
         }
 
-        public List<ApplicationUser> GetSubordinates(List<ApplicationUser> allUsers, string managerId)
+        public List<ApplicationUser> GetAllSubordinates(List<ApplicationUser> allUsers, string managerId)
         {
             var subordinates = new List<ApplicationUser>();
             foreach (var user in allUsers)
@@ -126,6 +126,27 @@ namespace FYP_WebApp.ServiceLayer
                     {
                         subordinates.Add(user);
                     }
+
+                }
+            }
+
+            return subordinates;
+        }
+
+        public List<ApplicationUser> GetTeamSubordinates(List<ApplicationUser> allUsers, string managerId, int teamId)
+        {
+            var subordinates = new List<ApplicationUser>();
+            foreach (var user in allUsers)
+            {
+                if (user.TeamId != null)
+                {
+                    var team = GetDetails((int)user.TeamId);
+
+                    if (team.Id == teamId && team.ManagerId == managerId)
+                    {
+                        subordinates.Add(user);
+                    }
+                    
                 }
             }
 
