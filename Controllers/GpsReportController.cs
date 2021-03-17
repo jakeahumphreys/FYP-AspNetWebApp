@@ -19,11 +19,13 @@ namespace FYP_WebApp.Controllers
     {
         private readonly GpsReportService _gpsReportService;
         private readonly TeamService _teamService;
+        private readonly StoredLocationService _storedLocationService;
 
         public GpsReportController()
         {
             _gpsReportService = new GpsReportService();
             _teamService = new TeamService();
+            _storedLocationService = new StoredLocationService();
         }
 
         [CustomAuth(Roles = "Admin, Manager")]
@@ -110,7 +112,49 @@ namespace FYP_WebApp.Controllers
             }
         }
 
-        
+
+        [CustomAuth(Roles = "Admin, Manager")]
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                ViewBag.LocationList = new SelectList(_storedLocationService.Index(), "Id", "Label");
+
+                return View(_gpsReportService.Details(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
+            }
+            catch (StoredLocationNotFoundException ex)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomAuth(Roles = "Admin, Manager")]
+        public ActionResult Edit(GpsReport gpsReport)
+        {
+            ViewBag.LocationList = new SelectList(_gpsReportService.GetAll(), "Id", "Label");
+            if (ModelState.IsValid)
+            {
+                ServiceResponse response = _gpsReportService.Edit(gpsReport);
+
+                if (response.Success == true)
+                {
+                    return RedirectToAction("Details", "GpsReport", new {id = gpsReport.Id});
+                }
+                else
+                {
+                    return View(gpsReport);
+                }
+            }
+            return View(gpsReport);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

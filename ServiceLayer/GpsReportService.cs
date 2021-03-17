@@ -54,6 +54,25 @@ namespace FYP_WebApp.ServiceLayer
             }
         }
 
+        public ServiceResponse Edit(GpsReport gpsReport)
+        {
+            if (gpsReport == null)
+            {
+                return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
+            }
+            else
+            {
+                var existingReport = _gpsReportRepository.GetById(gpsReport.Id);
+
+                existingReport.LocationId = gpsReport.LocationId;
+
+                _gpsReportRepository.Update(existingReport);
+                _gpsReportRepository.Save();
+
+                return new ServiceResponse { Success = true };
+            }
+        }
+
         public List<GpsReport> GetGpsReports(List<ApplicationUser> users)
         {
             var gpsReports = new List<GpsReport>();
