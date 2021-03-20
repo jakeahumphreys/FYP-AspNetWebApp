@@ -21,11 +21,13 @@ namespace FYP_WebApp.Controllers
             _configurationRecordService = new ConfigurationRecordService();
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(_configurationRecordService.GetAll());
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             try
@@ -42,6 +44,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -69,6 +72,7 @@ namespace FYP_WebApp.Controllers
             return View(configurationRecord);
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             try
@@ -107,6 +111,7 @@ namespace FYP_WebApp.Controllers
             return View(configurationRecord);
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             try

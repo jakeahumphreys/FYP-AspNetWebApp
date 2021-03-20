@@ -4,106 +4,147 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>ConfigurationRecord</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.StoreLocationAccuracy, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StoreLocationAccuracy, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StoreLocationAccuracy, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MessageOfTheDayText, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MessageOfTheDayText, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MessageOfTheDayText, "", new { @class = "text-danger" })
+        <div class="card mb-3 rounded shadow">
+            <h5 class="card-header">Automatic Location Linking</h5>
+            <div class="card-body">
+                <p>
+                    <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                    This value determines the distance in metres that the system will use to automatically attribute a GPS Report to a location.
+                    <br />
+                </p>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StoreLocationAccuracy, htmlAttributes: new { @class = "control-label col-md-10" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StoreLocationAccuracy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StoreLocationAccuracy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpSendUrgentEmails, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpSendUrgentEmails, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpSendUrgentEmails, "", new { @class = "text-danger" })
+        <div class="card mb-3 rounded shadow">
+            <h5 class="card-header">System MOTD</h5>
+            <div class="card-body">
+                <p>
+                    <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                    If this field has a value it will be displayed in a banner every time a user visits the homepage.
+                    <br />
+                </p>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MessageOfTheDayText, htmlAttributes: new { @class = "control-label col-md-10" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MessageOfTheDayText, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MessageOfTheDayText, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpUrl, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpUrl, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpUrl, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="card mb-3 rounded shadow">
+            <h5 class="card-header">SMTP Configuration</h5>
+            <div class="card-body">
+                <p>
+                    <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                    If the following checkbox is selected, the system will send an email to the appropriate manager when an urgent request is received.
+                    <br />
+                </p>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpSendUrgentEmails, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.SmtpSendUrgentEmails, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpSendUrgentEmails, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpUrl, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SmtpUrl, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpUrl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpPort, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpPort, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpPort, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpPort, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SmtpPort, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpPort, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpEmailFrom, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpEmailFrom, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpEmailFrom, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpEmailFrom, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SmtpEmailFrom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpEmailFrom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpSenderUsername, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpSenderUsername, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpSenderUsername, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpSenderUsername, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SmtpSenderUsername, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpSenderUsername, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpSenderPassword, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpSenderPassword, new { htmlAttributes = new { @class = "form-control", @Value=Model.SmtpSenderPassword} })
-            @Html.ValidationMessageFor(model => model.SmtpSenderPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpSenderPassword, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SmtpSenderPassword, new { htmlAttributes = new { @class = "form-control", @value = Model.SmtpSenderPassword} })
+                        @Html.ValidationMessageFor(model => model.SmtpSenderPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SmtpShouldUseSsl, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SmtpShouldUseSsl, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SmtpShouldUseSsl, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SmtpShouldUseSsl, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.SmtpShouldUseSsl, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SmtpShouldUseSsl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(model => model.MapsApiKey, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MapsApiKey, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MapsApiKey, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="card mb-3 rounded shadow">
+            <h5 class="card-header">Google Maps API</h5>
+            <div class="card-body">
+                <p>
+                    <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                    The Google Maps API Key should be stored here.
+                    <br />
+                </p>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MapsApiKey, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MapsApiKey, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MapsApiKey, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 rounded shadow">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check"></i>
+                    Submit
+                </button>
+                <button class="btn btn-danger" onclick="location.href = '@Url.Action("Index", "ConfigurationRecord")';return false;">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

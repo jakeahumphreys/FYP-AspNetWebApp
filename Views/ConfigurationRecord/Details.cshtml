@@ -4,102 +4,118 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>ConfigurationRecord</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+    <div class="card rounded shadow mb-3">
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StoreLocationAccuracy)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StoreLocationAccuracy)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StoreLocationAccuracy)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.StoreLocationAccuracy)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MessageOfTheDayText)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.MessageOfTheDayText)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MessageOfTheDayText)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpSendUrgentEmails)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MessageOfTheDayText)
+                </dd>
+            </dl>
+            <hr/>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpSendUrgentEmails)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpSendUrgentEmails)
-        </dd>
-                
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpUrl)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpSendUrgentEmails)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpUrl)
-        </dd>
-                
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpPort)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpUrl)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpPort)
-        </dd>
-                
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpEmailFrom)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpUrl)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpEmailFrom)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpPort)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpSenderUsername)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpPort)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpSenderUsername)
-        </dd>
-                
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpSenderPassword)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpEmailFrom)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpSenderPassword)
-        </dd>
-                
-        <dt>
-            @Html.DisplayNameFor(model => model.SmtpShouldUseSsl)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpEmailFrom)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmtpShouldUseSsl)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.MapsApiKey)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpSenderUsername)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MapsApiKey)
-        </dd>
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpSenderUsername)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpSenderPassword)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpSenderPassword)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SmtpShouldUseSsl)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SmtpShouldUseSsl)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MapsApiKey)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MapsApiKey)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="card rounded shadow mb-3">
+        <h5 class="card-header">Actions</h5>
+        <div class="card-body">
+            <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "ConfigurationRecord")';return false;">
+                <i class="fa fa-arrow-circle-left"></i>
+                Back
+            </button>
+            <button class="btn btn-warning" onclick="location.href = '@Url.Action("Edit", "ConfigurationRecord", new {id = Model.Id})';return false;">
+                <i class="fa fa-edit"></i>
+                Edit
+            </button>
+            <button class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "ConfigurationRecord", new {id = Model.Id})';return false;">
+                <i class="fa fa-trash"></i>
+                Delete
+            </button>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
