@@ -196,7 +196,7 @@ namespace FYP_WebApp.ServiceLayer
                 var smtpClientBuilder = new SmtpClientBuilder();
                 var smtpClient = smtpClientBuilder
                     .Host(latestConfig.SmtpUrl)
-                    .Port(latestConfig.SmtpPort)
+                    .Port((int)latestConfig.SmtpPort)
                     .Credentials(new NetworkCredential(latestConfig.SmtpSenderUsername, latestConfig.SmtpSenderPassword))
                     .EnableSsl(latestConfig.SmtpShouldUseSsl)
                     .Build();

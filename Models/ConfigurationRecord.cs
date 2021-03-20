@@ -29,7 +29,7 @@ namespace FYP_WebApp.Models
         public string SmtpUrl { get; set; }
         [RequiredIfTrue("SmtpSendUrgentEmails")]
         [Display(Name = "SMTP Port")]
-        public int SmtpPort { get; set; }
+        public int? SmtpPort { get; set; }
         [RequiredIfTrue("SmtpSendUrgentEmails")]
         [Display(Name = "SMTP Email From")]
         [DataType(DataType.EmailAddress)]
