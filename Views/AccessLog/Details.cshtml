@@ -4,44 +4,45 @@
     ViewBag.Title = "Access Log Details";
 }
 
-<div>
-    <h4>AccessLog</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeStamp)
-        </dt>
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Access Log (@Model.Id : @Model.TimeStamp)</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TimeStamp)
+            </dt>
     
-        <dd>
-            @Html.DisplayFor(model => model.TimeStamp)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TimeStamp)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AttemptedUser)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.AttemptedUser)
+            </dt>
     
-        <dd>
-            @Html.DisplayFor(model => model.AttemptedUser)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.AttemptedUser)
+            </dd>
         
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Message)
+            </dt>
     
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Message)
+            </dd>
     
-        <dt>
-            @Html.DisplayNameFor(model => model.Success)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Success)
+            </dt>
     
-        <dd>
-            @Html.DisplayFor(model => model.Success)
-        </dd>
-    
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Success)
+            </dd>
+        </dl>
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "AccessLog")';return false;">
+            <i class="fa fa-times"></i>
+            Close Log
+        </button>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
