@@ -10,6 +10,7 @@ namespace FYP_WebApp.Models
     public class StoredLocation
     {
         public int Id { get; set; }
+        [Required]
         public string Label { get; set; }
         [DisplayFormat(DataFormatString = "{0:0.000000}", ApplyFormatInEditMode = true)]
         public decimal Latitude { get; set; }

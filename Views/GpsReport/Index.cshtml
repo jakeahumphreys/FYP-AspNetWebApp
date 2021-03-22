@@ -5,71 +5,83 @@
     ViewBag.Title = "Index";
 }
 
-<h2>GPS Reports</h2>
 
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">GPS Reports</h5>
+    <div class="card-body">
+        <button class="btn btn-primary mb-2" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+            <i class="fa fa-filter"></i>
+            Show Filters
+        </button>
 
-<button class="btn btn-primary mb-2" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-    Show Filters
-</button>
+        <div class="collapse mb-2" id="collapseFilters">
+            <div class="card card-body">
+                @using (Html.BeginForm("Index", "GpsReport", FormMethod.Get))
+                {
+                    <p>
+                        Search by name: @Html.TextBox("searchStringName", ViewBag.CurrentFilter as string)
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </p>
+                }
+            </div>
+        </div>
 
-<div class="collapse mb-2" id="collapseFilters">
-    <div class="card card-body">
-        @using (Html.BeginForm("Index", "GpsReport", FormMethod.Get))
-        {
-            <p> Search by name: @Html.TextBox("searchStringName", ViewBag.CurrentFilter as string)
-                <button class="btn btn-primary" type="submit">
-                    <i class="fa fa-search"></i>
-                    Search
-                </button></p>
-        }
+        <table class="table table-striped table-bordered rounded">
+            <tr>
+                <th>
+                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.SortByNameParameter, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    Team
+                </th>
+                <th>
+                    @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.SortByDateParameter, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    Latitude
+                </th>
+                <th>
+                    Longitude
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.DisplayString)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Team.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Details", "GpsReport", new {id = item.Id})';return false;">
+                            <i class="fa fa-eye"></i>
+                            Details
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+        <span class="badge badge-info">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+        <br/>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
     </div>
 </div>
 
-<table class="table table-striped table-bordered rounded">
-    <tr>
-        <th>
-            @Html.ActionLink("Name", "Index", new{sortOrder = ViewBag.SortByNameParameter, currentFilter=ViewBag.CurrentFilter})
-        </th>
-        <th>
-            Team
-        </th>
-        <th>
-            @Html.ActionLink("Time", "Index", new {sortOrder = ViewBag.SortByDateParameter, currentFilter=ViewBag.CurrentFilter})
-        </th>
-        <th>
-            Latitude
-        </th>
-        <th>
-            Longitude
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.DisplayString)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Team.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                <button class="btn btn-primary" onclick="location.href = '@Url.Action("Details","GpsReport", new { id = item.Id })';return false;">Details</button>
-            </td>
-        </tr>
-    }
-</table>
-<span class="badge badge-info">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))

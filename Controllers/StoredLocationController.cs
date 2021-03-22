@@ -120,6 +120,11 @@ namespace FYP_WebApp.Controllers
             var decimalLatitude = Convert.ToDecimal(latitude);
             var decimalLongitude = Convert.ToDecimal(longitude);
 
+            if (string.IsNullOrEmpty(label))
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = "Unable to create location. Label not provided" });
+            }
+
             ServiceResponse response = _storedLocationService.CreateAction(new StoredLocation { Label = label, Longitude = decimalLongitude, Latitude = decimalLatitude });
 
             if (response.Success == true)

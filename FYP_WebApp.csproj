@@ -395,6 +395,10 @@
     <Compile Include="Migrations\202103202150200_MakePortFieldNullable.Designer.cs">
       <DependentUpon>202103202150200_MakePortFieldNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103222151533_MakeLabelRequired.cs" />
+    <Compile Include="Migrations\202103222151533_MakeLabelRequired.Designer.cs">
+      <DependentUpon>202103222151533_MakeLabelRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -794,6 +798,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103202150200_MakePortFieldNullable.resx">
       <DependentUpon>202103202150200_MakePortFieldNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103222151533_MakeLabelRequired.resx">
+      <DependentUpon>202103222151533_MakeLabelRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
