@@ -69,6 +69,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Index()
         {
             var userList = _applicationDbContext.Users.ToList();
@@ -76,6 +77,7 @@ namespace FYP_WebApp.Controllers
             return View(userList);
         }
 
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Details(string id)
         {
             if (!string.IsNullOrEmpty(id))
@@ -98,6 +100,7 @@ namespace FYP_WebApp.Controllers
             }
         }
 
+        [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Edit(string id)
         {
             
@@ -320,7 +323,7 @@ namespace FYP_WebApp.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [CustomAuth(Roles = "Admin")]
         public ActionResult Register()
         {
             var rolesSelectList = new SelectList(_applicationDbContext.Roles.ToList(), "Name", "Name");
@@ -358,7 +361,7 @@ namespace FYP_WebApp.Controllers
                         UserManager.AddToRole(user.Id, model.Role);
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
