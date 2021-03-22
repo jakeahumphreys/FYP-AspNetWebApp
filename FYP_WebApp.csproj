@@ -399,6 +399,14 @@
     <Compile Include="Migrations\202103222151533_MakeLabelRequired.Designer.cs">
       <DependentUpon>202103222151533_MakeLabelRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103222336358_UpdateToNoteModel.cs" />
+    <Compile Include="Migrations\202103222336358_UpdateToNoteModel.Designer.cs">
+      <DependentUpon>202103222336358_UpdateToNoteModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103222349094_UpdateToNoteModelRemoveRequirements.cs" />
+    <Compile Include="Migrations\202103222349094_UpdateToNoteModelRemoveRequirements.Designer.cs">
+      <DependentUpon>202103222349094_UpdateToNoteModelRemoveRequirements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -679,7 +687,6 @@
     <Content Include="Views\Note\Delete.cshtml" />
     <Content Include="Views\Note\Details.cshtml" />
     <Content Include="Views\Note\Edit.cshtml" />
-    <Content Include="Views\Note\Index.cshtml" />
     <Content Include="Views\GpsReport\Details.cshtml" />
     <Content Include="Views\GpsReport\Index.cshtml" />
     <Content Include="Views\ApiLog\Details.cshtml" />
@@ -802,6 +809,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103222151533_MakeLabelRequired.resx">
       <DependentUpon>202103222151533_MakeLabelRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103222336358_UpdateToNoteModel.resx">
+      <DependentUpon>202103222336358_UpdateToNoteModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103222349094_UpdateToNoteModelRemoveRequirements.resx">
+      <DependentUpon>202103222349094_UpdateToNoteModelRemoveRequirements.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

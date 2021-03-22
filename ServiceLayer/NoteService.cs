@@ -50,7 +50,7 @@ namespace FYP_WebApp.ServiceLayer
             }
             else
             {
-                if (note.Sender == null)
+                if (note.SenderId == null)
                 {
                     return new ServiceResponse { Success = false, ResponseError = ResponseErrors.NullParameter };
                 }

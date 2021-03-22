@@ -23,12 +23,6 @@ namespace FYP_WebApp.Controllers
         }
 
         [CustomAuth(Roles = "Admin")]
-        public ActionResult Index()
-        {
-            return View(_noteService.GetAll());
-        }
-
-        [CustomAuth(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             try
@@ -49,7 +43,6 @@ namespace FYP_WebApp.Controllers
         [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Create(int storedLocationId)
         {
-            //ViewBag.StoredLocationId = new SelectList(db.StoredLocations, "Id", "Label");
             var noteViewModel = new NoteViewModel {StoredLocationId = storedLocationId};
             return View(noteViewModel);
         }
@@ -57,18 +50,27 @@ namespace FYP_WebApp.Controllers
         [CustomAuth(Roles = "Admin, Manager, Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Note, StoredLocationId")] NoteViewModel noteViewModel)
+        public ActionResult Create(NoteViewModel noteViewModel)
         {
+            noteViewModel.Note.StoredLocationId = noteViewModel.StoredLocationId;
+            noteViewModel.Note.SenderId = User.Identity.GetUserId();
+            noteViewModel.Note.TimeCreated = DateTime.Now;
+
             if (ModelState.IsValid)
             {
-                noteViewModel.Note.StoredLocationId = noteViewModel.StoredLocationId;
-                noteViewModel.Note.SenderId = User.Identity.GetUserId();
-                noteViewModel.Note.TimeCreated = DateTime.Now;
+              
                 var result = _noteService.Create(noteViewModel.Note);
 
                 if (result.Success)
                 {
                     return RedirectToAction("Details", "StoredLocation", new {@id = noteViewModel.StoredLocationId});
+                }
+                else
+                {
+                    if (result.ResponseError == ResponseErrors.NullParameter)
+                    {
+                        return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "Invalid Parameter" });
+                    }
                 }
             }
 
