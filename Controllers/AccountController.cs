@@ -88,7 +88,8 @@ namespace FYP_WebApp.Controllers
                 }
                 else
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = $"A user with ID {id} does not exist." });
+
                 }
             }
             else

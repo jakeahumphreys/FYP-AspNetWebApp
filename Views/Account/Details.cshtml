@@ -4,114 +4,164 @@
     ViewBag.Title = "Details";
 }
 
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">@Model.DisplayString</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            @if (Model.Image != null)
+            {
+                <dd>
+                    <img class="img-thumbnail" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" width="100" height="100" />
+                </dd>
+            }
+            else
+            {
+                <img class="img-thumbnail shadow" src="../../Content/Images/no-image.png" width="100" height="100"/>
+            }
 
-<div>
-    <button class="btn btn-primary fa fa-arrow-circle-left" data-toggle="tooltip" title="Back" onclick="location.href='@Url.Action("Index","Account", new { })';return false;"></button>
-    <button class="btn btn-warning fa fa-pen" data-toggle="tooltip" title="Edit" onclick="location.href='@Url.Action("Edit","Account", new {id = Model.Id})';return false;"></button>
-    <hr />
-</div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Team.Name)
+            </dt>
 
-<h2>Details (@Model.Surname , @Model.FirstName)</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        @if (Model.Image != null)
-        {
             <dd>
-                <img class="img-thumbnail" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" width="100" height="100" />
+                @Html.DisplayFor(model => model.Team.Name)
             </dd>
-        }
-    
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Team.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Team.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Surname)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Surname)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInactive)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NotifyEmail)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsInactive)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NotifyEmail)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.NotifyEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NotifyEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MobileLoginKey)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MobileLoginKey)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEndDateUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+        </dl>
+    </div>
 </div>
 
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Credentials</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            
+            <p>
+                <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                This is the 'Password' that will be used if this account wishes to login using the mobile application.
+                <br />
+            </p>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.MobileLoginKey)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MobileLoginKey)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Administrative Settings</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <p>
+                <span class="fa fa-info-circle" style="color:dodgerblue; margin-left:5px; margin-right: 5px; margin-top: 5px;"></span>
+                A Locked account can still be allocated, but access is prevented to the user.
+            </p>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            </dt>
+
+            @if (Model.LockoutEndDateUtc == null)
+            {
+                <dd>
+                    <span class="badge badge-info">Not currently locked</span>
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.LockoutEndDateUtc)
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LockoutEnabled)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LockoutEnabled)
+            </dd>
+
+            <hr/>
+
+            <p>
+                <span class="fa fa-info-circle" style="color: dodgerblue; margin-left: 5px; margin-right: 5px; margin-top: 5px;"></span>
+                An inactive account is considered disabled and is not present in management options.
+            </p>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsInactive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsInactive)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Actions</h5>
+    <div class="card-body">
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Account")';return false;">
+            <i class="fa fa-arrow-circle-left"></i>
+            Back
+        </button>
+        <button class="btn btn-warning" onclick="location.href = '@Url.Action("Edit", "Account", new {id = Model.Id})';return false;">
+            <i class="fa fa-edit"></i>
+            Edit
+        </button>
+    </div>
+</div>

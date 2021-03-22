@@ -7,166 +7,169 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    if (User.IsInRole("Admin"))
-    {
-        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Account")';return false;">
-            Back
-            <i class="fa fa-arrow-alt-circle-left mr-2"></i>
-        </button>
-    }
-    else
-    {
-        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Home")';return false;">
-            Back
-            <i class="fa fa-arrow-alt-circle-left mr-2"></i>
-        </button>
-    }
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.User.Id)
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.User.Id)
 
-        <div class="card mb-3 mt-3 shadow-lg">
-            <h5 class="card-header">Profile Image</h5>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-3">
-                        @if (Model.User.Image != null)
-                        {
-                            <img class="img-thumbnail shadow" src="data:image;base64,@System.Convert.ToBase64String(Model.User.Image)" width="100" height="100"/>
-                        }
-                        else
-                        {
-                            <img class="img-thumbnail shadow" src="../../Content/Images/no-image.png" width="100" height="100"/>
-                        }
-                    </div>
-                    <div class="col-9">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Image, htmlAttributes: new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Image, new {htmlAttributes = new {@class = "form-control"}})
-                                @Html.ValidationMessageFor(model => model.Image, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
-                    </div>
+    <div class="card mb-3 mt-3 shadow-lg">
+        <h5 class="card-header">Profile Image</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    @if (Model.User.Image != null)
+                    {
+                        <img class="img-thumbnail shadow" src="data:image;base64,@System.Convert.ToBase64String(Model.User.Image)" width="100" height="100" />
+                    }
+                    else
+                    {
+                        <img class="img-thumbnail shadow" src="../../Content/Images/no-image.png" width="100" height="100" />
+                    }
                 </div>
-            </div>
-        </div>
-
-        <div class="card mb-3 shadow-lg">
-            <h5 class="card-header">Personal Details</h5>
-            <div class="card-body">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.User.Surname, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    @Html.LabelFor(model => model.User.NotifyEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <p>If you wish to receive emails at your personal address:</p>
-                        @Html.EditorFor(model => model.User.NotifyEmail, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.User.NotifyEmail, "", new {@class = "text-danger"})
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.User.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.User.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.User.PhoneNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="card mb-3 shadow-lg">
-                <h5 class="card-header">Administration</h5>
-                <div class="card-body">
-
+                <div class="col-9">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.RoleId, new {@class = "col-md-2 control-label"})
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.RoleId, (SelectList) ViewBag.roleSelectList, htmlAttributes: new {@class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.RoleId, "", new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.User.TeamId, new {@class = "col-md-2 control-label"})
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.User.TeamId, (SelectList) ViewBag.teamSelectList, htmlAttributes: new {@class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.User.TeamId, "", new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.User.MobileLoginKey, htmlAttributes: new {@class = "control-label col-md-2"})
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.User.MobileLoginKey, new {htmlAttributes = new {@class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.User.MobileLoginKey, "", new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.User.IsInactive, htmlAttributes: new {@class = "control-label col-md-2"})
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.User.IsInactive)
-                                @Html.ValidationMessageFor(model => model.User.IsInactive, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.User.LockoutEndDateUtc, htmlAttributes: new {@class = "control-label col-md-2"})
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.User.LockoutEndDateUtc, new {htmlAttributes = new {@class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.User.LockoutEndDateUtc, "", new {@class = "text-danger"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.User.LockoutEnabled, htmlAttributes: new {@class = "control-label col-md-2"})
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.User.LockoutEnabled)
-                                @Html.ValidationMessageFor(model => model.User.LockoutEnabled, "", new {@class = "text-danger"})
-                            </div>
+                            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>
+
+    <div class="card mb-3 shadow-lg">
+        <h5 class="card-header">Personal Details</h5>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User.Surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.NotifyEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <p>If you wish to receive emails at your personal address:</p>
+                    @Html.EditorFor(model => model.User.NotifyEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User.NotifyEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="card mb-3 shadow-lg">
+            <h5 class="card-header">Administration</h5>
+            <div class="card-body">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RoleId, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.RoleId, (SelectList)ViewBag.roleSelectList, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RoleId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.User.TeamId, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.User.TeamId, (SelectList)ViewBag.teamSelectList, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.User.TeamId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.MobileLoginKey, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.MobileLoginKey, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.MobileLoginKey, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.IsInactive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.User.IsInactive)
+                            @Html.ValidationMessageFor(model => model.User.IsInactive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.LockoutEndDateUtc, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.LockoutEndDateUtc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.LockoutEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.User.LockoutEnabled)
+                            @Html.ValidationMessageFor(model => model.User.LockoutEnabled, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="card mb-3 rounded shadow">
+        <h5 class="card-header">Actions</h5>
+        <div class="card-body">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-check"></i>
+                Submit
+            </button>
+            @if (User.IsInRole("Admin"))
+            {
+                <button class="btn btn-danger" onclick="location.href = '@Url.Action("Details", "Account", new {id = Model.User.Id})';return false;">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-danger" onclick="location.href = '@Url.Action("Index", "Home")';return false;">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+            }
+
+        </div>
+    </div>
+</div>
 }
 
 
