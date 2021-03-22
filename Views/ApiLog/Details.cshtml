@@ -127,6 +127,16 @@
     </div>
 }
 
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Actions</h5>
+    <div class="card-body">
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "ApiLog")';return false;">
+            <i class="fa fa-times"></i>
+            Close Log
+        </button>
+    </div>
+</div>
+
 <script>
     $("pre code").each(function () {
         var html = $(this).html();
