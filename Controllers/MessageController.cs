@@ -50,6 +50,17 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(string recipient, string content)
         {
+
+            if (string.IsNullOrEmpty(recipient))
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "A recipient is required."});
+            }
+
+            if (string.IsNullOrEmpty(content))
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "A message cannot be empty." });
+            }
+
             var userList = new SelectList(_accountService.GetAll().Where(x => x.IsInactive != true).ToList(), "Id", "DisplayString");
             ViewBag.UserList = userList;
 
