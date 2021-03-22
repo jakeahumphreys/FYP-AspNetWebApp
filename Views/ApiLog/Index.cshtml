@@ -32,6 +32,7 @@
 </div>
 
 <div class="card rounded-lg shadow">
+    <h5 class="card-header">API Logs</h5>
     <div class="card-body">
         <table class="table table-hover">
             <tr>
@@ -45,7 +46,7 @@
                     Action
                 </th>
                 <th>
-                    @Html.ActionLink("Timestamp", "Index", new { SortOrder = ViewBag.DateSortParameter })
+                    @Html.ActionLink("Timestamp", "Index", new {SortOrder = ViewBag.DateSortParameter})
                 </th>
                 <th>
                     Status Code
@@ -120,6 +121,6 @@
             }
         </table>
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("Index", new{page, sortOrder = ViewBag.CurrentSort}))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort}))
     </div>
 </div>
