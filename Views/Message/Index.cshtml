@@ -2,61 +2,111 @@
 @model IEnumerable<FYP_WebApp.Models.Message>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Messages";
 }
 
-<h2>Index</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MessageReceived)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Recipient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsRead)
-        </th>
-        <th>Type</th>
-        <th>Actions</th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MessageReceived)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sender.DisplayString)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Recipient.DisplayString)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsRead)
-        </td>
-        <td>
-            @if (item.MessageType == MessageType.Urgent)
-            {
-                <span class="badge badge-danger">URGENT</span>
-            }
-            @if (item.MessageType == MessageType.CheckIn)
-            {
-                <span class="badge badge-success">CheckIn</span>
-            }
-            @if (item.MessageType == MessageType.Routine)
-            {
-                <span class="badge badge-info">Routine</span>
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id })
-        </td>
-    </tr>
+@if (ViewBag.MessageSent != null && ViewBag.MessageSent == true)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p>Message sent.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 }
 
-</table>
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Messages</h5>
+    <div class="card-body">
+        <div class="scroller-lg">
+            <table class="table">
+                @foreach (var item in Model)
+                {
+                    <tr class="@(!item.IsRead ? "table-info" : null) border rounded-lg mb-1">
+                        <td>
+                            <strong>Date:</strong>
+                            @Html.DisplayFor(modelItem => item.MessageReceived)
+                        </td>
+                        <td>
+                            <strong>From:</strong>
+                            @Html.DisplayFor(modelItem => item.Sender.DisplayString)
+                        </td>
+                        <td>
+                            @if (item.MessageType == MessageType.Urgent)
+                            {
+                                <span class="badge badge-danger">URGENT MESSAGE</span>
+                            }
+                            @if (item.MessageType == MessageType.CheckIn)
+                            {
+                                <span class="badge badge-success">CheckIn</span>
+                            }
+                            @if (item.MessageType == MessageType.Routine)
+                            {
+                                <span class="badge badge-info">Routine Message</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsRead)
+                            {
+                                <p>Message Seen: <i class="fa fa-check" style="color: green"></i></p>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="location.href = '@Url.Action("Details", "Message", new {id = item.Id})';return false;">
+                                <i class="fa fa-envelope-open"></i>
+                                Read
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <button class="btn btn-success btn-sm"  data-toggle="modal" data-target="#messageModal">
+            <i class="fa fa-plus-square"></i>
+            New Message
+        </button>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "Message", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">New Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group">
+                            @Html.Label("To")
+                            <div class="col-lg-12">
+                                @Html.DropDownList("recipient", (SelectList) ViewBag.UserList, "", new {htmlAttributes = new {@class = "form-control", @style = "width:100%;"}})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Message")
+                            <div class="col-md-10">
+                                @Html.TextArea("content")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-paper-plane"></i>
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

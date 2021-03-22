@@ -693,6 +693,7 @@
     <Content Include="Views\ConfigurationRecord\Edit.cshtml" />
     <Content Include="Views\ConfigurationRecord\Delete.cshtml" />
     <Content Include="Views\GpsReport\Edit.cshtml" />
+    <Content Include="Views\Message\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

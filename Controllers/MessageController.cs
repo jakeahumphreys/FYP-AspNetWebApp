@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using FYP_WebApp.Models;
 
 namespace FYP_WebApp.Controllers
 {
@@ -11,16 +12,63 @@ namespace FYP_WebApp.Controllers
     public class MessageController : Controller
     {
         private readonly MessageService _messageService;
+        private readonly AccountService _accountService;
 
         public MessageController()
         {
             _messageService = new MessageService();
+            _accountService = new AccountService();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? messageSent)
         {
+            if (messageSent == 1)
+            {
+                ViewBag.MessageSent = true;
+            }
+
+            var userList = new SelectList(_accountService.GetAll().Where(x => x.IsInactive != true).ToList(), "Id", "DisplayString");
+            ViewBag.UserList = userList;
             var userId = User.Identity.GetUserId();
             return View(_messageService.GetAll().Where(x=>x.RecipientId == userId));
+        }
+
+        public ActionResult Create(string recipient)
+        {
+            var userList = new SelectList(_accountService.GetAll().Where(x => x.IsInactive != true).ToList(), "Id", "DisplayString");
+            ViewBag.UserList = userList;
+
+            if (!string.IsNullOrEmpty(recipient))
+            {
+                return View(new Message {RecipientId = recipient});
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(string recipient, string content)
+        {
+            var userList = new SelectList(_accountService.GetAll().Where(x => x.IsInactive != true).ToList(), "Id", "DisplayString");
+            ViewBag.UserList = userList;
+
+            var message = new Message {RecipientId = recipient, Content = content};
+
+            message.SenderId = User.Identity.GetUserId();
+            message.MessageReceived = DateTime.Now;
+            message.MessageType = MessageType.Routine;
+            
+            var result = _messageService.Create(message);
+
+            if (result.Success)
+            {
+                return RedirectToAction("Index", "Message", new{messageSent = 1});
+            }
+            else
+            {
+                return View(message);
+            }
         }
 
         public ActionResult Details(int id)

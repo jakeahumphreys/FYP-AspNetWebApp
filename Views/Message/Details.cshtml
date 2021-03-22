@@ -1,57 +1,30 @@
 ﻿@model FYP_WebApp.Models.Message
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Message Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Message</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MessageReceived)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MessageReceived)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sender)
-        </dt>
-
-        <dd>
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Message Received: @Model.MessageReceived</h5>
+    <div class="card-body">
+        <div class="border rounded-pill mb-3">
+            <strong class="pl-2">From:</strong>
             @Html.DisplayFor(model => model.Sender.DisplayString)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Recipient)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Recipient.DisplayString)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsRead)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsRead)
-        </dd>
-
-    </dl>
+        </div>
+        <div class="border rounded p-3 mb-1">
+            <div class="scroller-lg">
+                @Html.DisplayFor(model => model.Content)
+            </div>
+        </div>
+        
+        @if (Model.IsRead == true)
+        {
+            <p>Message Seen: <i class="fa fa-check" style="color: green"></i></p>
+        }
+        
+        <button class="btn btn-info btn-sm" onclick="location.href = '@Url.Action("Index", "Message")';return false;">
+            <i class="fa fa-times"></i>
+            Close Message
+        </button>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
