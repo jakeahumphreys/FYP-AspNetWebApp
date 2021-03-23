@@ -1,50 +1,80 @@
-﻿@model FYP_WebApp.Models.Pairing
+﻿@using Microsoft.AspNet.Identity
+@model FYP_WebApp.Models.Pairing
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Pairing @Model.Id (@Model.Start - @Model.End)</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Start)
+            </dt>
 
-<div>
-    <h4>Pairing</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Start)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Start)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Start)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.End)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.End)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.End)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.End)
-        </dd>
+            <dt>
+                Team Member
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.DisplayString)
+                @if (Model.UserId == User.Identity.GetUserId())
+                {
+                    <span class="badge badge-info">You</span>
+                }
+                else
+                {
+                    <span class="badge badge-info">@Model.User.Team.Name</span>
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+            <dt>
+               Assigned Buddy
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BuddyUserId)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BuddyUser.DisplayString)
+                @if (Model.BuddyUserId == User.Identity.GetUserId())
+                {
+                    <span class="badge badge-info">You</span>
+                }
+                else
+                {
+                    <span class="badge badge-info">@Model.BuddyUser.Team.Name</span>
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.BuddyUserId)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Actions</h5>
+    <div class="card-body">
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Pairing")';return false;">
+            <i class="fa fa-arrow-circle-left"></i>
+            Back
+        </button>
+        <button class="btn btn-warning" onclick="location.href = '@Url.Action("Edit", "Pairing", new {id = Model.Id})';return false;">
+            <i class="fa fa-edit"></i>
+            Edit
+        </button>
+        <button class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "Pairing", new {id = Model.Id})';return false;">
+            <i class="fa fa-trash"></i>
+            Delete
+        </button>
+    </div>
+</div>

@@ -23,12 +23,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<Pairing> GetAll()
         {
-            return _context.Pairings.Include(x=> x.User).Include(x => x.BuddyUser).ToList();
+            return _context.Pairings.Include(x=> x.User).Include(x => x.User.Team).Include(x => x.BuddyUser).Include(x => x.BuddyUser.Team).ToList();
         }
 
         public Pairing GetById(int id)
         {
-            return _context.Pairings.Where(x => x.Id == id).Include(x => x.User).Include(x => x.BuddyUser).SingleOrDefault();
+            return _context.Pairings.Where(x => x.Id == id).Include(x => x.User).Include(x => x.BuddyUser).Include(x => x.User.Team).Include(x => x.BuddyUser.Team).SingleOrDefault();
         }
 
         public void Insert(Pairing pairing)

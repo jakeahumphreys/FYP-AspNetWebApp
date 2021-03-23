@@ -1,18 +1,18 @@
-﻿@model FYP_WebApp.Models.PairingViewModel
+﻿
+@model FYP_WebApp.Models.PairingViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Pairing";
 }
 
-<h2>Create</h2>
+<h2>Create Pairing</h2>
+<hr/>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Pairing</h4>
-        <hr />
         @if (Model.ConflictingPairings != null && Model.ConflictingPairings.Count > 0)
         {
             <div class="alert alert-danger" role="alert">
@@ -31,62 +31,83 @@
             </div>
         }
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
         
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+        <div class="card rounded shadow mb-3">
+            <h5 class="card-header">Time Information</h5>
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Pairing.UserId, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model=>model.Pairing.UserId, (SelectList)Model.UserList, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Pairing.UserId, "", new { @class = "text-danger" })
+        <div class="card rounded shadow mb-3">
+            <h5 class="card-header">Staff</h5>
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Pairing.UserId, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Pairing.UserId, (SelectList)Model.UserList, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Pairing.UserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Pairing.BuddyUserId, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Pairing.BuddyUserId, (SelectList)Model.UserList, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Pairing.BuddyUserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Pairing.BuddyUserId, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model=>model.Pairing.BuddyUserId, (SelectList)Model.UserList, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Pairing.BuddyUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+        <div class="card rounded shadow mb-3">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        Submit
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <i class="fa fa-sync"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-danger" onclick="location.href = '@Url.Action("Index", "Pairing")';return false;">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

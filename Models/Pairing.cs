@@ -17,9 +17,11 @@ namespace FYP_WebApp.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd H:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime End { get; set; }
         [NotEqualTo("BuddyUserId", ErrorMessage = "Cannot be the same as Buddy User.")]
+        [Display(Name = "Team Member")]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         [NotEqualTo("UserId", ErrorMessage = "Cannot be the same as User.")]
+        [Display(Name = "Assigned Buddy")]
         public string BuddyUserId { get; set; }
         public ApplicationUser BuddyUser { get; set; }
 
