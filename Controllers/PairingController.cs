@@ -30,7 +30,35 @@ namespace FYP_WebApp.Controllers
         [CustomAuth(Roles = "Admin, Manager")]
         public ActionResult Index()
         {
-            return View(_pairingService.GetAll());
+            var managerId = User.Identity.GetUserId();
+
+            //List<Pairing> visiblePairings = _pairingService.GetAll().Where(x => x.User.TeamId != null && x.User.Team.ManagerId == managerId && x.BuddyUser.TeamId != null && x.BuddyUser.Team.ManagerId == managerId).ToList();
+
+            var visiblePairings = new List<Pairing>();
+
+            var teamMembers = _teamService.GetAllSubordinates(_accountService.GetAll(), managerId);
+
+            foreach (var member in teamMembers)
+            {
+                foreach (var pairing in _pairingService.GetAll())
+                {
+                    if (pairing.UserId == member.Id || pairing.BuddyUserId == member.Id)
+                    {
+                        if (!visiblePairings.Contains(pairing))
+                        {
+                            visiblePairings.Add(pairing);
+                        }
+                    }
+                }
+            }
+
+            if (teamMembers.Count == 0)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "You current have no team members to pair." });
+            }
+
+            return View(visiblePairings);
+
         }
 
         [CustomAuth(Roles = "Admin, Manager")]
