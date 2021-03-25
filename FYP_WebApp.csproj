@@ -415,6 +415,10 @@
     <Compile Include="Migrations\202103251650415_RenameMembers.Designer.cs">
       <DependentUpon>202103251650415_RenameMembers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103251722417_EnforceFieldsOnTeam.cs" />
+    <Compile Include="Migrations\202103251722417_EnforceFieldsOnTeam.Designer.cs">
+      <DependentUpon>202103251722417_EnforceFieldsOnTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -829,6 +833,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103251650415_RenameMembers.resx">
       <DependentUpon>202103251650415_RenameMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103251722417_EnforceFieldsOnTeam.resx">
+      <DependentUpon>202103251722417_EnforceFieldsOnTeam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

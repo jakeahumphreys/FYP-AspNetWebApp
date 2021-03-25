@@ -153,7 +153,7 @@ namespace FYP_WebApp.ServiceLayer
             foreach (var user in teamStaff)
             {
                 List<Pairing> pairings = _pairingRepository.GetAll().Where(x =>
-                    x.UserId == user.Id && x.Start >= DateTime.Today && x.End <= DateTime.Today).ToList();
+                    x.UserId == user.Id && x.Start >= DateTime.Today && x.End >= DateTime.Today).ToList();
 
                 if (pairings.Count == 0)
                 {

@@ -10,8 +10,10 @@ namespace FYP_WebApp.Models
     public class Team
     {
         public int Id { get; set; }
+        [Required]
         [Display(Name = "Team Name")]
         public string Name { get; set; }
+        [Required]
         public string ManagerId { get; set; }
         public ApplicationUser Manager { get; set; }
         public List<ApplicationUser> TeamMembers { get; set; }

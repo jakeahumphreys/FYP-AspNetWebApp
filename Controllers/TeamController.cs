@@ -62,6 +62,9 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,ManagerId,IsInactive")] Team team)
         {
+            var managerList = new SelectList(_accountService.GetAllManagers(), "Id", "DisplayString");
+            ViewBag.managerList = managerList;
+
             if (ModelState.IsValid)
             {
                 var result = _teamService.Create(team);
