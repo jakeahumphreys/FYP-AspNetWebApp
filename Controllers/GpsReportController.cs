@@ -137,7 +137,7 @@ namespace FYP_WebApp.Controllers
         {
             try
             {
-                ViewBag.LocationList = new SelectList(_storedLocationService.Index(), "Id", "Label");
+                ViewBag.LocationList = new SelectList(_storedLocationService.Index().Where(l => l.IsInactive == false), "Id", "Label");
 
                 return View(_gpsReportService.Details(id));
             }

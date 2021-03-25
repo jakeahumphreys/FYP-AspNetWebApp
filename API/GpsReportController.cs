@@ -142,7 +142,7 @@ namespace FYP_WebApp.API
         public StoredLocation GetClosestLocation(GeoCoordinate reportedLocation)
         {
             
-            var nearestLocation = (from location in _storedLocationService.Index()
+            var nearestLocation = (from location in _storedLocationService.Index().Where(l => l.IsInactive == false)
                 let geo = new GeoCoordinate
                     {Latitude = Convert.ToDouble(location.Latitude), Longitude = Convert.ToDouble(location.Longitude)}
                 orderby geo.GetDistanceTo(reportedLocation)

@@ -33,6 +33,11 @@ namespace FYP_WebApp.Controllers
         {
             var locations = _storedLocationService.Index();
 
+            if (!User.IsInRole("Admin"))
+            {
+                locations = locations.Where(l => l.IsInactive == false).ToList();
+            }
+
             if (searchStringName != null)
             {
                 page = 1;
@@ -152,7 +157,7 @@ namespace FYP_WebApp.Controllers
 
             if (response.Success == true)
             {
-                var storedLocation = _storedLocationService.Index().FirstOrDefault(x => x.Label == label && x.Latitude == decimalLatitude && x.Longitude == decimalLongitude);
+                var storedLocation = _storedLocationService.Index().FirstOrDefault(x => x.Label == label && x.Latitude == decimalLatitude && x.Longitude == decimalLongitude && x.IsInactive == false);
 
                 _gpsReportService.LinkExistingLocations(storedLocation);
 

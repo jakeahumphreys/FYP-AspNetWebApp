@@ -31,7 +31,7 @@ namespace FYP_WebApp.API
         [HttpGet]
         public IEnumerable<StoredLocationDto> Get()
         {
-            var response =  mapper.Map<IList<StoredLocation>, List<StoredLocationDto>>(_storedLocationService.Index());
+            var response =  mapper.Map<IList<StoredLocation>, List<StoredLocationDto>>(_storedLocationService.Index().Where(l => l.IsInactive == false).ToList());
 
             _logService.CreateApiLog(new ApiLog
             {
