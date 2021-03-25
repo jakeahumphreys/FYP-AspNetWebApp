@@ -1,14 +1,10 @@
 ﻿@model PagedList.IPagedList<FYP_WebApp.Models.StoredLocation>
+@using AutoMapper.Features
 @using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Stored Locations";
 }
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
 <div class="card rounded shadow mb-3">
     <h5 class="card-header">Stored Locations</h5>
     <div class="card-body">
@@ -53,6 +49,10 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Label)
+                        @if (User.IsInRole("Admin") && item.IsInactive == true)
+                        {
+                            <span class="badge badge-dark">Inactive</span>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Latitude)
@@ -70,6 +70,15 @@
             }
 
         </table>
+        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+        {
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("Create", "StoredLocation")';return false;">
+                <i class="fa fa-plus-square"></i>
+                Create
+            </button>
+        }
+        <br/>
+        <hr/>
         <span class="badge badge-info">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
         <br/>
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
