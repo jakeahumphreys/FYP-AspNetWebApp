@@ -1,50 +1,77 @@
-﻿@model IEnumerable<FYP_WebApp.Models.StoredLocation>
+﻿@model PagedList.IPagedList<FYP_WebApp.Models.StoredLocation>
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Stored Locations";
 }
-
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Label)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsInactive)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsInactive)
-        </td>
-        <td>
-            <button class="btn btn-info" onclick="location.href = '@Url.Action("Details","StoredLocation", new { id = item.Id })';return false;">Details</button>
-            <button class="btn btn-danger" onclick="location.href = '@Url.Action("Delete","StoredLocation", new { id = item.Id })';return false;">Delete</button>
-        </td>
-    </tr>
-}
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Stored Locations</h5>
+    <div class="card-body">
+        <button class="btn btn-primary mb-2" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+            <i class="fa fa-filter"></i>
+            Show Filters
+        </button>
 
-</table>
+        <div class="collapse mb-2" id="collapseFilters">
+            <div class="card card-body">
+                @using (Html.BeginForm("Index", "StoredLocation", FormMethod.Get))
+                {
+                    <p>
+                        Search by name: @Html.TextBox("searchStringName", ViewBag.CurrentFilter as string)
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </p>
+                }
+            </div>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Label
+                </th>
+                <th>
+                    Latitude
+                </th>
+                <th>
+                    Longitude
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        <button class="btn btn-info" onclick="location.href = '@Url.Action("Details", "StoredLocation", new {id = item.Id})';return false;">
+                            <i class="fa fa-eye"></i>
+                            View
+                        </button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <span class="badge badge-info">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+        <br/>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>

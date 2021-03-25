@@ -12,6 +12,7 @@ using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
+using PagedList;
 
 namespace FYP_WebApp.Controllers
 {
@@ -28,9 +29,31 @@ namespace FYP_WebApp.Controllers
             _gpsReportService = new GpsReportService();
         }
         [CustomAuth(Roles = "Admin, Manager, Member")]
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchStringName, int? page)
         {
-            return View(_storedLocationService.Index());
+            var locations = _storedLocationService.Index();
+
+            if (searchStringName != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchStringName = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchStringName;
+
+            if (!string.IsNullOrEmpty(searchStringName))
+            {
+                locations = locations.Where(s =>
+                    s.Label.IndexOf(searchStringName, StringComparison.CurrentCultureIgnoreCase) >= 0).ToList();
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(locations.ToPagedList(pageNumber, pageSize));
         }
 
         [CustomAuth(Roles = "Admin, Manager, Member")]
