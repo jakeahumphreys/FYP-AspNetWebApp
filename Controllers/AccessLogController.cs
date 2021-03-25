@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using PagedList;
@@ -22,6 +23,12 @@ namespace FYP_WebApp.Controllers
         {
             _logService = new LogService();
         }
+
+        public AccessLogController(IAccessLogRepository accessLogRepository)
+        {
+            _logService = new LogService(accessLogRepository);
+        }
+
         public ActionResult Index(string sortOrder, int? page)
         {
             ViewBag.CurrentSort = sortOrder;

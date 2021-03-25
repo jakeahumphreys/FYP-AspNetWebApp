@@ -21,6 +21,17 @@ namespace FYP_WebApp.ServiceLayer
             _accessLogRepository = new AccessLogRepository();
         }
 
+        public LogService(IAccessLogRepository accessLogRepository)
+        {
+            _accessLogRepository = accessLogRepository;
+
+        }
+
+        public LogService(IApiLogRepository apiLogRepository)
+        {
+            _apiLogRepository = apiLogRepository;
+        }
+
         public List<ApiLog> GetAllApiLogs()
         {
             return _apiLogRepository.GetAll();

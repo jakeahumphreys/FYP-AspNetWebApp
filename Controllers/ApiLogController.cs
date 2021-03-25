@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.Owin.Security.Facebook;
@@ -25,6 +26,12 @@ namespace FYP_WebApp.Controllers
         {
             _logService = new LogService();
         }
+
+        public ApiLogController(IApiLogRepository apiLogRepository)
+        {
+            _logService = new LogService(apiLogRepository);
+        }
+
         // GET: ApiLog
         public ActionResult Index(string sortOrder, int? page)
         {
