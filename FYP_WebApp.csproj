@@ -407,6 +407,14 @@
     <Compile Include="Migrations\202103222349094_UpdateToNoteModelRemoveRequirements.Designer.cs">
       <DependentUpon>202103222349094_UpdateToNoteModelRemoveRequirements.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103251621194_ConvertTeamList.cs" />
+    <Compile Include="Migrations\202103251621194_ConvertTeamList.Designer.cs">
+      <DependentUpon>202103251621194_ConvertTeamList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103251650415_RenameMembers.cs" />
+    <Compile Include="Migrations\202103251650415_RenameMembers.Designer.cs">
+      <DependentUpon>202103251650415_RenameMembers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -815,6 +823,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103222349094_UpdateToNoteModelRemoveRequirements.resx">
       <DependentUpon>202103222349094_UpdateToNoteModelRemoveRequirements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103251621194_ConvertTeamList.resx">
+      <DependentUpon>202103251621194_ConvertTeamList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103251650415_RenameMembers.resx">
+      <DependentUpon>202103251650415_RenameMembers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

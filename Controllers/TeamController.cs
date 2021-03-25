@@ -36,7 +36,9 @@ namespace FYP_WebApp.Controllers
         {
             try
             {
-                return View(_teamService.GetDetails(id));
+                var team = _teamService.GetDetails(id);
+                team.TeamMembers = GetTeamMembers(team.Id, team.ManagerId);
+                return View(team);
             }
             catch (ArgumentException ex)
             {
@@ -152,6 +154,24 @@ namespace FYP_WebApp.Controllers
             {
                 return RedirectToAction("Error", "Error", new { @Error = Errors.SystemError, @Message = "Unable to delete entity." });
             }
+        }
+
+        public List<ApplicationUser> GetTeamMembers(int teamId, string managerId)
+        {
+            var members = new List<ApplicationUser>();
+
+            foreach (var user in _accountService.GetAll())
+            {
+                if (user.TeamId != null && user.TeamId == teamId && user.Id != managerId)
+                {
+                    if (!members.Contains(user))
+                    {
+                        members.Add(user);
+                    }
+                }
+            }
+
+            return members;
         }
 
         protected override void Dispose(bool disposing)

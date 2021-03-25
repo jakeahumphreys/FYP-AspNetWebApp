@@ -4,39 +4,79 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.Name</h2>
+<hr/>
+<br/>
 
-<div>
-    <h4>Team</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        
-        <dt>
-            <p>Manager</p>
-        </dt>
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Team Details</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Manager.DisplayString)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInactive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsInactive)
-        </dd>
-
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Staff</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                Manager
+            </dt>
+
+            <dd>
+                @Html.ActionLink(Model.Manager.DisplayString, "Details", "Account", new {id = Model.Manager.Id}, null)
+            </dd>
+        </dl>
+        <hr/>
+        <dl class="dl-horizontal">
+            <dt>
+                Members
+            </dt>
+            @foreach (var member in Model.TeamMembers)
+            {
+                <dd>
+                    @Html.ActionLink(member.DisplayString, "Details", "Account", new {id = member.Id}, null)
+                </dd>
+            }
+        </dl>
+
+    </div>
+</div>
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Record State</h5>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IsInactive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsInactive)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card rounded shadow mb-3">
+    <h5 class="card-header">Actions</h5>
+    <div class="card-body">
+        <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Team")';return false;">
+            <i class="fa fa-arrow-circle-left"></i>
+            Back
+        </button>
+        <button class="btn btn-warning" onclick="location.href = '@Url.Action("Edit", "Team", new {id = Model.Id})';return false;">
+            <i class="fa fa-edit"></i>
+            Edit
+        </button>
+    </div>
+</div>

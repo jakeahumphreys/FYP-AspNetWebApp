@@ -72,6 +72,7 @@ namespace FYP_WebApp.ServiceLayer
                 var existingTeam = _teamRepository.GetById(team.Id);
                 existingTeam.Name = team.Name;
                 existingTeam.ManagerId = team.ManagerId;
+                existingTeam.IsInactive = team.IsInactive;
 
                 _teamRepository.Update(existingTeam);
                 _teamRepository.Save();

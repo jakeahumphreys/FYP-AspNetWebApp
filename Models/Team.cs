@@ -14,7 +14,7 @@ namespace FYP_WebApp.Models
         public string Name { get; set; }
         public string ManagerId { get; set; }
         public ApplicationUser Manager { get; set; }
-        public ICollection<ApplicationUser> Members { get; set; }
+        public List<ApplicationUser> TeamMembers { get; set; }
         [Display(Name = "Inactivated?")]
         public bool IsInactive { get; set; }
     }

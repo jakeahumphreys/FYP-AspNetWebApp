@@ -51,6 +51,7 @@ namespace FYP_WebApp.Models
         [Display(Name = "Team")]
         public int? TeamId { get; set; }
         public Team Team { get; set; }
+
         public bool IsInactive { get; set; }
 
         [Display(Name = "Mobile Login Key")]

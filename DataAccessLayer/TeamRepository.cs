@@ -23,12 +23,12 @@ namespace FYP_WebApp.DataAccessLayer
 
         public List<Team> GetAll()
         {
-            return _context.Teams.Include(x => x.Manager).ToList();
+            return _context.Teams.Include(x => x.Manager).Include(x => x.TeamMembers).ToList();
         }
 
         public Team GetById(int id)
         {
-            return _context.Teams.Where(x => x.Id == id).Include(y => y.Manager).SingleOrDefault();
+            return _context.Teams.Where(x => x.Id == id).Include(x => x.TeamMembers).Include(y => y.Manager).SingleOrDefault();
         }
 
         public void Insert(Team team)
