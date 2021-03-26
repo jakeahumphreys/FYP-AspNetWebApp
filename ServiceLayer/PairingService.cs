@@ -112,13 +112,17 @@ namespace FYP_WebApp.ServiceLayer
             {
                 foreach (var existingPairing in _pairingRepository.GetAll())
                 {
-                    if (existingPairing.UserId == pairing.UserId || existingPairing.BuddyUserId == pairing.BuddyUserId)
+                    if (existingPairing.Id != pairing.Id)
                     {
-                        if (pairing.Start <= existingPairing.End && existingPairing.Start <= pairing.End)
+                        if (existingPairing.UserId == pairing.UserId || existingPairing.BuddyUserId == pairing.BuddyUserId)
                         {
-                            conflictingPairings.Add(existingPairing);
+                            if (pairing.Start <= existingPairing.End && existingPairing.Start <= pairing.End)
+                            {
+                                conflictingPairings.Add(existingPairing);
+                            }
                         }
                     }
+                  
                 }
             }
 

@@ -27,6 +27,12 @@ namespace FYP_WebApp.Controllers
             _accountService = new AccountService();
         }
 
+        public TeamController(ITeamRepository teamRepository, ApplicationDbContext context)
+        {
+            _teamService = new TeamService(teamRepository);
+            _accountService = new AccountService(context);
+        }
+
         public ActionResult Index()
         {
             return View(_teamService.GetAll());
@@ -37,7 +43,12 @@ namespace FYP_WebApp.Controllers
             try
             {
                 var team = _teamService.GetDetails(id);
-                team.TeamMembers = GetTeamMembers(team.Id, team.ManagerId);
+
+                if (team.TeamMembers != null)
+                {
+                    team.TeamMembers = GetTeamMembers(team.Id, team.ManagerId);
+                }
+               
                 return View(team);
             }
             catch (ArgumentException ex)

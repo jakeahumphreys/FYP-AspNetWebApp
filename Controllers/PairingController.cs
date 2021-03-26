@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
@@ -25,6 +26,14 @@ namespace FYP_WebApp.Controllers
             _accountService = new AccountService();
             _teamService = new TeamService();
             _library = new Library();
+        }
+
+        public PairingController(IPairingRepository pairingRepository, ApplicationDbContext context, ITeamRepository teamRepository, Library library)
+        {
+            _pairingService = new PairingService(pairingRepository);
+            _accountService = new AccountService(context);
+            _teamService = new TeamService(teamRepository);
+            _library = library;
         }
 
         [CustomAuth(Roles = "Admin, Manager")]
@@ -54,7 +63,7 @@ namespace FYP_WebApp.Controllers
 
             if (teamMembers.Count == 0)
             {
-                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "You current have no team members to pair." });
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "You currently have no team members to pair." });
             }
 
             return View(visiblePairings);
@@ -102,6 +111,11 @@ namespace FYP_WebApp.Controllers
                 {
                     pairingViewModel.ConflictingPairings = conflictingPairings;
                     return View(pairingViewModel);
+                }
+
+                if (pairingViewModel.Pairing == null)
+                {
+                    return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "No Pairing." });
                 }
 
                 pairingViewModel.Pairing.Start =

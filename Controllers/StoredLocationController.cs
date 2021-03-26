@@ -110,7 +110,10 @@ namespace FYP_WebApp.Controllers
                     }
                 }
 
-                storedLocation.CheckIns = storedLocation.CheckIns.OrderByDescending(x => x.Time).ToList();
+                if (storedLocation.CheckIns != null)
+                {
+                    storedLocation.CheckIns = storedLocation.CheckIns.OrderByDescending(x => x.Time).ToList();
+                }
 
                 return View(storedLocation);
             }
