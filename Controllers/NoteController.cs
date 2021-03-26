@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
@@ -15,11 +16,16 @@ namespace FYP_WebApp.Controllers
 {
     public class NoteController : Controller
     {
-        private NoteService _noteService;
+        private readonly NoteService _noteService;
 
         public NoteController()
         {
             _noteService = new NoteService();
+        }
+
+        public NoteController(INoteRepository noteRepository)
+        {
+            _noteService = new NoteService(noteRepository);
         }
 
         [CustomAuth(Roles = "Admin")]
@@ -52,6 +58,17 @@ namespace FYP_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(NoteViewModel noteViewModel)
         {
+
+            if (noteViewModel == null)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "Invalid Parameter" });
+            }
+
+            if (noteViewModel.Note == null)
+            {
+                return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = "Invalid Parameter" });
+            }
+
             noteViewModel.Note.StoredLocationId = noteViewModel.StoredLocationId;
             noteViewModel.Note.SenderId = User.Identity.GetUserId();
             noteViewModel.Note.TimeCreated = DateTime.Now;

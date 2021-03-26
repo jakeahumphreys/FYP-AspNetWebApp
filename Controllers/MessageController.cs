@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 
 namespace FYP_WebApp.Controllers
@@ -18,6 +19,13 @@ namespace FYP_WebApp.Controllers
         {
             _messageService = new MessageService();
             _accountService = new AccountService();
+        }
+
+        public MessageController(IMessageRepository messageRepository, IPairingRepository pairingRepository, ITeamRepository teamRepository, ApplicationDbContext context, IConfigurationRecordRepository configurationRecordRepository)
+        {
+            _messageService = new MessageService(messageRepository, pairingRepository, teamRepository, context,
+                configurationRecordRepository);
+            _accountService = new AccountService(context);
         }
 
         public ActionResult Index(int? messageSent)

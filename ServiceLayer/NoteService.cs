@@ -20,6 +20,11 @@ namespace FYP_WebApp.ServiceLayer
             _noteRepository = new NoteRepository(new ApplicationDbContext());
         }
 
+        public NoteService(INoteRepository noteRepository)
+        {
+            _noteRepository = noteRepository;
+        }
+
         public List<Note> GetAll()
         {
             return _noteRepository.GetAll();
@@ -36,7 +41,7 @@ namespace FYP_WebApp.ServiceLayer
 
             if (note == null)
             {
-                throw new NoteNotFoundException("A Note with ID" + id + " was not found.");
+                throw new NoteNotFoundException("A Note with ID " + id + " was not found.");
             }
 
             return note;
