@@ -15,7 +15,12 @@ namespace FYP_WebApp.ServiceLayer
 
         public GpsReportService()
         {
-            _gpsReportRepository = new GpsReportRepository(new ApplicationDbContext());
+            _gpsReportRepository = new GpsReportRepository();
+        }
+
+        public GpsReportService(IGpsReportRepository gpsReportRepository)
+        {
+            _gpsReportRepository = gpsReportRepository;
         }
 
         public List<GpsReport> GetAll()

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Parser;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
@@ -20,12 +21,22 @@ namespace FYP_WebApp.Controllers
         private readonly GpsReportService _gpsReportService;
         private readonly TeamService _teamService;
         private readonly StoredLocationService _storedLocationService;
+        private readonly ConfigurationRecordService _configRecordService;
 
         public GpsReportController()
         {
             _gpsReportService = new GpsReportService();
             _teamService = new TeamService();
             _storedLocationService = new StoredLocationService();
+            _configRecordService = new ConfigurationRecordService();
+        }
+
+        public GpsReportController(IGpsReportRepository gpsRepository, ITeamRepository teamRepository, IStoredLocationRepository locationRepository, IConfigurationRecordRepository configurationRecordRepository)
+        {
+            _gpsReportService = new GpsReportService(gpsRepository);
+            _teamService = new TeamService(teamRepository);
+            _storedLocationService = new StoredLocationService(locationRepository);
+            _configRecordService = new ConfigurationRecordService(configurationRecordRepository);
         }
 
         [CustomAuth(Roles = "Admin, Manager")]
@@ -54,7 +65,8 @@ namespace FYP_WebApp.Controllers
 
                 foreach (var team in _teamService.GetAll())
                 {
-                    if (team.ManagerId == User.Identity.GetUserId())
+                    var currentUserId = User.Identity.GetUserId();
+                    if (team.ManagerId == currentUserId)
                     {
                         teamIds.Add(team.Id);
                     }
@@ -117,7 +129,7 @@ namespace FYP_WebApp.Controllers
             try
             {
                 var gpsReport = _gpsReportService.Details(id);
-                var mapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey;
+                var mapsApiKey = _configRecordService.GetLatestConfigurationRecord().MapsApiKey;
                 ViewBag.mapUrl = $"https://www.google.com/maps/embed/v1/place?key={mapsApiKey}&q={gpsReport.Latitude},{gpsReport.Longitude}";
                 return View(gpsReport);
             }

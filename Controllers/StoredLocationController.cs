@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Management;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using Microsoft.AspNet.Identity;
@@ -21,13 +22,24 @@ namespace FYP_WebApp.Controllers
         private readonly StoredLocationService _storedLocationService;
         private readonly TeamService _teamService;
         private readonly GpsReportService _gpsReportService;
+        private readonly ConfigurationRecordService _configurationRecordService;
 
         public StoredLocationController()
         {
             _storedLocationService = new StoredLocationService();
             _teamService = new TeamService();
             _gpsReportService = new GpsReportService();
+            _configurationRecordService = new ConfigurationRecordService();
         }
+
+        public StoredLocationController(IStoredLocationRepository locationRepository, ITeamRepository teamRepository, IGpsReportRepository gpsRepository, IConfigurationRecordRepository configRepository)
+        {
+            _storedLocationService = new StoredLocationService(locationRepository);
+            _teamService = new TeamService(teamRepository);
+            _gpsReportService = new GpsReportService(gpsRepository);
+            _configurationRecordService = new ConfigurationRecordService(configRepository);
+        }
+
         [CustomAuth(Roles = "Admin, Manager, Member")]
         public ActionResult Index(string currentFilter, string searchStringName, int? page)
         {
@@ -67,7 +79,7 @@ namespace FYP_WebApp.Controllers
             try
             {
                 var storedLocation = _storedLocationService.GetDetails(id);
-                var mapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey;
+                var mapsApiKey = _configurationRecordService.GetLatestConfigurationRecord().MapsApiKey;
                 ViewBag.mapUrl =
                     $"https://www.google.com/maps/embed/v1/place?key={mapsApiKey}&q={storedLocation.Latitude},{storedLocation.Longitude}";
 

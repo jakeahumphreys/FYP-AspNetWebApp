@@ -24,6 +24,7 @@ namespace FYP_WebApp.ServiceLayer
         private readonly IPairingRepository _pairingRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IConfigurationRecordRepository _configurationRecordRepository;
 
         public MessageService()
         {
@@ -31,12 +32,17 @@ namespace FYP_WebApp.ServiceLayer
             _pairingRepository = new PairingRepository(new ApplicationDbContext());
             _teamRepository = new TeamRepository(new ApplicationDbContext());
             _applicationDbContext = new ApplicationDbContext();
+            _configurationRecordRepository = new ConfigurationRecordRepository();
         }
 
-        public MessageService(IMessageRepository messageRepository)
+        public MessageService(IMessageRepository messageRepository, IPairingRepository pairingRepository, ITeamRepository teamRepository, ApplicationDbContext context, IConfigurationRecordRepository configurationRecordRepository)
         {
             _messageRepository = messageRepository;
-        }
+            _pairingRepository = pairingRepository;
+            _teamRepository = teamRepository;
+            _applicationDbContext = context;
+            _configurationRecordRepository = configurationRecordRepository;
+;        }
 
         public List<Message> GetAll()
         {
@@ -151,7 +157,8 @@ namespace FYP_WebApp.ServiceLayer
                     var sender = _applicationDbContext.Users.Find(message.SenderId);
                     if (user.NotifyEmail != null)
                     {
-                        SendUrgentEmail(ConfigHelper.GetLatestConfigRecord(), 
+                        var latestConfig = _configurationRecordRepository.GetAll().OrderByDescending(x => x.Created).FirstOrDefault();
+                        SendUrgentEmail(latestConfig, 
                             user.NotifyEmail,
                             "Urgent Assistance Request",
                             $"{sender.DisplayString} has requested urgent assistance at {DateTime.Now}.",

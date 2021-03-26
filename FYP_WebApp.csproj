@@ -219,7 +219,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common Logic\AutomapperConfig.cs" />
-    <Compile Include="Common Logic\ConfigHelper.cs" />
     <Compile Include="Common Logic\CustomAuth.cs" />
     <Compile Include="Common Logic\CustomHandleErrorAttribute.cs" />
     <Compile Include="Common Logic\Email\MailMessageBuilder.cs" />

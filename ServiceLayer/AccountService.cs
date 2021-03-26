@@ -17,6 +17,11 @@ namespace FYP_WebApp.ServiceLayer
             _applicationDbContext = new ApplicationDbContext();
         }
 
+        public AccountService(ApplicationDbContext context)
+        {
+            _applicationDbContext = context;
+        }
+
         public List<ApplicationUser> GetAll()
         {
             return _applicationDbContext.Users.Include(x => x.Team).ToList();

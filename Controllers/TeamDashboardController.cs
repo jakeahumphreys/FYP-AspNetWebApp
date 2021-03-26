@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebSockets;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
@@ -19,10 +20,11 @@ namespace FYP_WebApp.Controllers
     public class TeamDashboardController : Controller
     {
 
-        private AccountService _accountService;
-        private TeamService _teamService;
-        private GpsReportService _gpsReportService;
-        private PairingService _pairingService;
+        private readonly AccountService _accountService;
+        private readonly TeamService _teamService;
+        private readonly GpsReportService _gpsReportService;
+        private readonly PairingService _pairingService;
+        private readonly ConfigurationRecordService _configRecordService;
 
         private int CurrentTeamId { get; set; }
 
@@ -32,6 +34,16 @@ namespace FYP_WebApp.Controllers
             _teamService = new TeamService();
             _gpsReportService = new GpsReportService();
             _pairingService = new PairingService();
+            _configRecordService = new ConfigurationRecordService();
+        }
+
+        public TeamDashboardController(ApplicationDbContext context, ITeamRepository teamRepository, IGpsReportRepository gpsReportRepository, IPairingRepository pairingRepository, IConfigurationRecordRepository configRecordRepository)
+        {
+            _accountService = new AccountService(context);
+            _teamService = new TeamService(teamRepository);
+            _gpsReportService = new GpsReportService(gpsReportRepository);
+            _pairingService = new PairingService(pairingRepository);
+            _configRecordService = new ConfigurationRecordService(configRecordRepository);
         }
 
         public ActionResult Index()
@@ -89,8 +101,7 @@ namespace FYP_WebApp.Controllers
             var onDutyMembers = members.Count(x=> x.Status != Status.NotOnShift);
             var unlinkedReports = _gpsReportService.GetAll().Where(x => x.User.TeamId == teamId && x.LocationId == null).ToList();
             var unpairedMembers = _pairingService.GetDailyUnpairedUsers(members);
-
-            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports, UnpairedTeamMembers = unpairedMembers, MapsApiKey = ConfigHelper.GetLatestConfigRecord().MapsApiKey};
+            var teamDashboardVm = new TeamDashboardViewModel {Team = team, Members = members, OnDutyMembers = onDutyMembers, UnlinkedReports = unlinkedReports, UnpairedTeamMembers = unpairedMembers, MapsApiKey = _configRecordService.GetLatestConfigurationRecord().MapsApiKey};
 
 
             return View(teamDashboardVm);

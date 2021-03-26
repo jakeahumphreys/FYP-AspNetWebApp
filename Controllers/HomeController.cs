@@ -13,17 +13,19 @@ namespace FYP_WebApp.Controllers
     {
         private readonly MessageService _messageService;
         private readonly AccountService _accountService;
+        private readonly ConfigurationRecordService _configurationRecordService;
 
         public HomeController()
         {
             _messageService = new MessageService();
             _accountService = new AccountService();
+            _configurationRecordService = new ConfigurationRecordService();
         }
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)
             {
-                var motdText = ConfigHelper.GetLatestConfigRecord().MessageOfTheDayText;
+                var motdText = _configurationRecordService.GetLatestConfigurationRecord().MessageOfTheDayText;
 
                 if (!string.IsNullOrEmpty(motdText))
                 {
