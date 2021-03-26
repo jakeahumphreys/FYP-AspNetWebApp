@@ -157,7 +157,7 @@ namespace FYP_WebApp.Controllers
             {
                 return RedirectToAction("Error", "Error", new { @Error = Errors.InvalidParameter, @Message = ex.Message });
             }
-            catch (StoredLocationNotFoundException ex)
+            catch (GpsReportNotFoundException ex)
             {
                 return RedirectToAction("Error", "Error", new { @Error = Errors.EntityNotFound, @Message = ex.Message });
             }
