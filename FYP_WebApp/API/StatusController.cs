@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
@@ -21,6 +22,12 @@ namespace FYP_WebApp.API
         {
             _accountService = new AccountService();
             _logService = new LogService();
+        }
+
+        public StatusController(ApplicationDbContext context, IApiLogRepository apiLogRepository)
+        {
+            _accountService = new AccountService(context);
+            _logService = new LogService(apiLogRepository);
         }
 
         [HttpPost]

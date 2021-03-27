@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
@@ -18,20 +19,27 @@ namespace FYP_WebApp.API
 
         private readonly StoredLocationService _storedLocationService;
         private readonly LogService _logService;
-        private Mapper mapper;
+        private readonly Mapper _mapper;
 
         public StoredLocationController()
         {
             _storedLocationService = new StoredLocationService();
             _logService = new LogService();
             var config = AutomapperConfig.instance().Configure();
-            mapper = new Mapper(config);
+            _mapper = new Mapper(config);
+        }
+
+        public StoredLocationController(IStoredLocationRepository locationRepository, IApiLogRepository apiLogRepository, Mapper mapper)
+        {
+            _storedLocationService = new StoredLocationService(locationRepository);
+            _logService = new LogService(apiLogRepository);
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IEnumerable<StoredLocationDto> Get()
         {
-            var response =  mapper.Map<IList<StoredLocation>, List<StoredLocationDto>>(_storedLocationService.Index().Where(l => l.IsInactive == false).ToList());
+            var response =  _mapper.Map<IList<StoredLocation>, List<StoredLocationDto>>(_storedLocationService.Index().Where(l => l.IsInactive == false).ToList());
 
             _logService.CreateApiLog(new ApiLog
             {
@@ -50,11 +58,29 @@ namespace FYP_WebApp.API
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
+            if (id == 0)
+            {
+                var response = Content(HttpStatusCode.BadRequest, "No ID was provided.");
+
+                _logService.CreateApiLog(new ApiLog
+                {
+                    LogLevel = LogLevel.Error,
+                    Controller = this.ControllerContext.ControllerDescriptor.ControllerName,
+                    Action = this.ActionContext.ActionDescriptor.ActionName,
+                    TimeStamp = DateTime.Now,
+                    RequestString = JsonConvert.SerializeObject("None", Formatting.Indented),
+                    ResponseString = JsonConvert.SerializeObject(response.Content, Formatting.Indented),
+                    StatusCode = HttpStatusCode.NotFound.ToString()
+                });
+
+                return response;
+            }
+
             var storedLocation = _storedLocationService.GetDetails(id);
 
             if (storedLocation != null)
             {
-                var response = Json(mapper.Map<StoredLocation, StoredLocationDto>(storedLocation));
+                var response = Json(_mapper.Map<StoredLocation, StoredLocationDto>(storedLocation));
 
                 _logService.CreateApiLog(new ApiLog
                 {

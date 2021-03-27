@@ -113,6 +113,10 @@
   <ItemGroup>
     <Compile Include="ApiControllerTests\AccountControllerTests.cs" />
     <Compile Include="ApiControllerTests\GpsReportControllerTests.cs" />
+    <Compile Include="ApiControllerTests\MessageControllerTests.cs" />
+    <Compile Include="ApiControllerTests\NoteControllerTests.cs" />
+    <Compile Include="ApiControllerTests\StatusControllerTests.cs" />
+    <Compile Include="ApiControllerTests\StoredLocationControllerTests.cs" />
     <Compile Include="ControllerTests\AccessLogControllerTests.cs" />
     <Compile Include="ControllerTests\ApiLogControllerTests.cs" />
     <Compile Include="ControllerTests\ConfigurationControllerTests.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="Helpers\ExceptionAssert.cs" />
     <Compile Include="Helpers\IdentityHelper.cs" />
     <Compile Include="Helpers\MockDbSet.cs" />
+    <Compile Include="Helpers\MockUserDbSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTests\LogServiceTests.cs" />
     <Compile Include="ServiceTests\ConfigServiceTests.cs" />

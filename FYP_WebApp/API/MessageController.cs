@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Hubs;
 using FYP_WebApp.Models;
@@ -22,7 +23,7 @@ namespace FYP_WebApp.API
         private readonly AccountService _accountService;
         private readonly LogService _logService;
         private readonly TeamService _teamService;
-        private Mapper _mapper;
+        private readonly Mapper _mapper;
 
         public MessageController()
         {
@@ -32,6 +33,16 @@ namespace FYP_WebApp.API
             _teamService = new TeamService();
             var config = AutomapperConfig.instance().Configure();
             _mapper = new Mapper(config);
+        }
+
+        public MessageController(IMessageRepository messageRepository, ApplicationDbContext context, IApiLogRepository apiLogRepository, ITeamRepository teamRepository, Mapper mapper, IPairingRepository pairingRepository, IConfigurationRecordRepository configurationRecordRepository)
+        {
+            _accountService = new AccountService(context);
+            _messageService = new MessageService(messageRepository, pairingRepository, teamRepository, context,
+                configurationRecordRepository);
+            _logService = new LogService(apiLogRepository);
+            _teamService = new TeamService(teamRepository);
+            _mapper = mapper;
         }
 
         [System.Web.Http.HttpGet]

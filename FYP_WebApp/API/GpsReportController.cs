@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using AutoMapper;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
@@ -34,6 +35,15 @@ namespace FYP_WebApp.API
             _configurationRecordService = new ConfigurationRecordService();
             var config = AutomapperConfig.instance().Configure();
             _mapper = new Mapper(config);
+        }
+
+        public GpsReportController(IGpsReportRepository gpsRepository, IStoredLocationRepository locationRepository, IConfigurationRecordRepository configRepository, IApiLogRepository apiLogRepository, Mapper mapper)
+        {
+            _gpsReportService = new GpsReportService(gpsRepository);
+            _storedLocationService = new StoredLocationService(locationRepository);
+            _configurationRecordService = new ConfigurationRecordService(configRepository);
+            _logService = new LogService(apiLogRepository);
+            _mapper = mapper;
         }
 
         [HttpPost]
