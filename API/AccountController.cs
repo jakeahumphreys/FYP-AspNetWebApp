@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using FYP_WebApp.Common_Logic;
+using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
@@ -33,6 +34,13 @@ namespace FYP_WebApp.API
             _logService = new LogService();
             var config = AutomapperConfig.instance().Configure();
             _mapper = new Mapper(config);
+        }
+
+        public AccountController(ApplicationDbContext context, IApiLogRepository apiLogRepository, Mapper mapper)
+        {
+            _applicationDbContext = context;
+            _logService = new LogService(apiLogRepository);
+            _mapper = mapper;
         }
 
         [HttpGet]

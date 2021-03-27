@@ -35,8 +35,24 @@ namespace FYP_WebApp.ServiceLayer
         public List<ApplicationUser> GetAllManagers()
         {
             var managerRole = _applicationDbContext.Roles.SingleOrDefault(r => r.Name == "Manager");
-            return _applicationDbContext.Users
-                .Where(user => user.Roles.Any(r => r.RoleId == managerRole.Id) && user.IsInactive == false).ToList();
+            List<ApplicationUser> managers = new List<ApplicationUser>();
+
+            foreach (var user in _applicationDbContext.Users)
+            {
+                if (user.Roles != null && user.Roles.Count > 0)
+                {
+                    if (user.Roles.Any(role => role.RoleId == managerRole.Id) && user.IsInactive == false)
+                    {
+                        if (!managers.Contains(user))
+                        {
+                            managers.Add(user);
+                        }
+                    }
+                }
+              
+            }
+          
+            return managers;
         }
 
         public ApplicationUser GetDetails(string id)

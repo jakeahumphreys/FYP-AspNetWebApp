@@ -97,8 +97,15 @@ namespace FYP_WebApp.Controllers
         {
             try
             {
-                var managerList = new SelectList(_accountService.GetAllManagers(), "Id", "DisplayString");
-                ViewBag.managerList = managerList;
+                var managers = _accountService.GetAllManagers();
+
+                if (managers != null)
+                {
+                    var managerList = new SelectList(managers, "Id", "DisplayString");
+                    
+                    ViewBag.managerList = managerList;
+                }
+
                 return View(_teamService.GetDetails(id));
             }
             catch (ArgumentException ex)

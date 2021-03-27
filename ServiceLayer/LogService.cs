@@ -24,12 +24,14 @@ namespace FYP_WebApp.ServiceLayer
         public LogService(IAccessLogRepository accessLogRepository)
         {
             _accessLogRepository = accessLogRepository;
+            _apiLogRepository = new ApiLogRepository();
 
         }
 
         public LogService(IApiLogRepository apiLogRepository)
         {
             _apiLogRepository = apiLogRepository;
+            _accessLogRepository = new AccessLogRepository();
         }
 
         public List<ApiLog> GetAllApiLogs()
