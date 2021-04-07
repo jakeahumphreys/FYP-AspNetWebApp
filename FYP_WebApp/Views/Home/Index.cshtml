@@ -59,7 +59,10 @@
                                 if (ViewBag.unreadMessages > 0)
                                 {
                                     <p>You have: @ViewBag.unreadMessages unread messages.</p>
-                                    <a href="#" class="btn btn-primary">My Messages</a>
+                                    <button class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Message")';return false;">
+                                        <i class="fa fa-envelope"></i>
+                                        My Messages
+                                    </button>
                                 }
                                 else
                                 {
