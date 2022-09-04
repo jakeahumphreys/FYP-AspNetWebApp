@@ -5,6 +5,7 @@ A worker tracking and safety application written in ASP.Net for my degree's fina
 Take a look at the user guides I wrote!
 
 Mobile: https://github.com/jakeahumphreys/FYP-AspNetWebApp/blob/master/Documentation/User%20Guides/User%20Guide%20-%20Mobile%20Application.pdf
+
 Web: https://github.com/jakeahumphreys/FYP-AspNetWebApp/blob/master/Documentation/User%20Guides/User%20Guide%20-%20Web%20Application.pdf
 
 ## Want to review the mobile app's code?
