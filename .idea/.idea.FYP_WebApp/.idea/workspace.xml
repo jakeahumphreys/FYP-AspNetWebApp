@@ -5,90 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a11b6f7-98dc-4f50-85db-902036ea4cb1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/MvcFoolproofJQueryValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/MvcFoolproofJQueryValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/MvcFoolproofValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/MvcFoolproofValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/mvcfoolproof.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Client Scripts/mvcfoolproof.unobtrusive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/PagedList.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/PagedList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-grid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-reboot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap-reboot.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/brands.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/brands.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/brands.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/brands.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome-all.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome-all.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome-all.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome-all.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/fontawesome.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/regular.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/regular.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/regular.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/regular.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/solid.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/solid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/solid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/solid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/svg-with-js.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/svg-with-js.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/svg-with-js.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/svg-with-js.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/v4-shims.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/v4-shims.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Content/v4-shims.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Content/v4-shims.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/FYP_WebApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/FYP_WebApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/all.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/all.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/all.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/brands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/brands.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/brands.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/conflict-detection.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/conflict-detection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/conflict-detection.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/conflict-detection.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/fontawesome.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/fontawesome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/fontawesome.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/fontawesome.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/regular.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/regular.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/regular.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/regular.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/solid.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/solid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/solid.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/solid.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/v4-shims.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/v4-shims.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/v4-shims.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/fontawesome/v4-shims.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.slim.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.slim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.slim.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery-3.4.1.slim.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.signalR-2.4.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.signalR-2.4.1.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Scripts/jquery.validate.unobtrusive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/Web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-brands-400.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-regular-400.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp/webfonts/fa-solid-900.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/FYP_WebApp_Unit_Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/FYP_WebApp_Unit_Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/app.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/obj/Debug/FYP_WebApp_Unit_Tests.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/obj/Debug/FYP_WebApp_Unit_Tests.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/FYP_WebApp_Unit_Tests/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/AutoMapper.10.1.1.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/lib/net461/AutoMapper.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/lib/net461/AutoMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/lib/netstandard2.0/AutoMapper.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/AutoMapper.10.1.1/lib/netstandard2.0/AutoMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/MvcFoolproofJQueryValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/MvcFoolproofJQueryValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/MvcFoolproofValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/MvcFoolproofValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/mvcfoolproof.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/Foolproof.0.9.4518/content/Client Scripts/mvcfoolproof.unobtrusive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.EntityFramework.2.2.3/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.EntityFramework.2.2.3/Microsoft.AspNet.Identity.EntityFramework.2.2.3.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.EntityFramework.2.2.3/lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.EntityFramework.2.2.3/lib/net45/Microsoft.AspNet.Identity.EntityFramework.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.Owin.2.2.3/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.Owin.2.2.3/Microsoft.AspNet.Identity.Owin.2.2.3.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.Owin.2.2.3/lib/net45/Microsoft.AspNet.Identity.Owin.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/Microsoft.AspNet.Identity.Owin.2.2.3/lib/net45/Microsoft.AspNet.Identity.Owin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/PagedList.Mvc.4.5.0.0/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/PagedList.Mvc.4.5.0.0/Content/Content/PagedList.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/PagedList.Mvc.4.5.0.0/PagedList.Mvc.4.5.0.0.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/PagedList.Mvc.4.5.0.0/lib/net40/PagedList.Mvc.XML" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/PagedList.Mvc.4.5.0.0/lib/net40/PagedList.Mvc.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FYP_WebApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FYP_WebApp/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +73,16 @@
       <workItem from="1662395467459" duration="170000" />
       <workItem from="1662395643236" duration="100000" />
       <workItem from="1662395758086" duration="837000" />
+      <workItem from="1662396604260" duration="432000" />
     </task>
+    <task id="LOCAL-00001" summary="Cataclysmic dependency repair">
+      <created>1662396739961</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662396739961</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,5 +104,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Cataclysmic dependency repair" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cataclysmic dependency repair" />
   </component>
 </project>
