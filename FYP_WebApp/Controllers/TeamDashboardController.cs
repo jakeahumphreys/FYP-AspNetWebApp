@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.WebSockets;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
 using FYP_WebApp.DTO;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
 {

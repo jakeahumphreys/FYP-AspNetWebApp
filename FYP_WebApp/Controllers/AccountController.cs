@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Protocols;
-using System.Web.WebSockets;
 using FYP_WebApp.Common_Logic;
-using FYP_WebApp.Hubs;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
-using Microsoft.Owin.Security.Facebook;
 
 namespace FYP_WebApp.Controllers
 {

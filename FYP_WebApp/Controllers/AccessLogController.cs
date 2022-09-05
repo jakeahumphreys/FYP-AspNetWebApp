@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using FYP_WebApp.Common_Logic;
 using FYP_WebApp.DataAccessLayer;
-using FYP_WebApp.Models;
 using FYP_WebApp.ServiceLayer;
 using PagedList;
 
